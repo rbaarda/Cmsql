@@ -1,0 +1,61 @@
+grammar Cql;
+
+/*
+ * Parser rules
+ */
+queries				: query (TERMINATOR query)* EOF
+					;
+
+query				: SELECT IDENTIFIER fromClause whereClause? TERMINATOR*
+					;
+
+fromClause			: FROM (NUMBER|START|ROOT)
+					;
+
+whereClause			: WHERE expression
+					;
+
+expression			: condition										# conditionExpression
+					| left=expression op=(AND|OR) right=expression	# binaryExpression
+					| LPAREN expression RPAREN						# parenthesizedExpression
+					;
+
+condition			: IDENTIFIER op=(EQUALS|NOTEQUALS) LITERAL
+					;
+
+/*
+* Lexer rules
+*/
+SELECT				: S E L E C T ;
+FROM				: F R O M ;
+WHERE				: W H E R E ;
+OR					: O R ;
+AND					: A N D ;
+NUMBER				: [0-9]+ ;
+START				: S T A R T ;
+ROOT				: R O O T ;
+LITERAL				: '\''([ a-zA-Z0-9]|[_]|[-])+'\'' ;
+IDENTIFIER			: [a-zA-Z]+[a-zA-Z0-9]* ;
+LPAREN				: '(' ;
+RPAREN				: ')' ;
+TERMINATOR			: ';' ;
+EQUALS				: '=' ;
+NOTEQUALS			: '!=' ;
+WHITESPACE			: [ \r\n\t]+ -> skip ;
+
+fragment S			: [Ss] ;
+fragment E			: [Ee] ;
+fragment L			: [Ll] ;
+fragment C			: [Cc] ;
+fragment T			: [Tt] ;
+fragment F			: [Ff] ;
+fragment R			: [Rr] ;
+fragment O			: [Oo] ;
+fragment M			: [Mm] ;
+fragment P			: [Pp] ;
+fragment A			: [Aa] ;
+fragment G			: [Gg] ;
+fragment W			: [Ww] ;
+fragment H			: [Hh] ;
+fragment N			: [Nn] ;
+fragment D			: [Dd] ;

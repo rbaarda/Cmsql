@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Cql.Grammar")]
-[assembly: AssemblyDescription("Content Query Language")]
+[assembly: AssemblyTitle("Cql.Query")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Cql.Grammar")]
+[assembly: AssemblyProduct("Cql.Query")]
 [assembly: AssemblyCopyright("Copyright © 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("dd49e66f-fa20-447e-b979-b034b944a0b9")]
+[assembly: Guid("4fa52fd9-4aea-4629-a7d8-5ff21bf42069")]
 
 // Version information for an assembly consists of the following four values:
 //
