@@ -64,6 +64,7 @@
     <Compile Include="CqlParserFactory.cs" />
     <Compile Include="CqlQueryParserTest.cs" />
     <Compile Include="Internal\ConditionVisitorTest.cs" />
+    <Compile Include="Internal\FromClauseVisitorTest.cs" />
     <Compile Include="Internal\WhereClauseVisitorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
