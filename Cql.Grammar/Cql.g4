@@ -6,7 +6,10 @@ grammar Cql;
 queries				: query (TERMINATOR query)* EOF
 					;
 
-query				: SELECT IDENTIFIER fromClause whereClause? TERMINATOR*
+query				: selectClause fromClause whereClause? TERMINATOR*
+					;
+
+selectClause		: SELECT IDENTIFIER
 					;
 
 fromClause			: FROM (NUMBER|START|ROOT)

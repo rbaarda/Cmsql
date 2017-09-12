@@ -33,7 +33,7 @@ namespace Cql.Grammar.Test
             IParseTree tree = parser.query();
 
             ParseTreePattern pattern = parser.CompileParseTreePattern(
-                "<SELECT> <IDENTIFIER> <fromClause>",
+                "<selectClause> <fromClause>",
                 CqlParser.RULE_query);
 
             ParseTreeMatch match = pattern.Match(tree);
@@ -50,7 +50,7 @@ namespace Cql.Grammar.Test
             IParseTree tree = parser.query();
 
             ParseTreePattern pattern = parser.CompileParseTreePattern(
-                "<SELECT> <IDENTIFIER> <fromClause> <TERMINATOR>",
+                "<selectClause> <fromClause> <TERMINATOR>",
                 CqlParser.RULE_query);
 
             ParseTreeMatch match = pattern.Match(tree);
@@ -75,7 +75,7 @@ namespace Cql.Grammar.Test
             IParseTree tree = parser.query();
 
             ParseTreePattern pattern = parser.CompileParseTreePattern(
-                "<SELECT> <IDENTIFIER> <fromClause> <whereClause>",
+                "<selectClause> <fromClause> <whereClause>",
                 CqlParser.RULE_query);
 
             ParseTreeMatch match = pattern.Match(tree);
@@ -100,7 +100,7 @@ namespace Cql.Grammar.Test
             IParseTree tree = parser.query();
 
             ParseTreePattern pattern = parser.CompileParseTreePattern(
-                "<SELECT> <IDENTIFIER> <fromClause> <whereClause> <TERMINATOR>",
+                "<selectClause> <fromClause> <whereClause> <TERMINATOR>",
                 CqlParser.RULE_query);
 
             ParseTreeMatch match = pattern.Match(tree);

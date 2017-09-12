@@ -6,14 +6,13 @@ namespace Cql.Grammar.Parser.Internal
     {
         public override CqlQuery VisitQuery(CqlParser.QueryContext context)
         {
-            FromClauseVisitor fromClauseVisitor = new FromClauseVisitor();
-            CqlQueryStartNode startNode = context.fromClause().Accept(fromClauseVisitor);
+            CqlQuery query = new CqlQuery();
 
-            CqlQuery query = new CqlQuery
-            {
-                ContentType = context.IDENTIFIER().GetText(),
-                StartNode = startNode
-            };
+            SelectClauseVisitor selectClauseVisitor = new SelectClauseVisitor();
+            query.ContentType = context.selectClause().Accept(selectClauseVisitor);
+
+            FromClauseVisitor fromClauseVisitor = new FromClauseVisitor();
+            query.StartNode = context.fromClause().Accept(fromClauseVisitor);
             
             CqlParser.WhereClauseContext whereClauseContext = context.whereClause();
             if (whereClauseContext != null)
