@@ -45,6 +45,7 @@ TERMINATOR			: ';' ;
 EQUALS				: '=' ;
 NOTEQUALS			: '!=' ;
 WHITESPACE			: [ \r\n\t]+ -> skip ;
+ERRORCHAR			: . ;
 
 fragment S			: [Ss] ;
 fragment E			: [Ee] ;
