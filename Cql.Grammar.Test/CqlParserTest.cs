@@ -108,6 +108,45 @@ namespace Cql.Grammar.Test
         }
 
         [Theory]
+        [InlineData("test")]
+        [InlineData("testPage")]
+        [InlineData("TestPage")]
+        [InlineData("test123")]
+        [InlineData("testPage123")]
+        [InlineData("TestPage123")]
+        public void Test_selectClause_rule_can_parse_valid_identifier(string identifier)
+        {
+            CqlParser parser = CreateParserForQuery($"select {identifier}");
+            IParseTree tree = parser.selectClause();
+
+            ParseTreePattern pattern = parser.CompileParseTreePattern(
+                "<SELECT> <IDENTIFIER>",
+                CqlParser.RULE_selectClause);
+
+            ParseTreeMatch match = pattern.Match(tree);
+            match.Succeeded.Should().BeTrue();
+        }
+
+        [Theory]
+        [InlineData("123")]
+        [InlineData("123test")]
+        [InlineData("-test")]
+        [InlineData("_test")]
+        [InlineData("!test")]
+        public void Test_selectClause_rule_cannot_parse_invalid_identifier(string identifier)
+        {
+            CqlParser parser = CreateParserForQuery($"select {identifier}");
+            IParseTree tree = parser.selectClause();
+
+            ParseTreePattern pattern = parser.CompileParseTreePattern(
+                "<SELECT> <IDENTIFIER>",
+                CqlParser.RULE_selectClause);
+
+            ParseTreeMatch match = pattern.Match(tree);
+            match.Succeeded.Should().BeFalse();
+        }
+
+        [Theory]
         [InlineData("(foo = 'data')")]
         [InlineData("(foo = 'bar' and foo = 'bar')")]
         [InlineData("((foo = 'bar' and foo = 'bar') or (foo = 'bar' and foo = 'bar'))")]
@@ -199,6 +238,24 @@ namespace Cql.Grammar.Test
 
             ParseTreeMatch match = pattern.Match(tree);
             match.Succeeded.Should().BeTrue();
+        }
+
+        [Theory]
+        [InlineData("123foo = 'bar'")]
+        [InlineData("-foo = 'bar'")]
+        [InlineData("_foo = 'bar'")]
+        [InlineData("!foo = 'bar'")]
+        public void Test_condition_rule_cannot_parse_invalid_identifier(string condition)
+        {
+            CqlParser parser = CreateParserForQuery(condition);
+            IParseTree tree = parser.condition();
+
+            ParseTreePattern pattern = parser.CompileParseTreePattern(
+                "<IDENTIFIER> <NOTEQUALS> <LITERAL>",
+                CqlParser.RULE_condition);
+
+            ParseTreeMatch match = pattern.Match(tree);
+            match.Succeeded.Should().BeFalse();
         }
 
         private CqlParser CreateParserForQuery(string query)
