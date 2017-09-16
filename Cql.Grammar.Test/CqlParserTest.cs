@@ -1,4 +1,5 @@
 ﻿using Antlr4.Runtime;
+using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 using Antlr4.Runtime.Tree.Pattern;
 using FluentAssertions;
@@ -108,6 +109,24 @@ namespace Cql.Grammar.Test
         }
 
         [Theory]
+        [InlineData("123select test from start")]
+        [InlineData("select123 test from start")]
+        [InlineData("select test,test from start")]
+        [InlineData("select test-test from start")]
+        [InlineData("select test_test from start")]
+        [InlineData("select test from foo")]
+        [InlineData("select test from start where")]
+        [InlineData("select test from start where 123foo = 'bar'")]
+        [InlineData("select test from start where foo = bar")]
+        [InlineData("select test from start where (foo = 'bar') bla (bar = 'foo')")]
+        [InlineData("select test from start where (foo = 'bar'")]
+        public void Test_query_rule_cannot_parse_invalid_query(string query)
+        {
+            CqlParser parser = CreateParserForQuery(query);
+            parser.Invoking(x => x.queries()).ShouldThrow<ParseCanceledException>();
+        }
+
+        [Theory]
         [InlineData("test")]
         [InlineData("testPage")]
         [InlineData("TestPage")]
@@ -136,14 +155,7 @@ namespace Cql.Grammar.Test
         public void Test_selectClause_rule_cannot_parse_invalid_identifier(string identifier)
         {
             CqlParser parser = CreateParserForQuery($"select {identifier}");
-            IParseTree tree = parser.selectClause();
-
-            ParseTreePattern pattern = parser.CompileParseTreePattern(
-                "<SELECT> <IDENTIFIER>",
-                CqlParser.RULE_selectClause);
-
-            ParseTreeMatch match = pattern.Match(tree);
-            match.Succeeded.Should().BeFalse();
+            parser.Invoking(x => x.selectClause()).ShouldThrow<ParseCanceledException>();
         }
 
         [Theory]
@@ -248,14 +260,7 @@ namespace Cql.Grammar.Test
         public void Test_condition_rule_cannot_parse_invalid_identifier(string condition)
         {
             CqlParser parser = CreateParserForQuery(condition);
-            IParseTree tree = parser.condition();
-
-            ParseTreePattern pattern = parser.CompileParseTreePattern(
-                "<IDENTIFIER> <NOTEQUALS> <LITERAL>",
-                CqlParser.RULE_condition);
-
-            ParseTreeMatch match = pattern.Match(tree);
-            match.Succeeded.Should().BeFalse();
+            parser.Invoking(x => x.condition()).ShouldThrow<ParseCanceledException>();
         }
 
         private CqlParser CreateParserForQuery(string query)
@@ -263,7 +268,10 @@ namespace Cql.Grammar.Test
             return new CqlParser(
                 new CommonTokenStream(
                     new CqlLexer(
-                        new AntlrInputStream(query))));
+                        new AntlrInputStream(query))))
+            {
+                ErrorHandler = new BailErrorStrategy()
+            };
         }
     }
 }
