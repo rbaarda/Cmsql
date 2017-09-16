@@ -24,10 +24,13 @@ namespace Cql.Grammar.Parser
 
         internal CqlParser CreateCqlParser(string cqlQuery)
         {
-            AntlrInputStream inputStream = new AntlrInputStream(cqlQuery);
-            CqlLexer lexer = new CqlLexer(inputStream);
-            CommonTokenStream tokenStream = new CommonTokenStream(lexer);
-            return new CqlParser(tokenStream);
+            return new CqlParser(
+                new CommonTokenStream(
+                    new CqlLexer(
+                        new AntlrInputStream(cqlQuery))))
+            {
+                ErrorHandler = new BailErrorStrategy()
+            };
         }
     }
 }
