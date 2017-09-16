@@ -9,7 +9,10 @@ namespace Cql.Grammar.Parser.Test
             return new CqlParser(
                 new CommonTokenStream(
                     new CqlLexer(
-                        new AntlrInputStream(query))));
+                        new AntlrInputStream(query))))
+            {
+                ErrorHandler = new BailErrorStrategy()
+            };
         }
     }
 }
