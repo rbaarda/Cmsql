@@ -78,19 +78,5 @@ namespace Cql.Grammar.Parser.Test.Internal
             cqlQuery.StartNode.Should().NotBeNull();
             cqlQuery.Criteria.Should().NotBeNull();
         }
-
-        [Theory]
-        [InlineData("selectaaa test from root")]
-        [InlineData("select 123test from 123")]
-        public void Test_cannot_parse_query_with_invalid_select_clause_without_where_clause(string query)
-        {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery(query);
-            CqlParser.QueryContext parseTree = cqlParser.query();
-
-            QueryVisitor visitor = new QueryVisitor();
-            CqlQuery cqlQuery = visitor.VisitQuery(parseTree);
-
-            cqlQuery.Should().BeNull();
-        }
     }
 }

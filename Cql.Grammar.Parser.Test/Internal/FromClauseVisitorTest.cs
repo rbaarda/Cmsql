@@ -51,17 +51,5 @@ namespace Cql.Grammar.Parser.Test.Internal
             startNode.StartNodeId.ShouldBeEquivalentTo(id);
             startNode.StartNodeType.ShouldBeEquivalentTo(CqlQueryStartNodeType.Id);
         }
-
-        [Fact]
-        public void Test_can_not_parse_invalid_literal_as_start_node()
-        {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("from foobar");
-            CqlParser.FromClauseContext parseTree = cqlParser.fromClause();
-
-            FromClauseVisitor visitor = new FromClauseVisitor();
-            CqlQueryStartNode startNode = visitor.VisitFromClause(parseTree);
-
-            startNode.Should().BeNull();
-        }
     }
 }
