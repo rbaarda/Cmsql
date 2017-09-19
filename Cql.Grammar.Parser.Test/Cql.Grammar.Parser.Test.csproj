@@ -68,6 +68,7 @@
     <Compile Include="Internal\FromClauseVisitorTest.cs" />
     <Compile Include="Internal\QueriesVisitorTest.cs" />
     <Compile Include="Internal\QueryVisitorTest.cs" />
+    <Compile Include="Internal\SelectClauseVisitorTest.cs" />
     <Compile Include="Internal\WhereClauseVisitorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
