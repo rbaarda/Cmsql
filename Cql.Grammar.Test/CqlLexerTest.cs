@@ -9,7 +9,7 @@ namespace Cql.Grammar.Test
     public class CqlLexerTest
     {
         [Fact]
-        public void Test_can_parse_query_from_start()
+        public void Test_can_tokenize_query_from_start()
         {
             CqlLexer lexer = CreateLexerForQuery("select foo from start");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
@@ -23,7 +23,7 @@ namespace Cql.Grammar.Test
         }
 
         [Fact]
-        public void Test_can_parse_query_from_root()
+        public void Test_can_tokenize_query_from_root()
         {
             CqlLexer lexer = CreateLexerForQuery("select foo from root");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
@@ -37,7 +37,7 @@ namespace Cql.Grammar.Test
         }
 
         [Fact]
-        public void Test_can_parse_query_from_arbitrary()
+        public void Test_can_tokenize_query_from_arbitrary()
         {
             CqlLexer lexer = CreateLexerForQuery("select foo from 15");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
@@ -51,7 +51,7 @@ namespace Cql.Grammar.Test
         }
 
         [Fact]
-        public void Test_can_parse_start_query()
+        public void Test_can_tokenize_start_query()
         {
             CqlLexer lexer = CreateLexerForQuery("select foo from start");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
@@ -65,7 +65,7 @@ namespace Cql.Grammar.Test
         }
 
         [Fact]
-        public void Test_can_parse_query_with_terminator()
+        public void Test_can_tokenize_query_with_terminator()
         {
             CqlLexer lexer = CreateLexerForQuery("select foo from start;");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
@@ -80,7 +80,7 @@ namespace Cql.Grammar.Test
         }
 
         [Fact]
-        public void Test_can_parse_two_queries_separated_by_terminator()
+        public void Test_can_tokenize_two_queries_separated_by_terminator()
         {
             CqlLexer lexer = CreateLexerForQuery("select foo from start; select bar from root");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
@@ -99,7 +99,7 @@ namespace Cql.Grammar.Test
         }
 
         [Fact]
-        public void Test_can_parse_query_with_single_condition()
+        public void Test_can_tokenize_query_with_single_equals_condition()
         {
             CqlLexer lexer = CreateLexerForQuery("select foo from start where foo = 'bar'");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
@@ -117,7 +117,25 @@ namespace Cql.Grammar.Test
         }
 
         [Fact]
-        public void Test_can_parse_query_with_single_conditional_and_expression()
+        public void Test_can_tokenize_query_with_single_not_equals_condition()
+        {
+            CqlLexer lexer = CreateLexerForQuery("select foo from start where foo != 'bar'");
+            IEnumerable<int> tokens = GetTokensAsList(lexer);
+
+            tokens.ShouldAllBeEquivalentTo(
+                GetTokensAsList(
+                    CqlLexer.SELECT,
+                    CqlLexer.IDENTIFIER,
+                    CqlLexer.FROM,
+                    CqlLexer.START,
+                    CqlLexer.WHERE,
+                    CqlLexer.IDENTIFIER,
+                    CqlLexer.NOTEQUALS,
+                    CqlLexer.LITERAL));
+        }
+
+        [Fact]
+        public void Test_can_tokenize_query_with_single_conditional_and_expression()
         {
             CqlLexer lexer = CreateLexerForQuery(
                 "select foo from start where foo = 'bar' and bar = 'foo'");
@@ -140,7 +158,7 @@ namespace Cql.Grammar.Test
         }
 
         [Fact]
-        public void Test_can_parse_query_with_single_conditional_or_expression()
+        public void Test_can_tokenize_query_with_single_conditional_or_expression()
         {
             CqlLexer lexer = CreateLexerForQuery(
                 "select foo from start where foo = 'bar' or bar = 'foo'");
@@ -163,7 +181,7 @@ namespace Cql.Grammar.Test
         }
 
         [Fact]
-        public void Test_can_parse_query_with_single_parenthesized_expression()
+        public void Test_can_tokenize_query_with_single_parenthesized_expression()
         {
             CqlLexer lexer = CreateLexerForQuery(
                 "select foo from start where (foo = 'bar' and bar = 'foo')");
@@ -188,7 +206,7 @@ namespace Cql.Grammar.Test
         }
 
         [Fact]
-        public void Test_can_parse_query_with_two_parenthesized_expressions()
+        public void Test_can_tokenize_query_with_two_parenthesized_expressions()
         {
             CqlLexer lexer = CreateLexerForQuery(
                 "select foo from start where (foo = 'bar' and bar = 'foo') or (bla = 'test' and test = 'bla')");
@@ -220,6 +238,23 @@ namespace Cql.Grammar.Test
                     CqlLexer.EQUALS,
                     CqlLexer.LITERAL,
                     CqlLexer.RPAREN));
+        }
+
+        [Fact]
+        public void Test_can_tokenize_query_with_invalid_type_identifier()
+        {
+            CqlLexer lexer = CreateLexerForQuery(
+                "select foo-bar from start");
+            IEnumerable<int> tokens = GetTokensAsList(lexer);
+
+            tokens.ShouldAllBeEquivalentTo(
+                GetTokensAsList(
+                    CqlLexer.SELECT,
+                    CqlLexer.IDENTIFIER,
+                    CqlLexer.ERRORCHAR,
+                    CqlLexer.IDENTIFIER,
+                    CqlLexer.FROM,
+                    CqlLexer.START));
         }
 
         private CqlLexer CreateLexerForQuery(string query)
