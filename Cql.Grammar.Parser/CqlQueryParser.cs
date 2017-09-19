@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Antlr4.Runtime;
+using Antlr4.Runtime.Atn;
 using Antlr4.Runtime.Tree;
 using Cql.Grammar.Parser.Internal;
 using Cql.Query;
@@ -29,7 +30,8 @@ namespace Cql.Grammar.Parser
                     new CqlLexer(
                         new AntlrInputStream(cqlQuery))))
             {
-                ErrorHandler = new BailErrorStrategy()
+                ErrorHandler = new BailErrorStrategy(),
+                Interpreter = {PredictionMode = PredictionMode.Sll}
             };
         }
     }
