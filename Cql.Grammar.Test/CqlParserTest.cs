@@ -1,4 +1,5 @@
 ﻿using Antlr4.Runtime;
+using Antlr4.Runtime.Atn;
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 using Antlr4.Runtime.Tree.Pattern;
@@ -22,6 +23,27 @@ namespace Cql.Grammar.Test
             ParseTreeMatch match = pattern.Match(tree);
 
             match.Succeeded.Should().BeTrue();
+        }
+
+        [Theory]
+        [InlineData("This is bogus")]
+        [InlineData("123select test from start")]
+        [InlineData("select123 test from start")]
+        [InlineData("select test,test from start")]
+        [InlineData("select test-test from start")]
+        [InlineData("select test_test from start")]
+        [InlineData("select test from foo")]
+        [InlineData("select test from start where")]
+        [InlineData("select test from start where 123foo = 'bar'")]
+        [InlineData("select test from start where foo = bar")]
+        [InlineData("select test from start where (foo = 'bar') bla (bar = 'foo')")]
+        [InlineData("select test from start where (foo = 'bar'")]
+        [InlineData("select test from start; select")]
+        [InlineData("select; select test from start")]
+        public void Test_queries_rule_cannot_parse_invalid_query(string query)
+        {
+            CqlParser parser = CreateParserForQuery(query);
+            parser.Invoking(x => x.queries()).ShouldThrow<ParseCanceledException>();
         }
 
         [Theory]
@@ -106,24 +128,6 @@ namespace Cql.Grammar.Test
 
             ParseTreeMatch match = pattern.Match(tree);
             match.Succeeded.Should().BeTrue();
-        }
-
-        [Theory]
-        [InlineData("123select test from start")]
-        [InlineData("select123 test from start")]
-        [InlineData("select test,test from start")]
-        [InlineData("select test-test from start")]
-        [InlineData("select test_test from start")]
-        [InlineData("select test from foo")]
-        [InlineData("select test from start where")]
-        [InlineData("select test from start where 123foo = 'bar'")]
-        [InlineData("select test from start where foo = bar")]
-        [InlineData("select test from start where (foo = 'bar') bla (bar = 'foo')")]
-        [InlineData("select test from start where (foo = 'bar'")]
-        public void Test_query_rule_cannot_parse_invalid_query(string query)
-        {
-            CqlParser parser = CreateParserForQuery(query);
-            parser.Invoking(x => x.queries()).ShouldThrow<ParseCanceledException>();
         }
 
         [Theory]
@@ -270,7 +274,8 @@ namespace Cql.Grammar.Test
                     new CqlLexer(
                         new AntlrInputStream(query))))
             {
-                ErrorHandler = new BailErrorStrategy()
+                ErrorHandler = new BailErrorStrategy(),
+                Interpreter = {PredictionMode = PredictionMode.Sll}
             };
         }
     }
