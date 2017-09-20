@@ -23,7 +23,7 @@ expression			: condition										# conditionExpression
 					| LPAREN expression RPAREN						# parenthesizedExpression
 					;
 
-condition			: IDENTIFIER op=(EQUALS|NOTEQUALS) LITERAL
+condition			: IDENTIFIER op=(EQUALS|NOTEQUALS|LARGERTHAN|LESSTHAN|LARGERTHANOREQUALS|LESSTHANOREQUALS) LITERAL
 					;
 
 /*
@@ -44,6 +44,10 @@ RPAREN				: ')' ;
 TERMINATOR			: ';' ;
 EQUALS				: '=' ;
 NOTEQUALS			: '!=' ;
+LARGERTHAN			: '>' ;
+LESSTHAN			: '<' ;
+LARGERTHANOREQUALS	: '>=' ;
+LESSTHANOREQUALS	: '<=' ;
 WHITESPACE			: [ \r\n\t]+ -> skip ;
 ERRORCHAR			: . ;
 

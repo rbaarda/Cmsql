@@ -4,6 +4,10 @@
     {
         None,
         Equals,
-        NotEquals
+        NotEquals,
+        LargerThan,
+        LessThan,
+        LargerThanOrEquals,
+        LessThanOrEquals
     }
 }

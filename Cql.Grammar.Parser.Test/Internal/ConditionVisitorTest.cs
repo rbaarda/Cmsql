@@ -34,5 +34,61 @@ namespace Cql.Grammar.Parser.Test.Internal
             condition.Operator.ShouldBeEquivalentTo(EqualityOperator.NotEquals);
             condition.Value.ShouldBeEquivalentTo("bar");
         }
+
+        [Fact]
+        public void Test_can_parse_larger_than_condition()
+        {
+            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("foo > 'bar'");
+            CqlParser.ConditionContext parseTree = cqlParser.condition();
+
+            ConditionVisitor visitor = new ConditionVisitor();
+            CqlQueryCondition condition = visitor.VisitCondition(parseTree);
+
+            condition.Identifier.ShouldBeEquivalentTo("foo");
+            condition.Operator.ShouldBeEquivalentTo(EqualityOperator.LargerThan);
+            condition.Value.ShouldBeEquivalentTo("bar");
+        }
+
+        [Fact]
+        public void Test_can_parse_less_than_condition()
+        {
+            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("foo < 'bar'");
+            CqlParser.ConditionContext parseTree = cqlParser.condition();
+
+            ConditionVisitor visitor = new ConditionVisitor();
+            CqlQueryCondition condition = visitor.VisitCondition(parseTree);
+
+            condition.Identifier.ShouldBeEquivalentTo("foo");
+            condition.Operator.ShouldBeEquivalentTo(EqualityOperator.LessThan);
+            condition.Value.ShouldBeEquivalentTo("bar");
+        }
+
+        [Fact]
+        public void Test_can_parse_larger_than_or_equals_condition()
+        {
+            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("foo >= 'bar'");
+            CqlParser.ConditionContext parseTree = cqlParser.condition();
+
+            ConditionVisitor visitor = new ConditionVisitor();
+            CqlQueryCondition condition = visitor.VisitCondition(parseTree);
+
+            condition.Identifier.ShouldBeEquivalentTo("foo");
+            condition.Operator.ShouldBeEquivalentTo(EqualityOperator.LargerThanOrEquals);
+            condition.Value.ShouldBeEquivalentTo("bar");
+        }
+
+        [Fact]
+        public void Test_can_parse_less_than_or_equals_condition()
+        {
+            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("foo <= 'bar'");
+            CqlParser.ConditionContext parseTree = cqlParser.condition();
+
+            ConditionVisitor visitor = new ConditionVisitor();
+            CqlQueryCondition condition = visitor.VisitCondition(parseTree);
+
+            condition.Identifier.ShouldBeEquivalentTo("foo");
+            condition.Operator.ShouldBeEquivalentTo(EqualityOperator.LessThanOrEquals);
+            condition.Value.ShouldBeEquivalentTo("bar");
+        }
     }
 }
