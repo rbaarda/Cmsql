@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Antlr4.Runtime.Misc;
+﻿using System.Linq;
 using Cql.Query;
 using FluentAssertions;
 using Xunit;
@@ -13,11 +11,13 @@ namespace Cql.Grammar.Parser.Test
         public void Test_can_parse_single_query_without_terminator()
         {
             CqlQueryParser parser = new CqlQueryParser();
-            IEnumerable<CqlQuery> queries = parser.Parse("select pages from start");
+            CqlQueryParseResult parseResult = parser.Parse("select pages from start");
 
-            queries.Should().NotBeNullOrEmpty();
-            queries.Should().HaveCount(1);
-            CqlQuery query = queries.First();
+            parseResult.Queries.Should().NotBeNullOrEmpty();
+            parseResult.Queries.Should().HaveCount(1);
+            parseResult.Errors.Should().BeNullOrEmpty();
+
+            CqlQuery query = parseResult.Queries.First();
             query.ContentType.ShouldBeEquivalentTo("pages");
             query.StartNode.StartNodeId.Should().BeNullOrEmpty();
             query.StartNode.StartNodeType.ShouldBeEquivalentTo(CqlQueryStartNodeType.Start);
@@ -28,11 +28,13 @@ namespace Cql.Grammar.Parser.Test
         public void Test_can_parse_single_query_with_terminator()
         {
             CqlQueryParser parser = new CqlQueryParser();
-            IEnumerable<CqlQuery> queries = parser.Parse("select test from start;");
+            CqlQueryParseResult parseResult = parser.Parse("select test from start;");
 
-            queries.Should().NotBeNullOrEmpty();
-            queries.Should().HaveCount(1);
-            CqlQuery query = queries.First();
+            parseResult.Queries.Should().NotBeNullOrEmpty();
+            parseResult.Queries.Should().HaveCount(1);
+            parseResult.Errors.Should().BeNullOrEmpty();
+
+            CqlQuery query = parseResult.Queries.First();
             query.ContentType.ShouldBeEquivalentTo("test");
             query.StartNode.StartNodeId.Should().BeNullOrEmpty();
             query.StartNode.StartNodeType.ShouldBeEquivalentTo(CqlQueryStartNodeType.Start);
@@ -43,18 +45,19 @@ namespace Cql.Grammar.Parser.Test
         public void Test_can_parse_multiple_queries()
         {
             CqlQueryParser parser = new CqlQueryParser();
-            IEnumerable<CqlQuery> queries = parser.Parse(
+            CqlQueryParseResult parseResult = parser.Parse(
                 "select test from start;select test from root where foo = 'bar';select barf from 123 where (foo = 'bar' and bar = 'foo') or (bla = 'bli' and bli = 'bla')");
             
-            queries.Should().HaveCount(3);
+            parseResult.Queries.Should().HaveCount(3);
+            parseResult.Errors.Should().BeNullOrEmpty();
 
-            CqlQuery firstQuery = queries.First();
+            CqlQuery firstQuery = parseResult.Queries.First();
             firstQuery.ContentType.ShouldBeEquivalentTo("test");
             firstQuery.StartNode.StartNodeId.Should().BeNullOrEmpty();
             firstQuery.StartNode.StartNodeType.ShouldBeEquivalentTo(CqlQueryStartNodeType.Start);
             firstQuery.Criteria.Should().BeNull();
 
-            CqlQuery secondQuery = queries.ElementAt(1);
+            CqlQuery secondQuery = parseResult.Queries.ElementAt(1);
             secondQuery.ContentType.ShouldBeEquivalentTo("test");
             secondQuery.StartNode.StartNodeId.Should().BeNullOrEmpty();
             secondQuery.StartNode.StartNodeType.ShouldBeEquivalentTo(CqlQueryStartNodeType.Root);
@@ -64,7 +67,7 @@ namespace Cql.Grammar.Parser.Test
             condition.Operator.ShouldBeEquivalentTo(EqualityOperator.Equals);
             condition.Value.ShouldBeEquivalentTo("bar");
 
-            CqlQuery thirdQuery = queries.ElementAt(2);
+            CqlQuery thirdQuery = parseResult.Queries.ElementAt(2);
             thirdQuery.ContentType.ShouldBeEquivalentTo("barf");
             thirdQuery.StartNode.StartNodeId.ShouldBeEquivalentTo("123");
             thirdQuery.StartNode.StartNodeType.ShouldBeEquivalentTo(CqlQueryStartNodeType.Id);
@@ -75,7 +78,9 @@ namespace Cql.Grammar.Parser.Test
         public void Test_cannot_parse_invalid_query()
         {
             CqlQueryParser parser = new CqlQueryParser();
-            parser.Invoking(x => x.Parse("select test-test from start")).ShouldThrow<ParseCanceledException>();
+            CqlQueryParseResult parseResult = parser.Parse("select test-test from start");
+
+            parseResult.Errors.Should().HaveCount(1);
         }
     }
 }

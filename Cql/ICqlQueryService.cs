@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using Cql.Query;
-
-namespace Cql
+﻿namespace Cql
 {
     public interface ICqlQueryService
     {
-        IEnumerable<CqlQueryResult> ExecuteQuery(string query);
+        CqlQueryExecutionResult ExecuteQuery(string queries);
     }
 }

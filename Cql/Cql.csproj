@@ -41,9 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CqlQueryExecutionResult.cs" />
     <Compile Include="CqlQueryService.cs" />
     <Compile Include="ICqlQueryService.cs" />
-    <Compile Include="Provider\ICqlQueryProvider.cs" />
+    <Compile Include="Provider\ICqlQueryRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,27 +1,34 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using Cql.Grammar.Parser;
 using Cql.Provider;
-using Cql.Query;
 
 namespace Cql
 {
     public class CqlQueryService : ICqlQueryService
     {
-        private readonly ICqlQueryProvider _queryProvider;
+        private readonly ICqlQueryRunner _queryRunner;
 
-        public CqlQueryService(ICqlQueryProvider queryProvider)
+        public CqlQueryService(ICqlQueryRunner queryRunner)
         {
-            _queryProvider = queryProvider;
+            _queryRunner = queryRunner;
         }
 
-        public IEnumerable<CqlQueryResult> ExecuteQuery(string query)
+        public CqlQueryExecutionResult ExecuteQuery(string query)
         {
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                throw new ArgumentException($"Parameter '{nameof(query)}' is null or whitespace.");
+            }
+
             CqlQueryParser parser = new CqlQueryParser();
-            IEnumerable<CqlQuery> parsedQuery = parser.Parse(query);
-            return parsedQuery != null
-                ? _queryProvider.ExecuteQuery(parsedQuery)
-                : Enumerable.Empty<CqlQueryResult>();
+            CqlQueryParseResult parseResult = parser.Parse(query);
+            if (parseResult.Errors != null && parseResult.Errors.Any())
+            {
+                return new CqlQueryExecutionResult();
+            }
+
+            return _queryRunner.ExecuteQueries(parseResult.Queries);
         }
     }
 }

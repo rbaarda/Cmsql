@@ -10,7 +10,7 @@ namespace Cql.Grammar.Parser
 {
     public class CqlQueryParser
     {
-        public IEnumerable<CqlQuery> Parse(string cqlQuery)
+        public CqlQueryParseResult Parse(string cqlQuery)
         {
             if (string.IsNullOrWhiteSpace(cqlQuery))
             {
@@ -18,9 +18,18 @@ namespace Cql.Grammar.Parser
             }
             
             CqlParser parser = CreateCqlParser(cqlQuery);
+            CqlParserErrorListener errorListener = new CqlParserErrorListener();
+            parser.AddErrorListener(errorListener);
+
             IParseTree parseTree = parser.queries();
             QueriesVisitor queriesVisitor = new QueriesVisitor();
-            return queriesVisitor.Visit(parseTree);
+
+            CqlQueryParseResult parseResult = new CqlQueryParseResult
+            {
+                Errors = errorListener.ParseErrors,
+                Queries = queriesVisitor.Visit(parseTree)
+            };
+            return parseResult;
         }
 
         internal CqlParser CreateCqlParser(string cqlQuery)
@@ -30,7 +39,7 @@ namespace Cql.Grammar.Parser
                     new CqlLexer(
                         new AntlrInputStream(cqlQuery))))
             {
-                ErrorHandler = new BailErrorStrategy(),
+                //ErrorHandler = new BailErrorStrategy(),
                 Interpreter = {PredictionMode = PredictionMode.Sll}
             };
         }

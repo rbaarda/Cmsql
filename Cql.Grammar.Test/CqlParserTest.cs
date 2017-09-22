@@ -274,7 +274,7 @@ namespace Cql.Grammar.Test
                     new CqlLexer(
                         new AntlrInputStream(query))))
             {
-                ErrorHandler = new BailErrorStrategy(),
+                //ErrorHandler = new BailErrorStrategy(),
                 Interpreter = {PredictionMode = PredictionMode.Sll}
             };
         }

@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CqlQueryParseError.cs" />
+    <Compile Include="CqlQueryParseResult.cs" />
+    <Compile Include="Internal\CqlParserErrorListener.cs" />
     <Compile Include="Internal\ConditionVisitor.cs" />
     <Compile Include="Internal\QueriesVisitor.cs" />
     <Compile Include="CqlQueryParser.cs" />
