@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Atn;
 using Antlr4.Runtime.Tree;
 using Cql.Grammar.Parser.Internal;
-using Cql.Query;
 
 namespace Cql.Grammar.Parser
 {
@@ -18,28 +16,27 @@ namespace Cql.Grammar.Parser
             }
             
             CqlParser parser = CreateCqlParser(cqlQuery);
+            parser.RemoveErrorListeners();
+
             CqlParserErrorListener errorListener = new CqlParserErrorListener();
             parser.AddErrorListener(errorListener);
 
             IParseTree parseTree = parser.queries();
             QueriesVisitor queriesVisitor = new QueriesVisitor();
-
-            CqlQueryParseResult parseResult = new CqlQueryParseResult
+            return new CqlQueryParseResult
             {
                 Errors = errorListener.ParseErrors,
                 Queries = queriesVisitor.Visit(parseTree)
             };
-            return parseResult;
         }
 
-        internal CqlParser CreateCqlParser(string cqlQuery)
+        private CqlParser CreateCqlParser(string cqlQuery)
         {
             return new CqlParser(
                 new CommonTokenStream(
                     new CqlLexer(
                         new AntlrInputStream(cqlQuery))))
             {
-                //ErrorHandler = new BailErrorStrategy(),
                 Interpreter = {PredictionMode = PredictionMode.Sll}
             };
         }
