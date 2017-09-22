@@ -1,4 +1,4 @@
-﻿namespace Cql.Grammar.Parser
+﻿namespace Cql.Grammar.Parsing
 {
     public class CqlQueryParseError
     {

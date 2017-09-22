@@ -1,6 +1,6 @@
 ﻿using Cql.Query;
 
-namespace Cql.Grammar.Parser.Internal
+namespace Cql.Grammar.Parsing.Internal
 {
     internal class QueryVisitor : CqlBaseVisitor<CqlQuery>
     {

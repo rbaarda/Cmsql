@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Cql.Grammar.Parser;
+using Cql.Grammar.Parsing;
 using Cql.Provider;
+using Cql.Query;
 
 namespace Cql
 {
@@ -25,7 +26,10 @@ namespace Cql
             CqlQueryParseResult parseResult = parser.Parse(query);
             if (parseResult.Errors != null && parseResult.Errors.Any())
             {
-                return new CqlQueryExecutionResult();
+                return new CqlQueryExecutionResult
+                {
+                    QueryResults = Enumerable.Empty<CqlQueryResult>()
+                };
             }
 
             return _queryRunner.ExecuteQueries(parseResult.Queries);

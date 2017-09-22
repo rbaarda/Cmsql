@@ -2,7 +2,7 @@
 using System.Linq;
 using Cql.Query;
 
-namespace Cql.Grammar.Parser.Internal
+namespace Cql.Grammar.Parsing.Internal
 {
     internal class QueriesVisitor : CqlBaseVisitor<IEnumerable<CqlQuery>>
     {

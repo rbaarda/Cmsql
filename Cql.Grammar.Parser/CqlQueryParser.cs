@@ -2,9 +2,9 @@
 using Antlr4.Runtime;
 using Antlr4.Runtime.Atn;
 using Antlr4.Runtime.Tree;
-using Cql.Grammar.Parser.Internal;
+using Cql.Grammar.Parsing.Internal;
 
-namespace Cql.Grammar.Parser
+namespace Cql.Grammar.Parsing
 {
     public class CqlQueryParser
     {

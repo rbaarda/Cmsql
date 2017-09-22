@@ -1,9 +1,9 @@
-﻿using Cql.Grammar.Parser.Internal;
+﻿using Cql.Grammar.Parsing.Internal;
 using Cql.Query;
 using FluentAssertions;
 using Xunit;
 
-namespace Cql.Grammar.Parser.Test.Internal
+namespace Cql.Grammar.Parsing.Test.Internal
 {
     public class WhereClauseVisitorTest
     {

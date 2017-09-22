@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F726D9A5-B8BE-4EE3-8E08-88A231B921D6}</ProjectGuid>
+    <ProjectGuid>{D841AFF8-38DD-4700-95AB-DE7FCBE2DE45}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cql.Grammar.Parser</RootNamespace>
-    <AssemblyName>Cql.Grammar.Parser</AssemblyName>
+    <RootNamespace>Cql.Grammar.Parsing.Test</RootNamespace>
+    <AssemblyName>Cql.Grammar.Parsing.Test</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,6 +33,12 @@
     <Reference Include="Antlr4.Runtime, Version=4.6.0.0, Culture=neutral, PublicKeyToken=09abb75b9ed49849, processorArchitecture=MSIL">
       <HintPath>..\packages\Antlr4.Runtime.4.6.4\lib\net45\Antlr4.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="FluentAssertions, Version=4.19.3.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.19.3\lib\net45\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions.Core, Version=4.19.3.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.19.3\lib\net45\FluentAssertions.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,22 +47,39 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.abstractions.2.0.1\lib\net35\xunit.abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.assert, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.assert.2.2.0\lib\netstandard1.1\xunit.assert.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.core, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.extensibility.core.2.2.0\lib\netstandard1.1\xunit.core.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.execution.desktop, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.extensibility.execution.2.2.0\lib\net452\xunit.execution.desktop.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CqlQueryParseError.cs" />
-    <Compile Include="CqlQueryParseResult.cs" />
-    <Compile Include="Internal\CqlParserErrorListener.cs" />
-    <Compile Include="Internal\ConditionVisitor.cs" />
-    <Compile Include="Internal\QueriesVisitor.cs" />
-    <Compile Include="CqlQueryParser.cs" />
-    <Compile Include="Internal\QueryVisitor.cs" />
-    <Compile Include="Internal\ExpressionVisitor.cs" />
-    <Compile Include="Internal\FromClauseVisitor.cs" />
-    <Compile Include="Internal\SelectClauseVisitor.cs" />
+    <Compile Include="CqlParserFactory.cs" />
+    <Compile Include="CqlQueryParserTest.cs" />
+    <Compile Include="Internal\ConditionVisitorTest.cs" />
+    <Compile Include="Internal\ExpressionVisitorTest.cs" />
+    <Compile Include="Internal\FromClauseVisitorTest.cs" />
+    <Compile Include="Internal\QueriesVisitorTest.cs" />
+    <Compile Include="Internal\QueryVisitorTest.cs" />
+    <Compile Include="Internal\SelectClauseVisitorTest.cs" />
+    <Compile Include="Internal\WhereClauseVisitorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Internal\WhereClauseVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cql.Grammar.Parser\Cql.Grammar.Parsing.csproj">
+      <Project>{f726d9a5-b8be-4ee3-8e08-88a231b921d6}</Project>
+      <Name>Cql.Grammar.Parsing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cql.Grammar\Cql.Grammar.csproj">
       <Project>{dd49e66f-fa20-447e-b979-b034b944a0b9}</Project>
       <Name>Cql.Grammar</Name>
@@ -65,9 +88,6 @@
       <Project>{4fa52fd9-4aea-4629-a7d8-5ff21bf42069}</Project>
       <Name>Cql.Query</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

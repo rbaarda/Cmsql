@@ -38,4 +38,4 @@ using System.Runtime.InteropServices;
 
 [assembly: CLSCompliant(true)]
 
-[assembly: InternalsVisibleTo("Cql.Grammar.Parser.Test")]
+[assembly: InternalsVisibleTo("Cql.Grammar.Parsing.Test")]

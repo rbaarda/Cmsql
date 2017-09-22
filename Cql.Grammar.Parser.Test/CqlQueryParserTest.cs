@@ -3,7 +3,7 @@ using Cql.Query;
 using FluentAssertions;
 using Xunit;
 
-namespace Cql.Grammar.Parser.Test
+namespace Cql.Grammar.Parsing.Test
 {
     public class CqlQueryParserTest
     {

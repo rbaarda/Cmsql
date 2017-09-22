@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Cql.Query;
 
-namespace Cql.Grammar.Parser
+namespace Cql.Grammar.Parsing
 {
     public class CqlQueryParseResult
     {

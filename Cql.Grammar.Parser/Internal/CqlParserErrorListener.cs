@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Antlr4.Runtime;
 
-namespace Cql.Grammar.Parser.Internal
+namespace Cql.Grammar.Parsing.Internal
 {
     internal class CqlParserErrorListener : BaseErrorListener
     {
