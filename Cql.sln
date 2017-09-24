@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cql.Grammar", "Cql.Grammar\Cql.Grammar.csproj", "{DD49E66F-FA20-447E-B979-B034B944A0B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cql.Grammar.Parsing", "Cql.Grammar.Parser\Cql.Grammar.Parsing.csproj", "{F726D9A5-B8BE-4EE3-8E08-88A231B921D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cql.Grammar.Parsing", "Cql.Grammar.Parsing\Cql.Grammar.Parsing.csproj", "{F726D9A5-B8BE-4EE3-8E08-88A231B921D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cql.Grammar.Parsing.Test", "Cql.Grammar.Parser.Test\Cql.Grammar.Parsing.Test.csproj", "{D841AFF8-38DD-4700-95AB-DE7FCBE2DE45}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cql.Grammar.Parsing.Test", "Cql.Grammar.Parsing.Test\Cql.Grammar.Parsing.Test.csproj", "{D841AFF8-38DD-4700-95AB-DE7FCBE2DE45}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{D24B2BFC-6FC0-422F-986C-C933E5155186}"
 EndProject

@@ -76,7 +76,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cql.Grammar.Parser\Cql.Grammar.Parsing.csproj">
+    <ProjectReference Include="..\Cql.Grammar.Parsing\Cql.Grammar.Parsing.csproj">
       <Project>{f726d9a5-b8be-4ee3-8e08-88a231b921d6}</Project>
       <Name>Cql.Grammar.Parsing</Name>
     </ProjectReference>

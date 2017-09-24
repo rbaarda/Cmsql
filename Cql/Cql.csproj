@@ -49,9 +49,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cql.Grammar.Parser\Cql.Grammar.Parsing.csproj">
+    <ProjectReference Include="..\Cql.Grammar.Parsing\Cql.Grammar.Parsing.csproj">
       <Project>{f726d9a5-b8be-4ee3-8e08-88a231b921d6}</Project>
       <Name>Cql.Grammar.Parsing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cql.Grammar\Cql.Grammar.csproj">
+      <Project>{dd49e66f-fa20-447e-b979-b034b944a0b9}</Project>
+      <Name>Cql.Grammar</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cql.Query\Cql.Query.csproj">
       <Project>{4fa52fd9-4aea-4629-a7d8-5ff21bf42069}</Project>
