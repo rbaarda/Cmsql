@@ -2,6 +2,6 @@
 {
     public interface ICqlQueryService
     {
-        CqlQueryExecutionResult ExecuteQuery(string queries);
+        CqlQueryResultSet ExecuteQuery(string queries);
     }
 }

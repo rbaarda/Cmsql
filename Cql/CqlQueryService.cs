@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Cql.Grammar.Parsing;
-using Cql.Provider;
-using Cql.Query;
 
 namespace Cql
 {
@@ -15,7 +13,7 @@ namespace Cql
             _queryRunner = queryRunner;
         }
 
-        public CqlQueryExecutionResult ExecuteQuery(string query)
+        public CqlQueryResultSet ExecuteQuery(string query)
         {
             if (string.IsNullOrWhiteSpace(query))
             {
@@ -26,13 +24,12 @@ namespace Cql
             CqlQueryParseResult parseResult = parser.Parse(query);
             if (parseResult.Errors != null && parseResult.Errors.Any())
             {
-                return new CqlQueryExecutionResult
-                {
-                    QueryResults = Enumerable.Empty<CqlQueryResult>()
-                };
+                return new CqlQueryResultSet(parseResult, new CqlQueryExecutionResult());
             }
 
-            return _queryRunner.ExecuteQueries(parseResult.Queries);
+            CqlQueryExecutionResult executionResult = _queryRunner.ExecuteQueries(parseResult.Queries);
+
+            return new CqlQueryResultSet(parseResult, executionResult);
         }
     }
 }
