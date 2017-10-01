@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Cql.Query
+﻿namespace Cql.Query
 {
     public class CqlQueryCriteria
     {
