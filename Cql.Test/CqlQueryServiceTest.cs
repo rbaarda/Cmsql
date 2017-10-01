@@ -11,7 +11,8 @@ namespace Cql.Test
             CqlQueryService queryService = new CqlQueryService(new FakeCqlQueryRunner());
             CqlQueryResultSet resultSet = queryService.ExecuteQuery("selectaaaa test from start");
 
-            resultSet.ParseResult.Errors.Should().HaveCount(1);
+            resultSet.ParseResult.Errors.Should().NotBeNullOrEmpty();
+            resultSet.ExecutionResult.QueryResults.Should().BeNullOrEmpty();
         }
     }
 }

@@ -26,27 +26,6 @@ namespace Cql.Grammar.Test
         }
 
         [Theory]
-        [InlineData("This is bogus")]
-        [InlineData("123select test from start")]
-        [InlineData("select123 test from start")]
-        [InlineData("select test,test from start")]
-        [InlineData("select test-test from start")]
-        [InlineData("select test_test from start")]
-        [InlineData("select test from foo")]
-        [InlineData("select test from start where")]
-        [InlineData("select test from start where 123foo = 'bar'")]
-        [InlineData("select test from start where foo = bar")]
-        [InlineData("select test from start where (foo = 'bar') bla (bar = 'foo')")]
-        [InlineData("select test from start where (foo = 'bar'")]
-        [InlineData("select test from start; select")]
-        [InlineData("select; select test from start")]
-        public void Test_queries_rule_cannot_parse_invalid_query(string query)
-        {
-            CqlParser parser = CreateParserForQuery(query);
-            parser.Invoking(x => x.queries()).ShouldThrow<ParseCanceledException>();
-        }
-
-        [Theory]
         [InlineData("select test from start")]
         [InlineData("select test from root")]
         [InlineData("select test from 12345")]
@@ -151,18 +130,6 @@ namespace Cql.Grammar.Test
         }
 
         [Theory]
-        [InlineData("123")]
-        [InlineData("123test")]
-        [InlineData("-test")]
-        [InlineData("_test")]
-        [InlineData("!test")]
-        public void Test_selectClause_rule_cannot_parse_invalid_identifier(string identifier)
-        {
-            CqlParser parser = CreateParserForQuery($"select {identifier}");
-            parser.Invoking(x => x.selectClause()).ShouldThrow<ParseCanceledException>();
-        }
-
-        [Theory]
         [InlineData("(foo = 'data')")]
         [InlineData("(foo = 'bar' and foo = 'bar')")]
         [InlineData("((foo = 'bar' and foo = 'bar') or (foo = 'bar' and foo = 'bar'))")]
@@ -256,17 +223,6 @@ namespace Cql.Grammar.Test
             match.Succeeded.Should().BeTrue();
         }
 
-        [Theory]
-        [InlineData("123foo = 'bar'")]
-        [InlineData("-foo = 'bar'")]
-        [InlineData("_foo = 'bar'")]
-        [InlineData("!foo = 'bar'")]
-        public void Test_condition_rule_cannot_parse_invalid_identifier(string condition)
-        {
-            CqlParser parser = CreateParserForQuery(condition);
-            parser.Invoking(x => x.condition()).ShouldThrow<ParseCanceledException>();
-        }
-
         private CqlParser CreateParserForQuery(string query)
         {
             return new CqlParser(
@@ -274,7 +230,6 @@ namespace Cql.Grammar.Test
                     new CqlLexer(
                         new AntlrInputStream(query))))
             {
-                //ErrorHandler = new BailErrorStrategy(),
                 Interpreter = {PredictionMode = PredictionMode.Sll}
             };
         }
