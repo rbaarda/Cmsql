@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("Release")]
 #endif
 [assembly: AssemblyCompany("Robert Baarda")]
-[assembly: AssemblyProduct("Content Query Language")]
+[assembly: AssemblyProduct("CQL - Content Query Language")]
 [assembly: AssemblyCopyright("Copyright © 2017 Robert Baarda")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
