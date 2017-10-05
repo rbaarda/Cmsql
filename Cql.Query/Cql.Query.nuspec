@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <!-- <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
+    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
+    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<summary>Query objects for Content Query Language (CQL), a DSL for querying tree structured data.</summary>
+    <description>This package contains the CQL query objects. CQL queries are parsed to the objects contained in this package. These are the actual query objects you work with in code.</description>
+    <releaseNotes>Initial alpha release (Proof of concept).</releaseNotes>
+    <copyright>Copyright (c) 2017 Robert Baarda</copyright>
+    <tags>cql content lexer parser DSL query tree cms</tags>
+  </metadata>
+</package>

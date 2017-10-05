@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <!--<licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>Lexer and Parser for Content Query Language (CQL), a DSL for querying tree structured data.</summary>
+    <description>This package contains the CQL lexer and parser.</description>
+    <releaseNotes>Initial alpha release (Proof of concept).</releaseNotes>
+    <copyright>Copyright (c) 2017 Robert Baarda</copyright>
+    <tags>cql content lexer parser DSL query tree cms</tags>
+  </metadata>
+</package>
