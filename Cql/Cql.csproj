@@ -37,12 +37,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CqlQueryExecutionResult.cs" />
     <Compile Include="CqlQueryResult.cs" />
     <Compile Include="CqlQueryResultSet.cs" />
     <Compile Include="CqlQueryService.cs" />
     <Compile Include="ICqlQueryService.cs" />
-    <Compile Include="ICqlQueryRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Cql.Query;
 
-namespace Cql
+namespace Cql.Query.Execution
 {
     public interface ICqlQueryRunner
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Cql
+namespace Cql.Query.Execution
 {
     public class CqlQueryExecutionResult
     {
