@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Cql.Query;
+using Cql.Query.Execution;
 
 namespace Cql.Test
 {
