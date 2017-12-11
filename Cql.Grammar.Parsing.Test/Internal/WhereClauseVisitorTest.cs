@@ -26,11 +26,11 @@ namespace Cql.Grammar.Parsing.Test.Internal
             CqlParser.WhereClauseContext parseTree = cqlParser.whereClause();
 
             WhereClauseVisitor visitor = new WhereClauseVisitor();
-            CqlQueryExpression expression = visitor.VisitWhereClause(parseTree) as CqlQueryExpression;
+            CqlQueryBinaryExpression binaryExpression = visitor.VisitWhereClause(parseTree) as CqlQueryBinaryExpression;
             
-            expression.Operator.ShouldBeEquivalentTo(ConditionalOperator.And);
-            expression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
-            expression.RightExpression.Should().BeOfType<CqlQueryCondition>();
+            binaryExpression.Operator.ShouldBeEquivalentTo(ConditionalOperator.And);
+            binaryExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
+            binaryExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
         }
 
         [Fact]
@@ -40,11 +40,11 @@ namespace Cql.Grammar.Parsing.Test.Internal
             CqlParser.WhereClauseContext parseTree = cqlParser.whereClause();
 
             WhereClauseVisitor visitor = new WhereClauseVisitor();
-            CqlQueryExpression expression = visitor.VisitWhereClause(parseTree) as CqlQueryExpression;
+            CqlQueryBinaryExpression binaryExpression = visitor.VisitWhereClause(parseTree) as CqlQueryBinaryExpression;
 
-            expression.Operator.ShouldBeEquivalentTo(ConditionalOperator.And);
-            expression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
-            expression.RightExpression.Should().BeOfType<CqlQueryCondition>();
+            binaryExpression.Operator.ShouldBeEquivalentTo(ConditionalOperator.And);
+            binaryExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
+            binaryExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
         }
 
         [Fact]
@@ -54,11 +54,11 @@ namespace Cql.Grammar.Parsing.Test.Internal
             CqlParser.WhereClauseContext parseTree = cqlParser.whereClause();
 
             WhereClauseVisitor visitor = new WhereClauseVisitor();
-            CqlQueryExpression expression = visitor.VisitWhereClause(parseTree) as CqlQueryExpression;
+            CqlQueryBinaryExpression binaryExpression = visitor.VisitWhereClause(parseTree) as CqlQueryBinaryExpression;
 
-            expression.Operator.ShouldBeEquivalentTo(ConditionalOperator.Or);
-            expression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
-            expression.RightExpression.Should().BeOfType<CqlQueryExpression>();
+            binaryExpression.Operator.ShouldBeEquivalentTo(ConditionalOperator.Or);
+            binaryExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
+            binaryExpression.RightExpression.Should().BeOfType<CqlQueryBinaryExpression>();
         }
 
         [Fact]
@@ -68,11 +68,11 @@ namespace Cql.Grammar.Parsing.Test.Internal
             CqlParser.WhereClauseContext parseTree = cqlParser.whereClause();
 
             WhereClauseVisitor visitor = new WhereClauseVisitor();
-            CqlQueryExpression expression = visitor.VisitWhereClause(parseTree) as CqlQueryExpression;
+            CqlQueryBinaryExpression binaryExpression = visitor.VisitWhereClause(parseTree) as CqlQueryBinaryExpression;
 
-            expression.Operator.ShouldBeEquivalentTo(ConditionalOperator.Or);
-            expression.LeftExpression.Should().BeOfType<CqlQueryExpression>();
-            expression.RightExpression.Should().BeOfType<CqlQueryCondition>();
+            binaryExpression.Operator.ShouldBeEquivalentTo(ConditionalOperator.Or);
+            binaryExpression.LeftExpression.Should().BeOfType<CqlQueryBinaryExpression>();
+            binaryExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
         }
     }
 }

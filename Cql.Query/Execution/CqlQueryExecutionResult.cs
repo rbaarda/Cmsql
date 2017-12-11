@@ -5,7 +5,7 @@ namespace Cql.Query.Execution
 {
     public class CqlQueryExecutionResult
     {
-        public IEnumerable<CqlQueryResult> QueryResults { get; internal set; }
+        public IEnumerable<CqlQueryResult> QueryResults { get; set; }
 
         public CqlQueryExecutionResult()
         {

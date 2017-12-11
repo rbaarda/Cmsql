@@ -71,7 +71,7 @@ namespace Cql.Grammar.Parsing.Test
             thirdQuery.ContentType.ShouldBeEquivalentTo("barf");
             thirdQuery.StartNode.StartNodeId.ShouldBeEquivalentTo("123");
             thirdQuery.StartNode.StartNodeType.ShouldBeEquivalentTo(CqlQueryStartNodeType.Id);
-            thirdQuery.Criteria.Should().BeOfType<CqlQueryExpression>();
+            thirdQuery.Criteria.Should().BeOfType<CqlQueryBinaryExpression>();
         }
 
         [Fact]

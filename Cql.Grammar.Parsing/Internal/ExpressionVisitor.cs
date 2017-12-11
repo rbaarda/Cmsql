@@ -19,7 +19,7 @@ namespace Cql.Grammar.Parsing.Internal
         public override ICqlQueryExpression VisitBinaryExpression(CqlParser.BinaryExpressionContext context)
         {
             ExpressionVisitor expressionVisitor = new ExpressionVisitor();
-            return new CqlQueryExpression
+            return new CqlQueryBinaryExpression
             {
                 Operator = GetConditionalOperator(context.op.Type),
                 LeftExpression = context.left.Accept(expressionVisitor),

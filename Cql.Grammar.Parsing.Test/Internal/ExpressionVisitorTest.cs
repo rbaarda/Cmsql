@@ -43,12 +43,12 @@ namespace Cql.Grammar.Parsing.Test.Internal
                 (CqlParser.BinaryExpressionContext)cqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
-            CqlQueryExpression expression = (CqlQueryExpression)visitor.VisitBinaryExpression(parseTree);
+            CqlQueryBinaryExpression binaryExpression = (CqlQueryBinaryExpression)visitor.VisitBinaryExpression(parseTree);
 
-            expression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
-            expression.LeftExpression.Should().NotBeNull();
-            expression.RightExpression.Should().BeOfType<CqlQueryCondition>();
-            expression.RightExpression.Should().NotBeNull();
+            binaryExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
+            binaryExpression.LeftExpression.Should().NotBeNull();
+            binaryExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
+            binaryExpression.RightExpression.Should().NotBeNull();
         }
 
         [Theory]
@@ -61,12 +61,12 @@ namespace Cql.Grammar.Parsing.Test.Internal
                 (CqlParser.BinaryExpressionContext)cqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
-            CqlQueryExpression expression = (CqlQueryExpression)visitor.VisitBinaryExpression(parseTree);
+            CqlQueryBinaryExpression binaryExpression = (CqlQueryBinaryExpression)visitor.VisitBinaryExpression(parseTree);
 
-            expression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
-            expression.LeftExpression.Should().NotBeNull();
-            expression.RightExpression.Should().BeOfType<CqlQueryCondition>();
-            expression.RightExpression.Should().NotBeNull();
+            binaryExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
+            binaryExpression.LeftExpression.Should().NotBeNull();
+            binaryExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
+            binaryExpression.RightExpression.Should().NotBeNull();
         }
 
         [Fact]
@@ -77,12 +77,12 @@ namespace Cql.Grammar.Parsing.Test.Internal
                 (CqlParser.ParenthesizedExpressionContext)cqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
-            CqlQueryExpression expression = (CqlQueryExpression)visitor.VisitParenthesizedExpression(parseTree);
+            CqlQueryBinaryExpression binaryExpression = (CqlQueryBinaryExpression)visitor.VisitParenthesizedExpression(parseTree);
 
-            expression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
-            expression.LeftExpression.Should().NotBeNull();
-            expression.RightExpression.Should().BeOfType<CqlQueryCondition>();
-            expression.RightExpression.Should().NotBeNull();
+            binaryExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
+            binaryExpression.LeftExpression.Should().NotBeNull();
+            binaryExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
+            binaryExpression.RightExpression.Should().NotBeNull();
         }
 
         [Fact]
@@ -95,24 +95,24 @@ namespace Cql.Grammar.Parsing.Test.Internal
                 (CqlParser.BinaryExpressionContext)cqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
-            CqlQueryExpression expression = (CqlQueryExpression)visitor.VisitBinaryExpression(parseTree);
+            CqlQueryBinaryExpression binaryExpression = (CqlQueryBinaryExpression)visitor.VisitBinaryExpression(parseTree);
 
-            expression.LeftExpression.Should().BeOfType<CqlQueryExpression>();
-            expression.LeftExpression.Should().NotBeNull();
-            expression.RightExpression.Should().BeOfType<CqlQueryExpression>();
-            expression.RightExpression.Should().NotBeNull();
+            binaryExpression.LeftExpression.Should().BeOfType<CqlQueryBinaryExpression>();
+            binaryExpression.LeftExpression.Should().NotBeNull();
+            binaryExpression.RightExpression.Should().BeOfType<CqlQueryBinaryExpression>();
+            binaryExpression.RightExpression.Should().NotBeNull();
 
-            CqlQueryExpression leftParenthesizedExpression = (CqlQueryExpression) expression.LeftExpression;
-            leftParenthesizedExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
-            leftParenthesizedExpression.LeftExpression.Should().NotBeNull();
-            leftParenthesizedExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
-            leftParenthesizedExpression.RightExpression.Should().NotBeNull();
+            CqlQueryBinaryExpression leftParenthesizedBinaryExpression = (CqlQueryBinaryExpression) binaryExpression.LeftExpression;
+            leftParenthesizedBinaryExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
+            leftParenthesizedBinaryExpression.LeftExpression.Should().NotBeNull();
+            leftParenthesizedBinaryExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
+            leftParenthesizedBinaryExpression.RightExpression.Should().NotBeNull();
 
-            CqlQueryExpression rightParenthesizedExpression = (CqlQueryExpression)expression.RightExpression;
-            rightParenthesizedExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
-            rightParenthesizedExpression.LeftExpression.Should().NotBeNull();
-            rightParenthesizedExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
-            rightParenthesizedExpression.RightExpression.Should().NotBeNull();
+            CqlQueryBinaryExpression rightParenthesizedBinaryExpression = (CqlQueryBinaryExpression)binaryExpression.RightExpression;
+            rightParenthesizedBinaryExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
+            rightParenthesizedBinaryExpression.LeftExpression.Should().NotBeNull();
+            rightParenthesizedBinaryExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
+            rightParenthesizedBinaryExpression.RightExpression.Should().NotBeNull();
         }
 
         [Fact]
@@ -125,24 +125,24 @@ namespace Cql.Grammar.Parsing.Test.Internal
                 (CqlParser.ParenthesizedExpressionContext)cqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
-            CqlQueryExpression expression = (CqlQueryExpression)visitor.VisitParenthesizedExpression(parseTree);
+            CqlQueryBinaryExpression binaryExpression = (CqlQueryBinaryExpression)visitor.VisitParenthesizedExpression(parseTree);
 
-            expression.LeftExpression.Should().BeOfType<CqlQueryExpression>();
-            expression.LeftExpression.Should().NotBeNull();
-            expression.RightExpression.Should().BeOfType<CqlQueryExpression>();
-            expression.RightExpression.Should().NotBeNull();
+            binaryExpression.LeftExpression.Should().BeOfType<CqlQueryBinaryExpression>();
+            binaryExpression.LeftExpression.Should().NotBeNull();
+            binaryExpression.RightExpression.Should().BeOfType<CqlQueryBinaryExpression>();
+            binaryExpression.RightExpression.Should().NotBeNull();
 
-            CqlQueryExpression leftParenthesizedExpression = (CqlQueryExpression)expression.LeftExpression;
-            leftParenthesizedExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
-            leftParenthesizedExpression.LeftExpression.Should().NotBeNull();
-            leftParenthesizedExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
-            leftParenthesizedExpression.RightExpression.Should().NotBeNull();
+            CqlQueryBinaryExpression leftParenthesizedBinaryExpression = (CqlQueryBinaryExpression)binaryExpression.LeftExpression;
+            leftParenthesizedBinaryExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
+            leftParenthesizedBinaryExpression.LeftExpression.Should().NotBeNull();
+            leftParenthesizedBinaryExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
+            leftParenthesizedBinaryExpression.RightExpression.Should().NotBeNull();
 
-            CqlQueryExpression rightParenthesizedExpression = (CqlQueryExpression)expression.RightExpression;
-            rightParenthesizedExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
-            rightParenthesizedExpression.LeftExpression.Should().NotBeNull();
-            rightParenthesizedExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
-            rightParenthesizedExpression.RightExpression.Should().NotBeNull();
+            CqlQueryBinaryExpression rightParenthesizedBinaryExpression = (CqlQueryBinaryExpression)binaryExpression.RightExpression;
+            rightParenthesizedBinaryExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
+            rightParenthesizedBinaryExpression.LeftExpression.Should().NotBeNull();
+            rightParenthesizedBinaryExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
+            rightParenthesizedBinaryExpression.RightExpression.Should().NotBeNull();
         }
     }
 }
