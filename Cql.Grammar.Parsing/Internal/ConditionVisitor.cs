@@ -22,12 +22,12 @@ namespace Cql.Grammar.Parsing.Internal
                     return EqualityOperator.Equals;
                 case CqlParser.NOTEQUALS:
                     return EqualityOperator.NotEquals;
-                case CqlParser.LARGERTHAN:
-                    return EqualityOperator.LargerThan;
+                case CqlParser.GREATERTHAN:
+                    return EqualityOperator.GreaterThan;
                 case CqlParser.LESSTHAN:
                     return EqualityOperator.LessThan;
-                case CqlParser.LARGERTHANOREQUALS:
-                    return EqualityOperator.LargerThanOrEquals;
+                case CqlParser.GREATERTHANOREQUALS:
+                    return EqualityOperator.GreaterThanOrEquals;
                 case CqlParser.LESSTHANOREQUALS:
                     return EqualityOperator.LessThanOrEquals;
             }

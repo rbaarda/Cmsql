@@ -45,7 +45,7 @@ namespace Cql.Grammar.Parsing.Test.Internal
             CqlQueryCondition condition = visitor.VisitCondition(parseTree);
 
             condition.Identifier.ShouldBeEquivalentTo("foo");
-            condition.Operator.ShouldBeEquivalentTo(EqualityOperator.LargerThan);
+            condition.Operator.ShouldBeEquivalentTo(EqualityOperator.GreaterThan);
             condition.Value.ShouldBeEquivalentTo("bar");
         }
 
@@ -73,7 +73,7 @@ namespace Cql.Grammar.Parsing.Test.Internal
             CqlQueryCondition condition = visitor.VisitCondition(parseTree);
 
             condition.Identifier.ShouldBeEquivalentTo("foo");
-            condition.Operator.ShouldBeEquivalentTo(EqualityOperator.LargerThanOrEquals);
+            condition.Operator.ShouldBeEquivalentTo(EqualityOperator.GreaterThanOrEquals);
             condition.Value.ShouldBeEquivalentTo("bar");
         }
 
