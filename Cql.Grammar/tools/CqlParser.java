@@ -18,7 +18,8 @@ public class CqlParser extends Parser {
 	public static final int
 		SELECT=1, FROM=2, WHERE=3, OR=4, AND=5, NUMBER=6, START=7, ROOT=8, LITERAL=9, 
 		IDENTIFIER=10, LPAREN=11, RPAREN=12, TERMINATOR=13, EQUALS=14, NOTEQUALS=15, 
-		WHITESPACE=16, ERRORCHAR=17;
+		GREATERTHAN=16, LESSTHAN=17, GREATERTHANOREQUALS=18, LESSTHANOREQUALS=19, 
+		WHITESPACE=20, ERRORCHAR=21;
 	public static final int
 		RULE_queries = 0, RULE_query = 1, RULE_selectClause = 2, RULE_fromClause = 3, 
 		RULE_whereClause = 4, RULE_expression = 5, RULE_condition = 6;
@@ -29,11 +30,12 @@ public class CqlParser extends Parser {
 
 	private static final String[] _LITERAL_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, null, "'('", 
-		"')'", "';'", "'='", "'!='"
+		"')'", "';'", "'='", "'!='", "'>'", "'<'", "'>='", "'<='"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, "SELECT", "FROM", "WHERE", "OR", "AND", "NUMBER", "START", "ROOT", 
 		"LITERAL", "IDENTIFIER", "LPAREN", "RPAREN", "TERMINATOR", "EQUALS", "NOTEQUALS", 
+		"GREATERTHAN", "LESSTHAN", "GREATERTHANOREQUALS", "LESSTHANOREQUALS", 
 		"WHITESPACE", "ERRORCHAR"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
@@ -526,6 +528,10 @@ public class CqlParser extends Parser {
 		public TerminalNode LITERAL() { return getToken(CqlParser.LITERAL, 0); }
 		public TerminalNode EQUALS() { return getToken(CqlParser.EQUALS, 0); }
 		public TerminalNode NOTEQUALS() { return getToken(CqlParser.NOTEQUALS, 0); }
+		public TerminalNode GREATERTHAN() { return getToken(CqlParser.GREATERTHAN, 0); }
+		public TerminalNode LESSTHAN() { return getToken(CqlParser.LESSTHAN, 0); }
+		public TerminalNode GREATERTHANOREQUALS() { return getToken(CqlParser.GREATERTHANOREQUALS, 0); }
+		public TerminalNode LESSTHANOREQUALS() { return getToken(CqlParser.LESSTHANOREQUALS, 0); }
 		public ConditionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -552,7 +558,7 @@ public class CqlParser extends Parser {
 			setState(61);
 			((ConditionContext)_localctx).op = _input.LT(1);
 			_la = _input.LA(1);
-			if ( !(_la==EQUALS || _la==NOTEQUALS) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQUALS) | (1L << NOTEQUALS) | (1L << GREATERTHAN) | (1L << LESSTHAN) | (1L << GREATERTHANOREQUALS) | (1L << LESSTHANOREQUALS))) != 0)) ) {
 				((ConditionContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 			}
 			else {
@@ -591,12 +597,12 @@ public class CqlParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\23C\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\27C\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\3\2\3\2\3\2\7\2\24\n\2\f\2"+
 		"\16\2\27\13\2\3\2\3\2\3\3\3\3\3\3\5\3\36\n\3\3\3\7\3!\n\3\f\3\16\3$\13"+
 		"\3\3\4\3\4\3\4\3\5\3\5\3\5\3\6\3\6\3\6\3\7\3\7\3\7\3\7\3\7\3\7\5\7\65"+
 		"\n\7\3\7\3\7\3\7\7\7:\n\7\f\7\16\7=\13\7\3\b\3\b\3\b\3\b\3\b\2\3\f\t\2"+
-		"\4\6\b\n\f\16\2\5\3\2\b\n\3\2\6\7\3\2\20\21\2@\2\20\3\2\2\2\4\32\3\2\2"+
+		"\4\6\b\n\f\16\2\5\3\2\b\n\3\2\6\7\3\2\20\25\2@\2\20\3\2\2\2\4\32\3\2\2"+
 		"\2\6%\3\2\2\2\b(\3\2\2\2\n+\3\2\2\2\f\64\3\2\2\2\16>\3\2\2\2\20\25\5\4"+
 		"\3\2\21\22\7\17\2\2\22\24\5\4\3\2\23\21\3\2\2\2\24\27\3\2\2\2\25\23\3"+
 		"\2\2\2\25\26\3\2\2\2\26\30\3\2\2\2\27\25\3\2\2\2\30\31\7\2\2\3\31\3\3"+

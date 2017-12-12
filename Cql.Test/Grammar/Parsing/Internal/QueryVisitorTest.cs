@@ -1,9 +1,10 @@
-﻿using Cql.Grammar.Parsing.Internal;
+﻿using Cql.Grammar;
+using Cql.Grammar.Parsing.Internal;
 using Cql.Query;
 using FluentAssertions;
 using Xunit;
 
-namespace Cql.Grammar.Parsing.Test.Internal
+namespace Cql.Test.Grammar.Parsing.Internal
 {
     public class QueryVisitorTest
     {

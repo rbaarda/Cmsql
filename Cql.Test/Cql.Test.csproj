@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr4.Runtime, Version=4.6.0.0, Culture=neutral, PublicKeyToken=09abb75b9ed49849, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr4.Runtime.4.6.4\lib\net45\Antlr4.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="FluentAssertions, Version=4.19.4.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentAssertions.4.19.4\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
@@ -62,16 +65,21 @@
   <ItemGroup>
     <Compile Include="CqlQueryServiceTest.cs" />
     <Compile Include="FakeCqlQueryRunner.cs" />
+    <Compile Include="Grammar\Parsing\CqlParserFactory.cs" />
+    <Compile Include="Grammar\Parsing\CqlQueryParserTest.cs" />
+    <Compile Include="Grammar\Parsing\Internal\ConditionVisitorTest.cs" />
+    <Compile Include="Grammar\Parsing\Internal\ExpressionVisitorTest.cs" />
+    <Compile Include="Grammar\Parsing\Internal\FromClauseVisitorTest.cs" />
+    <Compile Include="Grammar\Parsing\Internal\QueriesVisitorTest.cs" />
+    <Compile Include="Grammar\Parsing\Internal\QueryVisitorTest.cs" />
+    <Compile Include="Grammar\Parsing\Internal\SelectClauseVisitorTest.cs" />
+    <Compile Include="Grammar\Parsing\Internal\WhereClauseVisitorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cql.Grammar.Parsing\Cql.Grammar.Parsing.csproj">
-      <Project>{f726d9a5-b8be-4ee3-8e08-88a231b921d6}</Project>
-      <Name>Cql.Grammar.Parsing</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cql.Query\Cql.Query.csproj">
-      <Project>{4fa52fd9-4aea-4629-a7d8-5ff21bf42069}</Project>
-      <Name>Cql.Query</Name>
+    <ProjectReference Include="..\Cql.Grammar\Cql.Grammar.csproj">
+      <Project>{DD49E66F-FA20-447E-B979-B034B944A0B9}</Project>
+      <Name>Cql.Grammar</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cql\Cql.csproj">
       <Project>{7a6a187b-4cff-4515-a6e9-070331425ca4}</Project>

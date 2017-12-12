@@ -39,18 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CqlQueryParseError.cs" />
-    <Compile Include="CqlQueryParseResult.cs" />
-    <Compile Include="Internal\CqlParserErrorListener.cs" />
-    <Compile Include="Internal\ConditionVisitor.cs" />
-    <Compile Include="Internal\QueriesVisitor.cs" />
-    <Compile Include="CqlQueryParser.cs" />
-    <Compile Include="Internal\QueryVisitor.cs" />
-    <Compile Include="Internal\ExpressionVisitor.cs" />
-    <Compile Include="Internal\FromClauseVisitor.cs" />
-    <Compile Include="Internal\SelectClauseVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Internal\WhereClauseVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cql.Grammar\Cql.Grammar.csproj">

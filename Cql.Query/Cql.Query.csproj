@@ -36,18 +36,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EqualityOperator.cs" />
-    <Compile Include="ConditionalOperator.cs" />
-    <Compile Include="CqlQuery.cs" />
-    <Compile Include="CqlQueryCondition.cs" />
-    <Compile Include="CqlQueryBinaryExpression.cs" />
-    <Compile Include="CqlQueryResult.cs" />
-    <Compile Include="CqlQueryStartNode.cs" />
-    <Compile Include="CqlQueryStartNodeType.cs" />
-    <Compile Include="Execution\CqlQueryExecutionResult.cs" />
-    <Compile Include="Execution\ICqlQueryRunner.cs" />
-    <Compile Include="Execution\ICqlQueryExpressionVisitor.cs" />
-    <Compile Include="ICqlQueryExpression.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,7 @@
 ﻿using Antlr4.Runtime;
+using Cql.Grammar;
 
-namespace Cql.Grammar.Parsing.Test
+namespace Cql.Test.Grammar.Parsing
 {
     internal static class CqlParserFactory
     {

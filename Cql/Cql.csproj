@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr4.Runtime, Version=4.6.0.0, Culture=neutral, PublicKeyToken=09abb75b9ed49849, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr4.Runtime.4.6.4\lib\net45\Antlr4.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -40,17 +43,39 @@
     <Compile Include="CqlQueryResult.cs" />
     <Compile Include="CqlQueryResultSet.cs" />
     <Compile Include="CqlQueryService.cs" />
+    <Compile Include="Grammar\Parsing\CqlQueryParseError.cs" />
+    <Compile Include="Grammar\Parsing\CqlQueryParser.cs" />
+    <Compile Include="Grammar\Parsing\CqlQueryParseResult.cs" />
+    <Compile Include="Grammar\Parsing\Internal\ConditionVisitor.cs" />
+    <Compile Include="Grammar\Parsing\Internal\CqlParserErrorListener.cs" />
+    <Compile Include="Grammar\Parsing\Internal\ExpressionVisitor.cs" />
+    <Compile Include="Grammar\Parsing\Internal\FromClauseVisitor.cs" />
+    <Compile Include="Grammar\Parsing\Internal\QueriesVisitor.cs" />
+    <Compile Include="Grammar\Parsing\Internal\QueryVisitor.cs" />
+    <Compile Include="Grammar\Parsing\Internal\SelectClauseVisitor.cs" />
+    <Compile Include="Grammar\Parsing\Internal\WhereClauseVisitor.cs" />
     <Compile Include="ICqlQueryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query\ConditionalOperator.cs" />
+    <Compile Include="Query\CqlQuery.cs" />
+    <Compile Include="Query\CqlQueryBinaryExpression.cs" />
+    <Compile Include="Query\CqlQueryCondition.cs" />
+    <Compile Include="Query\CqlQueryResult.cs" />
+    <Compile Include="Query\CqlQueryStartNode.cs" />
+    <Compile Include="Query\CqlQueryStartNodeType.cs" />
+    <Compile Include="Query\EqualityOperator.cs" />
+    <Compile Include="Query\Execution\CqlQueryExecutionResult.cs" />
+    <Compile Include="Query\Execution\ICqlQueryExpressionVisitor.cs" />
+    <Compile Include="Query\Execution\ICqlQueryRunner.cs" />
+    <Compile Include="Query\ICqlQueryExpression.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cql.Grammar.Parsing\Cql.Grammar.Parsing.csproj">
-      <Project>{f726d9a5-b8be-4ee3-8e08-88a231b921d6}</Project>
-      <Name>Cql.Grammar.Parsing</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cql.Query\Cql.Query.csproj">
-      <Project>{4fa52fd9-4aea-4629-a7d8-5ff21bf42069}</Project>
-      <Name>Cql.Query</Name>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cql.Grammar\Cql.Grammar.csproj">
+      <Project>{DD49E66F-FA20-447E-B979-B034B944A0B9}</Project>
+      <Name>Cql.Grammar</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

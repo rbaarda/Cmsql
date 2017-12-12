@@ -128,14 +128,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cql.Query\Cql.Query.csproj">
-      <Project>{4fa52fd9-4aea-4629-a7d8-5ff21bf42069}</Project>
-      <Name>Cql.Query</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cql\Cql.csproj">
+      <Project>{7A6A187B-4CFF-4515-A6E9-070331425CA4}</Project>
+      <Name>Cql</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
