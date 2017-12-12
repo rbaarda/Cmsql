@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cql.Grammar.Test", "Cql.Gra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cql.Test", "Cql.Test\Cql.Test.csproj", "{660185C9-3EC2-4D6A-8C29-805B7C5C7CDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cql.Query.EpiServer", "Cql.Query.EpiServer\Cql.Query.EpiServer.csproj", "{C97DA5C5-3BC7-4B9E-8657-96ECB21C0459}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cql.EpiServer", "Cql.Query.EpiServer\Cql.EpiServer.csproj", "{C97DA5C5-3BC7-4B9E-8657-96ECB21C0459}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

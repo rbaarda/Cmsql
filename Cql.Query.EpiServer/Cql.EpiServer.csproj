@@ -7,8 +7,8 @@
     <ProjectGuid>{C97DA5C5-3BC7-4B9E-8657-96ECB21C0459}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cql.Query.EpiServer</RootNamespace>
-    <AssemblyName>Cql.Query.EpiServer</AssemblyName>
+    <RootNamespace>Cql.EpiServer</RootNamespace>
+    <AssemblyName>Cql.EpiServer</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

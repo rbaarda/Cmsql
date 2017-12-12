@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Cql.Query;
 using Cql.Query.Execution;
 using EPiServer;
 using EPiServer.Core;
 using EPiServer.DataAbstraction;
 
-namespace Cql.Query.EpiServer
+namespace Cql.EpiServer
 {
     public class DefaultQueryRunner : ICqlQueryRunner
     {
@@ -70,9 +71,9 @@ namespace Cql.Query.EpiServer
             return PageReference.EmptyReference;
         }
 
-        private CqlQueryResult MapPageDataToCqlQueryResult(PageData page)
+        private Query.CqlQueryResult MapPageDataToCqlQueryResult(PageData page)
         {
-            return new CqlQueryResult
+            return new Query.CqlQueryResult
             {
                 Name = page.Name
             };

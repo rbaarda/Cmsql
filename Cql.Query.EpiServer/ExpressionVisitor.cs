@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cql.Query;
 using Cql.Query.Execution;
 using EPiServer;
 using EPiServer.DataAbstraction;
 using EPiServer.Filters;
 
-namespace Cql.Query.EpiServer
+namespace Cql.EpiServer
 {
     internal class ExpressionVisitor : ICqlQueryExpressionVisitor
     {
