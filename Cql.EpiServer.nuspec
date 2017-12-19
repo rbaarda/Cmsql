@@ -1,25 +1,26 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Cql</id>
+    <id>Cql.EpiServer</id>
     <version>$version$</version>
-    <title>CQL - Content Query Language</title>
+    <title>CQL EPiServer</title>
     <authors>Robert Baarda</authors>
     <owners>Robert Baarda</owners>
     <!-- <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl> -->
     <!-- <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl> -->
     <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-	  <summary>Content Query Language (CQL), a DSL for querying tree structured data.</summary>
-    <description>Content Query Language (CQL), is a DSL specifically designed for use in Content Management Systems to query over tree structured data.</description>
+	<summary>Content Query Language (CQL), a DSL for querying tree structured data.</summary>
+    <description>This package contains the EPiServer CQL query runner implementation.</description>
     <releaseNotes>Initial alpha release (Proof of concept).</releaseNotes>
     <copyright>Copyright (c) 2017 Robert Baarda</copyright>
-    <tags>cql content lexer parser dsl query tree cms</tags>
+    <tags>cql content lexer parser dsl query tree cms episerver</tags>
     <dependencies>
-      <dependency id="Antlr4.Runtime" version="[4.6.4,5.0.0)"/>
+        <dependency id="Cql" version="1.0.0-alpha1"/>
+        <dependency id="EPiServer.CMS.Core" version="[10.0.0,11.0.0)"/>
     </dependencies>
   </metadata>
   <files>
-    <file src="Cql\bin\$configuration$\Cql.dll" target="lib\net461"/>
+    <file src="Cql.EpiServer\bin\$configuration$\Cql.EpiServer.dll" target="lib\net461"/>
   </files>
 </package>
