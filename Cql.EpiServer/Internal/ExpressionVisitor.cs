@@ -4,10 +4,11 @@ using System.Linq;
 using Cql.Query;
 using Cql.Query.Execution;
 using EPiServer;
+using EPiServer.Core;
 using EPiServer.DataAbstraction;
 using EPiServer.Filters;
 
-namespace Cql.EpiServer
+namespace Cql.EpiServer.Internal
 {
     internal class ExpressionVisitor : ICqlQueryExpressionVisitor
     {
@@ -25,21 +26,31 @@ namespace Cql.EpiServer
 
         public void VisitQueryCondition(CqlQueryCondition condition)
         {
-            PropertyDefinition propDef = _contentType.PropertyDefinitions
-                .FirstOrDefault(prop =>
-                    prop.Name.Equals(condition.Identifier, StringComparison.InvariantCultureIgnoreCase));
-            if (propDef != null)
+            PropertyDataType propertyType = PropertyDataType.String;
+            if (MetaDataPropertyTypeMapping.Mappings.ContainsKey(condition.Identifier))
             {
-                CompareCondition compareCondition = MapEqualityOperatorToCompareCondition(condition.Operator);
-                PropertyCriteriaCollectionStack.Peek().Add(new PropertyCriteria
-                {
-                    Condition = compareCondition,
-                    Value = condition.Value,
-                    Name = condition.Identifier,
-                    Type = propDef.Type.DataType,
-                    Required = true
-                });
+                propertyType = MetaDataPropertyTypeMapping.Mappings[condition.Identifier];
             }
+            else
+            {
+                PropertyDefinition propDef = _contentType.PropertyDefinitions
+                    .FirstOrDefault(prop =>
+                        prop.Name.Equals(condition.Identifier, StringComparison.InvariantCultureIgnoreCase));
+                if (propDef != null)
+                {
+                    propertyType = propDef.Type.DataType;
+                }
+            }
+            
+            CompareCondition compareCondition = MapEqualityOperatorToCompareCondition(condition.Operator);
+            PropertyCriteriaCollectionStack.Peek().Add(new PropertyCriteria
+            {
+                Condition = compareCondition,
+                Value = condition.Value,
+                Name = condition.Identifier,
+                Type = propertyType,
+                Required = true
+            });
         }
 
         public void VisitQueryExpression(CqlQueryBinaryExpression binaryExpression)

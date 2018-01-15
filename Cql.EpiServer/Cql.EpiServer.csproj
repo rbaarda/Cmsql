@@ -123,8 +123,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefaultQueryRunner.cs" />
-    <Compile Include="ExpressionVisitor.cs" />
+    <Compile Include="Internal\MetaDataPropertyMapping.cs" />
+    <Compile Include="PageCriteriaQueryRunner.cs" />
+    <Compile Include="Internal\ExpressionVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

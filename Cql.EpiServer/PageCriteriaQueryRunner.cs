@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Cql.EpiServer.Internal;
 using Cql.Query;
 using Cql.Query.Execution;
 using EPiServer;
@@ -8,12 +9,12 @@ using EPiServer.DataAbstraction;
 
 namespace Cql.EpiServer
 {
-    public class DefaultQueryRunner : ICqlQueryRunner
+    public class PageCriteriaQueryRunner : ICqlQueryRunner
     {
         private readonly IPageCriteriaQueryService _pageCriteriaQueryService;
         private readonly IContentTypeRepository _contentTypeRepository;
 
-        public DefaultQueryRunner(
+        public PageCriteriaQueryRunner(
             IPageCriteriaQueryService pageCriteriaQueryService,
             IContentTypeRepository contentTypeRepository)
         {
@@ -30,8 +31,12 @@ namespace Cql.EpiServer
 
                 Stack<PropertyCriteriaCollection> propertyCriteriaCollectionStack = new Stack<PropertyCriteriaCollection>();
                 propertyCriteriaCollectionStack.Push(new PropertyCriteriaCollection());
-                ExpressionVisitor visitor = new ExpressionVisitor(contentType, propertyCriteriaCollectionStack);
-                query.Criteria.Accept(visitor);
+
+                if (query.Criteria != null)
+                {
+                    ExpressionVisitor visitor = new ExpressionVisitor(contentType, propertyCriteriaCollectionStack);
+                    query.Criteria.Accept(visitor);
+                }
 
                 PageReference searchStartNodeRef = GetStartSearchFromNode(query.StartNode);
 
@@ -71,9 +76,9 @@ namespace Cql.EpiServer
             return PageReference.EmptyReference;
         }
 
-        private Query.CqlQueryResult MapPageDataToCqlQueryResult(PageData page)
+        private CqlQueryResult MapPageDataToCqlQueryResult(PageData page)
         {
-            return new Query.CqlQueryResult
+            return new CqlQueryResult
             {
                 Name = page.Name
             };
