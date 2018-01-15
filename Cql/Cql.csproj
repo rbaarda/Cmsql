@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CqlQueryResult.cs" />
     <Compile Include="CqlQueryResultSet.cs" />
     <Compile Include="CqlQueryService.cs" />
     <Compile Include="Grammar\Parsing\CqlQueryParseError.cs" />
