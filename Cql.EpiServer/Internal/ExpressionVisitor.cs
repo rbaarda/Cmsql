@@ -1,56 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Cql.Query;
 using Cql.Query.Execution;
 using EPiServer;
 using EPiServer.Core;
-using EPiServer.DataAbstraction;
 using EPiServer.Filters;
 
 namespace Cql.EpiServer.Internal
 {
     internal class ExpressionVisitor : ICqlQueryExpressionVisitor
     {
-        private readonly ContentType _contentType;
+        private readonly PropertyDataTypeResolver _propertyDataTypeResolver;
 
         public Stack<PropertyCriteriaCollection> PropertyCriteriaCollectionStack { get; }
 
         public ExpressionVisitor(
-            ContentType contentType,
+            PropertyDataTypeResolver propertyDataTypeResolver,
             Stack<PropertyCriteriaCollection> propertyCriteriaCollectionStack)
         {
-            _contentType = contentType;
+            _propertyDataTypeResolver = propertyDataTypeResolver;
             PropertyCriteriaCollectionStack = propertyCriteriaCollectionStack;
         }
 
         public void VisitQueryCondition(CqlQueryCondition condition)
         {
-            PropertyDataType propertyType = PropertyDataType.String;
-            if (MetaDataPropertyTypeMapping.Mappings.ContainsKey(condition.Identifier))
+            if (_propertyDataTypeResolver.TryResolve(
+                condition.Identifier,
+                out PropertyDataType propertyDataType))
             {
-                propertyType = MetaDataPropertyTypeMapping.Mappings[condition.Identifier];
-            }
-            else
-            {
-                PropertyDefinition propDef = _contentType.PropertyDefinitions
-                    .FirstOrDefault(prop =>
-                        prop.Name.Equals(condition.Identifier, StringComparison.InvariantCultureIgnoreCase));
-                if (propDef != null)
+                CompareCondition compareCondition = MapEqualityOperatorToCompareCondition(condition.Operator);
+                PropertyCriteriaCollectionStack.Peek().Add(new PropertyCriteria
                 {
-                    propertyType = propDef.Type.DataType;
-                }
+                    Condition = compareCondition,
+                    Value = condition.Value,
+                    Name = condition.Identifier,
+                    Type = propertyDataType,
+                    Required = true
+                });
             }
-            
-            CompareCondition compareCondition = MapEqualityOperatorToCompareCondition(condition.Operator);
-            PropertyCriteriaCollectionStack.Peek().Add(new PropertyCriteria
-            {
-                Condition = compareCondition,
-                Value = condition.Value,
-                Name = condition.Identifier,
-                Type = propertyType,
-                Required = true
-            });
         }
 
         public void VisitQueryExpression(CqlQueryBinaryExpression binaryExpression)
@@ -61,7 +48,7 @@ namespace Cql.EpiServer.Internal
             }
 
             ExpressionVisitor leftExpressionVisitor = new ExpressionVisitor(
-                _contentType,
+                _propertyDataTypeResolver,
                 PropertyCriteriaCollectionStack);
             binaryExpression.LeftExpression.Accept(leftExpressionVisitor);
 
@@ -71,7 +58,7 @@ namespace Cql.EpiServer.Internal
             }
 
             ExpressionVisitor rightExpressionVisitor = new ExpressionVisitor(
-                _contentType,
+                _propertyDataTypeResolver,
                 PropertyCriteriaCollectionStack);
             binaryExpression.RightExpression.Accept(rightExpressionVisitor);
         }

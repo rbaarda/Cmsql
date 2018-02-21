@@ -59,10 +59,11 @@
     <Compile Include="Query\CqlQuery.cs" />
     <Compile Include="Query\CqlQueryBinaryExpression.cs" />
     <Compile Include="Query\CqlQueryCondition.cs" />
-    <Compile Include="Query\CqlQueryResult.cs" />
+    <Compile Include="Query\ICqlQueryResult.cs" />
     <Compile Include="Query\CqlQueryStartNode.cs" />
     <Compile Include="Query\CqlQueryStartNodeType.cs" />
     <Compile Include="Query\EqualityOperator.cs" />
+    <Compile Include="Query\Execution\CqlQueryExecutionError.cs" />
     <Compile Include="Query\Execution\CqlQueryExecutionResult.cs" />
     <Compile Include="Query\Execution\ICqlQueryExpressionVisitor.cs" />
     <Compile Include="Query\Execution\ICqlQueryRunner.cs" />

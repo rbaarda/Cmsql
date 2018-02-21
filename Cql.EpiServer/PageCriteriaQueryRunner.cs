@@ -24,23 +24,25 @@ namespace Cql.EpiServer
 
         public CqlQueryExecutionResult ExecuteQueries(IEnumerable<CqlQuery> queries)
         {
+            List<CqlQueryExecutionError> errors = new List<CqlQueryExecutionError>();
+
             List<PageData> result = new List<PageData>();
             foreach (CqlQuery query in queries)
             {
                 ContentType contentType = _contentTypeRepository.Load(query.ContentType);
-
-                Stack<PropertyCriteriaCollection> propertyCriteriaCollectionStack = new Stack<PropertyCriteriaCollection>();
-                propertyCriteriaCollectionStack.Push(new PropertyCriteriaCollection());
-
-                if (query.Criteria != null)
+                if (contentType == null)
                 {
-                    ExpressionVisitor visitor = new ExpressionVisitor(contentType, propertyCriteriaCollectionStack);
-                    query.Criteria.Accept(visitor);
+                    errors.Add(new CqlQueryExecutionError($"Couldn't load content-type '{query.ContentType}'."));
+                    return new CqlQueryExecutionResult(Enumerable.Empty<ICqlQueryResult>(), errors);
                 }
+
+                CqlExpressionParser expressionParser = new CqlExpressionParser();
+                IEnumerable<PropertyCriteriaCollection> propertyCriteria =
+                    expressionParser.Parse(contentType, query.Criteria);
 
                 PageReference searchStartNodeRef = GetStartSearchFromNode(query.StartNode);
 
-                foreach (PropertyCriteriaCollection propertyCriteriaCollection in propertyCriteriaCollectionStack)
+                foreach (PropertyCriteriaCollection propertyCriteriaCollection in propertyCriteria)
                 {
                     PageDataCollection foundPages = _pageCriteriaQueryService.FindPagesWithCriteria(
                         searchStartNodeRef,
@@ -52,10 +54,10 @@ namespace Cql.EpiServer
                 }
             }
 
-            return new CqlQueryExecutionResult
-            {
-                QueryResults = result.Select(MapPageDataToCqlQueryResult)
-            };
+            IEnumerable<ICqlQueryResult> pageDataCqlQueryResults =
+                result.Select(p => new PageDataCqlQueryResult(p)).ToList();
+
+            return new CqlQueryExecutionResult(pageDataCqlQueryResults, errors);
         }
 
         private PageReference GetStartSearchFromNode(CqlQueryStartNode startNode)
@@ -74,14 +76,6 @@ namespace Cql.EpiServer
                     break;
             }
             return PageReference.EmptyReference;
-        }
-
-        private CqlQueryResult MapPageDataToCqlQueryResult(PageData page)
-        {
-            return new CqlQueryResult
-            {
-                Name = page.Name
-            };
         }
     }
 }
