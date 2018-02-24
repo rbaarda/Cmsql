@@ -124,7 +124,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Internal\CqlExpressionParser.cs" />
-    <Compile Include="Internal\MetaDataPropertyMapping.cs" />
     <Compile Include="Internal\PropertyDataTypeResolver.cs" />
     <Compile Include="PageCriteriaQueryRunner.cs" />
     <Compile Include="Internal\ExpressionVisitor.cs" />
