@@ -8,7 +8,7 @@ namespace Cql.EpiServer.Internal
 {
     internal class PropertyDataTypeResolver
     {
-        private static readonly IDictionary<string, PropertyDataType>
+        internal static readonly IDictionary<string, PropertyDataType>
             MetaDataPropertyTypeMappings = new Dictionary<string, PropertyDataType>
             {
                 {MetaDataProperties.PageLink, PropertyDataType.PageReference},
@@ -39,7 +39,6 @@ namespace Cql.EpiServer.Internal
                 {MetaDataProperties.PageCategory, PropertyDataType.Category},
                 {MetaDataProperties.PageStartPublish, PropertyDataType.Date},
                 {MetaDataProperties.PageStopPublish, PropertyDataType.Date},
-                {MetaDataProperties.PageCreated, PropertyDataType.Date},
                 {MetaDataProperties.PageArchiveLink, PropertyDataType.PageReference},
                 {MetaDataProperties.PageShortcutType, PropertyDataType.Number},
                 {MetaDataProperties.PageShortcutLink, PropertyDataType.PageReference},
