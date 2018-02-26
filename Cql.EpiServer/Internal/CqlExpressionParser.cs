@@ -18,8 +18,9 @@ namespace Cql.EpiServer.Internal
             Stack<PropertyCriteriaCollection> propertyCriteriaCollectionStack = new Stack<PropertyCriteriaCollection>();
             propertyCriteriaCollectionStack.Push(new PropertyCriteriaCollection());
 
-            PropertyDataTypeResolver propertyDataTypeResolver = new PropertyDataTypeResolver(contentType);
-            ExpressionVisitor visitor = new ExpressionVisitor(propertyDataTypeResolver, propertyCriteriaCollectionStack);
+            QueryConditionToPropertyCriteriaMapper mapper =
+                new QueryConditionToPropertyCriteriaMapper(new PropertyDataTypeResolver(contentType));
+            ExpressionVisitor visitor = new ExpressionVisitor(mapper, propertyCriteriaCollectionStack);
             expression.Accept(visitor);
 
             return propertyCriteriaCollectionStack;

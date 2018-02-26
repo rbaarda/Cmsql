@@ -1,42 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Cql.Query;
 using Cql.Query.Execution;
 using EPiServer;
-using EPiServer.Core;
-using EPiServer.Filters;
 
 namespace Cql.EpiServer.Internal
 {
     internal class ExpressionVisitor : ICqlQueryExpressionVisitor
     {
-        private readonly PropertyDataTypeResolver _propertyDataTypeResolver;
+        private readonly QueryConditionToPropertyCriteriaMapper _conditionToCriteriaMapper;
 
-        public Stack<PropertyCriteriaCollection> PropertyCriteriaCollectionStack { get; }
+        internal Stack<PropertyCriteriaCollection> PropertyCriteriaCollectionStack { get; }
 
-        public ExpressionVisitor(
-            PropertyDataTypeResolver propertyDataTypeResolver,
+        internal ExpressionVisitor(
+            QueryConditionToPropertyCriteriaMapper conditionToCriteriaMapper,
             Stack<PropertyCriteriaCollection> propertyCriteriaCollectionStack)
         {
-            _propertyDataTypeResolver = propertyDataTypeResolver;
+            _conditionToCriteriaMapper = conditionToCriteriaMapper;
             PropertyCriteriaCollectionStack = propertyCriteriaCollectionStack;
         }
 
         public void VisitQueryCondition(CqlQueryCondition condition)
         {
-            if (_propertyDataTypeResolver.TryResolve(
-                condition.Identifier,
-                out PropertyDataType propertyDataType))
+            if (_conditionToCriteriaMapper.TryMap(condition, out PropertyCriteria criteria))
             {
-                CompareCondition compareCondition = MapEqualityOperatorToCompareCondition(condition.Operator);
-                PropertyCriteriaCollectionStack.Peek().Add(new PropertyCriteria
+                if (!PropertyCriteriaCollectionStack.Any())
                 {
-                    Condition = compareCondition,
-                    Value = condition.Value,
-                    Name = condition.Identifier,
-                    Type = propertyDataType,
-                    Required = true
-                });
+                    PropertyCriteriaCollectionStack.Push(new PropertyCriteriaCollection());
+                }
+
+                PropertyCriteriaCollectionStack.Peek().Add(criteria);
             }
         }
 
@@ -48,7 +41,7 @@ namespace Cql.EpiServer.Internal
             }
 
             ExpressionVisitor leftExpressionVisitor = new ExpressionVisitor(
-                _propertyDataTypeResolver,
+                _conditionToCriteriaMapper,
                 PropertyCriteriaCollectionStack);
             binaryExpression.LeftExpression.Accept(leftExpressionVisitor);
 
@@ -58,26 +51,9 @@ namespace Cql.EpiServer.Internal
             }
 
             ExpressionVisitor rightExpressionVisitor = new ExpressionVisitor(
-                _propertyDataTypeResolver,
+                _conditionToCriteriaMapper,
                 PropertyCriteriaCollectionStack);
             binaryExpression.RightExpression.Accept(rightExpressionVisitor);
-        }
-
-        private CompareCondition MapEqualityOperatorToCompareCondition(EqualityOperator operatr)
-        {
-            switch (operatr)
-            {
-                case EqualityOperator.Equals:
-                    return CompareCondition.Equal;
-                case EqualityOperator.GreaterThan:
-                    return CompareCondition.GreaterThan;
-                case EqualityOperator.LessThan:
-                    return CompareCondition.LessThan;
-                case EqualityOperator.NotEquals:
-                    return CompareCondition.NotEqual;
-            }
-
-            throw new InvalidOperationException($"Equality operator '{operatr}' not supported.");
         }
     }
 }

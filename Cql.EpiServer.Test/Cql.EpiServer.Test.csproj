@@ -142,6 +142,7 @@
   <ItemGroup>
     <Compile Include="Internal\ExpressionVisitorTest.cs" />
     <Compile Include="Internal\PropertyDataTypeResolverTest.cs" />
+    <Compile Include="Internal\QueryConditionToPropertyCriteriaMapperTest.cs" />
     <Compile Include="PageCriteriaQueryRunnerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -157,6 +158,10 @@
     <ProjectReference Include="..\Cql.EpiServer\Cql.EpiServer.csproj">
       <Project>{c97da5c5-3bc7-4b9e-8657-96ecb21c0459}</Project>
       <Name>Cql.EpiServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cql\Cql.csproj">
+      <Project>{7a6a187b-4cff-4515-a6e9-070331425ca4}</Project>
+      <Name>Cql</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
