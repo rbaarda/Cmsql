@@ -20,7 +20,7 @@ namespace Cql.EpiServer.Internal
 
             QueryConditionToPropertyCriteriaMapper mapper =
                 new QueryConditionToPropertyCriteriaMapper(new PropertyDataTypeResolver(contentType));
-            ExpressionVisitor visitor = new ExpressionVisitor(mapper, propertyCriteriaCollectionStack);
+            CqlExpressionVisitor visitor = new CqlExpressionVisitor(mapper, propertyCriteriaCollectionStack);
             expression.Accept(visitor);
 
             return propertyCriteriaCollectionStack;

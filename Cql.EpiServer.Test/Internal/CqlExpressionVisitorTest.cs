@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Cql.EpiServer.Test.Internal
 {
-    public class ExpressionVisitorTest
+    public class CqlExpressionVisitorTest
     {
         [Fact]
         public void Test_can_parse_query_condition_to_property_criteria()
@@ -26,14 +26,14 @@ namespace Cql.EpiServer.Test.Internal
             Stack<PropertyCriteriaCollection> propertyCriteriaCollectionStack
                 = new Stack<PropertyCriteriaCollection>();
 
-            ExpressionVisitor expressionVisitor =
-                new ExpressionVisitor(
+            CqlExpressionVisitor cqlExpressionVisitor =
+                new CqlExpressionVisitor(
                     new QueryConditionToPropertyCriteriaMapper(
                         new PropertyDataTypeResolver(new ContentType())),
                     propertyCriteriaCollectionStack);
 
             // Act
-            expressionVisitor.VisitQueryCondition(condition);
+            cqlExpressionVisitor.VisitQueryCondition(condition);
 
             PropertyCriteriaCollection propertyCriteriaCollection =
                 propertyCriteriaCollectionStack.Pop();

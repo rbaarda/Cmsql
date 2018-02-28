@@ -6,13 +6,13 @@ using EPiServer;
 
 namespace Cql.EpiServer.Internal
 {
-    internal class ExpressionVisitor : ICqlQueryExpressionVisitor
+    internal class CqlExpressionVisitor : ICqlQueryExpressionVisitor
     {
         private readonly QueryConditionToPropertyCriteriaMapper _conditionToCriteriaMapper;
 
         internal Stack<PropertyCriteriaCollection> PropertyCriteriaCollectionStack { get; }
 
-        internal ExpressionVisitor(
+        internal CqlExpressionVisitor(
             QueryConditionToPropertyCriteriaMapper conditionToCriteriaMapper,
             Stack<PropertyCriteriaCollection> propertyCriteriaCollectionStack)
         {
@@ -40,20 +40,20 @@ namespace Cql.EpiServer.Internal
                 PropertyCriteriaCollectionStack.Push(new PropertyCriteriaCollection());
             }
 
-            ExpressionVisitor leftExpressionVisitor = new ExpressionVisitor(
+            CqlExpressionVisitor leftCqlExpressionVisitor = new CqlExpressionVisitor(
                 _conditionToCriteriaMapper,
                 PropertyCriteriaCollectionStack);
-            binaryExpression.LeftExpression.Accept(leftExpressionVisitor);
+            binaryExpression.LeftExpression.Accept(leftCqlExpressionVisitor);
 
             if (binaryExpression.Operator == ConditionalOperator.Or)
             {
                 PropertyCriteriaCollectionStack.Push(new PropertyCriteriaCollection());
             }
 
-            ExpressionVisitor rightExpressionVisitor = new ExpressionVisitor(
+            CqlExpressionVisitor rightCqlExpressionVisitor = new CqlExpressionVisitor(
                 _conditionToCriteriaMapper,
                 PropertyCriteriaCollectionStack);
-            binaryExpression.RightExpression.Accept(rightExpressionVisitor);
+            binaryExpression.RightExpression.Accept(rightCqlExpressionVisitor);
         }
     }
 }
