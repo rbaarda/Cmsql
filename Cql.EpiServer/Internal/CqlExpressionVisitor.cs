@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Cql.Query;
+﻿using Cql.Query;
 using Cql.Query.Execution;
 using EPiServer;
 
@@ -9,27 +7,21 @@ namespace Cql.EpiServer.Internal
     internal class CqlExpressionVisitor : ICqlQueryExpressionVisitor
     {
         private readonly QueryConditionToPropertyCriteriaMapper _conditionToCriteriaMapper;
-
-        internal Stack<PropertyCriteriaCollection> PropertyCriteriaCollectionStack { get; }
-
+        private readonly CqlExpressionVisitorContext _context;
+        
         internal CqlExpressionVisitor(
             QueryConditionToPropertyCriteriaMapper conditionToCriteriaMapper,
-            Stack<PropertyCriteriaCollection> propertyCriteriaCollectionStack)
+            CqlExpressionVisitorContext context)
         {
             _conditionToCriteriaMapper = conditionToCriteriaMapper;
-            PropertyCriteriaCollectionStack = propertyCriteriaCollectionStack;
+            _context = context;
         }
 
         public void VisitQueryCondition(CqlQueryCondition condition)
         {
             if (_conditionToCriteriaMapper.TryMap(condition, out PropertyCriteria criteria))
             {
-                if (!PropertyCriteriaCollectionStack.Any())
-                {
-                    PropertyCriteriaCollectionStack.Push(new PropertyCriteriaCollection());
-                }
-
-                PropertyCriteriaCollectionStack.Peek().Add(criteria);
+                _context.AddPropertyCriteria(criteria);
             }
         }
 
@@ -37,22 +29,20 @@ namespace Cql.EpiServer.Internal
         {
             if (binaryExpression.Operator == ConditionalOperator.Or)
             {
-                PropertyCriteriaCollectionStack.Push(new PropertyCriteriaCollection());
+                _context.PushNewPropertyCriteriaCollection();
             }
 
-            CqlExpressionVisitor leftCqlExpressionVisitor = new CqlExpressionVisitor(
-                _conditionToCriteriaMapper,
-                PropertyCriteriaCollectionStack);
+            CqlExpressionVisitor leftCqlExpressionVisitor =
+                new CqlExpressionVisitor(_conditionToCriteriaMapper, _context);
             binaryExpression.LeftExpression.Accept(leftCqlExpressionVisitor);
 
             if (binaryExpression.Operator == ConditionalOperator.Or)
             {
-                PropertyCriteriaCollectionStack.Push(new PropertyCriteriaCollection());
+                _context.PushNewPropertyCriteriaCollection();
             }
 
-            CqlExpressionVisitor rightCqlExpressionVisitor = new CqlExpressionVisitor(
-                _conditionToCriteriaMapper,
-                PropertyCriteriaCollectionStack);
+            CqlExpressionVisitor rightCqlExpressionVisitor =
+                new CqlExpressionVisitor(_conditionToCriteriaMapper, _context);
             binaryExpression.RightExpression.Accept(rightCqlExpressionVisitor);
         }
     }

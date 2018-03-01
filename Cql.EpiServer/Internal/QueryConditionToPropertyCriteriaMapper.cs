@@ -42,7 +42,7 @@ namespace Cql.EpiServer.Internal
             return true;
         }
 
-        private CompareCondition MapEqualityOperatorToCompareCondition(EqualityOperator operatr)
+        internal CompareCondition MapEqualityOperatorToCompareCondition(EqualityOperator operatr)
         {
             switch (operatr)
             {

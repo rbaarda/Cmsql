@@ -8,7 +8,7 @@ namespace Cql.EpiServer.Internal
 {
     internal class PropertyDataTypeResolver
     {
-        internal static readonly IDictionary<string, PropertyDataType>
+        private static readonly IDictionary<string, PropertyDataType>
             MetaDataPropertyTypeMappings = new Dictionary<string, PropertyDataType>
             {
                 {MetaDataProperties.PageLink, PropertyDataType.PageReference},
@@ -69,8 +69,7 @@ namespace Cql.EpiServer.Internal
             }
 
             PropertyDefinition propDef = _contentType.PropertyDefinitions
-                .FirstOrDefault(prop =>
-                    prop.Name.Equals(propertyIdentifier, StringComparison.InvariantCultureIgnoreCase));
+                .SingleOrDefault(prop => prop.Name.Equals(propertyIdentifier, StringComparison.InvariantCultureIgnoreCase));
             if (propDef != null)
             {
                 propertyDataType = propDef.Type.DataType;

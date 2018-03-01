@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Cql.EpiServer.Internal;
 using Cql.Query;
 using EPiServer;
@@ -22,21 +21,18 @@ namespace Cql.EpiServer.Test.Internal
                 Operator = EqualityOperator.GreaterThan,
                 Value = "5"
             };
-
-            Stack<PropertyCriteriaCollection> propertyCriteriaCollectionStack
-                = new Stack<PropertyCriteriaCollection>();
+            
+            CqlExpressionVisitorContext context = new CqlExpressionVisitorContext();
 
             CqlExpressionVisitor cqlExpressionVisitor =
                 new CqlExpressionVisitor(
                     new QueryConditionToPropertyCriteriaMapper(
-                        new PropertyDataTypeResolver(new ContentType())),
-                    propertyCriteriaCollectionStack);
+                        new PropertyDataTypeResolver(new ContentType())), context);
 
             // Act
             cqlExpressionVisitor.VisitQueryCondition(condition);
 
-            PropertyCriteriaCollection propertyCriteriaCollection =
-                propertyCriteriaCollectionStack.Pop();
+            PropertyCriteriaCollection propertyCriteriaCollection = context.GetCriteria().Single();
 
             PropertyCriteria propertyCriteria = propertyCriteriaCollection.Single();
 

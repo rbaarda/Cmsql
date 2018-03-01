@@ -124,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Internal\CqlExpressionParser.cs" />
+    <Compile Include="Internal\CqlExpressionVisitorContext.cs" />
     <Compile Include="Internal\PropertyDataTypeResolver.cs" />
     <Compile Include="Internal\QueryConditionToPropertyCriteriaMapper.cs" />
     <Compile Include="PageCriteriaQueryRunner.cs" />

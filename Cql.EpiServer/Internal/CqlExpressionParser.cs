@@ -15,15 +15,15 @@ namespace Cql.EpiServer.Internal
                 return Enumerable.Empty<PropertyCriteriaCollection>();
             }
 
-            Stack<PropertyCriteriaCollection> propertyCriteriaCollectionStack = new Stack<PropertyCriteriaCollection>();
-            propertyCriteriaCollectionStack.Push(new PropertyCriteriaCollection());
+            CqlExpressionVisitorContext context = new CqlExpressionVisitorContext();
 
             QueryConditionToPropertyCriteriaMapper mapper =
                 new QueryConditionToPropertyCriteriaMapper(new PropertyDataTypeResolver(contentType));
-            CqlExpressionVisitor visitor = new CqlExpressionVisitor(mapper, propertyCriteriaCollectionStack);
+
+            CqlExpressionVisitor visitor = new CqlExpressionVisitor(mapper, context);
             expression.Accept(visitor);
 
-            return propertyCriteriaCollectionStack;
+            return context.GetCriteria();
         }
     }
 }

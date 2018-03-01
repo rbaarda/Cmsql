@@ -1,4 +1,5 @@
-﻿using Cql.EpiServer.Internal;
+﻿using System;
+using Cql.EpiServer.Internal;
 using Cql.Query;
 using EPiServer;
 using EPiServer.Core;
@@ -111,6 +112,33 @@ namespace Cql.EpiServer.Test.Internal
             // Assert
             isMapSuccessfull.Should().BeFalse();
             criteria.Should().BeNull();
+        }
+
+        [Theory]
+        [InlineData(EqualityOperator.GreaterThan, CompareCondition.GreaterThan)]
+        [InlineData(EqualityOperator.Equals, CompareCondition.Equal)]
+        [InlineData(EqualityOperator.LessThan, CompareCondition.LessThan)]
+        [InlineData(EqualityOperator.NotEquals, CompareCondition.NotEqual)]
+        public void Test_can_map_equality_operator_to_compare_condition(EqualityOperator operatr, CompareCondition condition)
+        {
+            QueryConditionToPropertyCriteriaMapper mapper =
+                new QueryConditionToPropertyCriteriaMapper(
+                    new PropertyDataTypeResolver(new ContentType()));
+
+            CompareCondition mappedCondition = mapper.MapEqualityOperatorToCompareCondition(operatr);
+
+            mappedCondition.ShouldBeEquivalentTo(condition);
+        }
+
+        [Fact]
+        public void Test_when_mapping_unknown_equality_operator_throw()
+        {
+            QueryConditionToPropertyCriteriaMapper mapper =
+                new QueryConditionToPropertyCriteriaMapper(
+                    new PropertyDataTypeResolver(new ContentType()));
+
+            mapper.Invoking(m => m.MapEqualityOperatorToCompareCondition(EqualityOperator.None))
+                .ShouldThrow<InvalidOperationException>();
         }
     }
 }
