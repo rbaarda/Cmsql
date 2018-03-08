@@ -33,7 +33,7 @@ namespace Cql.EpiServer
                 if (contentType == null)
                 {
                     errors.Add(new CqlQueryExecutionError($"Couldn't load content-type '{query.ContentType}'."));
-                    break;
+                    continue;
                 }
 
                 CqlExpressionParser expressionParser = new CqlExpressionParser();
@@ -41,14 +41,14 @@ namespace Cql.EpiServer
                 if (visitorContext.Errors.Any())
                 {
                     errors.AddRange(visitorContext.Errors);
-                    break;
+                    continue;
                 }
 
                 PageReference searchStartNodeRef = GetStartSearchFromNode(query.StartNode);
                 if (PageReference.IsNullOrEmpty(searchStartNodeRef))
                 {
                     errors.Add(new CqlQueryExecutionError($"Couldn't process start node '{query.StartNode}'."));
-                    break;
+                    continue;
                 }
 
                 foreach (PropertyCriteriaCollection propertyCriteriaCollection in visitorContext.GetCriteria())
