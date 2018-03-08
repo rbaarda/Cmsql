@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Cql.Query.Execution;
 using EPiServer;
 
 namespace Cql.EpiServer.Internal
@@ -9,9 +10,13 @@ namespace Cql.EpiServer.Internal
     {
         private readonly Stack<PropertyCriteriaCollection> _propertyCriteriaCollectionStack;
 
+        internal IList<CqlQueryExecutionError> Errors { get; }
+
         internal CqlExpressionVisitorContext()
         {
             _propertyCriteriaCollectionStack = new Stack<PropertyCriteriaCollection>();
+
+            Errors = new List<CqlQueryExecutionError>();
         }
 
         internal void AddPropertyCriteria(PropertyCriteria propertyCriteria)

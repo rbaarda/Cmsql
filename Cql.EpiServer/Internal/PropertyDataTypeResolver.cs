@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using EPiServer.Core;
 using EPiServer.DataAbstraction;
@@ -56,10 +57,7 @@ namespace Cql.EpiServer.Internal
 
         internal bool TryResolve(string propertyIdentifier, out PropertyDataType propertyDataType)
         {
-            if (string.IsNullOrWhiteSpace(propertyIdentifier))
-            {
-                throw new ArgumentException($"Parameter '{nameof(propertyIdentifier)}' is null or whitespace.");
-            }
+            Debug.Assert(!string.IsNullOrWhiteSpace(propertyIdentifier));
 
             propertyDataType = PropertyDataType.String;
             if (MetaDataPropertyTypeMappings.ContainsKey(propertyIdentifier))
@@ -68,8 +66,10 @@ namespace Cql.EpiServer.Internal
                 return true;
             }
 
-            PropertyDefinition propDef = _contentType.PropertyDefinitions
-                .SingleOrDefault(prop => prop.Name.Equals(propertyIdentifier, StringComparison.InvariantCultureIgnoreCase));
+            PropertyDefinition propDef = _contentType
+                .PropertyDefinitions
+                .SingleOrDefault(prop =>
+                    prop.Name.Equals(propertyIdentifier, StringComparison.InvariantCultureIgnoreCase));
             if (propDef != null)
             {
                 propertyDataType = propDef.Type.DataType;

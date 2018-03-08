@@ -64,7 +64,7 @@ namespace Cql.EpiServer.Test.Internal
         }
 
         [Fact]
-        public void Test_when_condition_is_cannot_be_mapped_criteria_should_be_empty()
+        public void Test_when_condition_cannot_be_mapped_criteria_should_be_empty()
         {
             // Arrange
             CqlQueryCondition condition = new CqlQueryCondition
@@ -88,6 +88,167 @@ namespace Cql.EpiServer.Test.Internal
 
             // Assert
             propertyCriteriaCollection.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void Test_can_map_binary_orexpression_to_two_criteria_collections()
+        {
+            // Arrange
+            CqlQueryBinaryExpression orExpression = new CqlQueryBinaryExpression
+            {
+                Operator = ConditionalOperator.Or,
+                LeftExpression = new CqlQueryCondition
+                {
+                    Identifier = "PageName",
+                    Operator = EqualityOperator.GreaterThan,
+                    Value = "5"
+                },
+                RightExpression = new CqlQueryCondition
+                {
+                    Identifier = "PageName",
+                    Operator = EqualityOperator.Equals,
+                    Value = "10"
+                }
+            };
+
+            CqlExpressionVisitorContext context = new CqlExpressionVisitorContext();
+
+            CqlExpressionVisitor cqlExpressionVisitor =
+                new CqlExpressionVisitor(
+                    new QueryConditionToPropertyCriteriaMapper(
+                        new PropertyDataTypeResolver(new ContentType())), context);
+
+            // Act
+            cqlExpressionVisitor.VisitQueryExpression(orExpression);
+
+            IEnumerable<PropertyCriteriaCollection> propertyCriteriaCollection = context.GetCriteria();
+
+            // Assert
+            propertyCriteriaCollection.Should().HaveCount(2);
+        }
+
+        [Fact]
+        public void Test_can_map_binary_andexpression_to_one_criteria_collections()
+        {
+            // Arrange
+            CqlQueryBinaryExpression orExpression = new CqlQueryBinaryExpression
+            {
+                Operator = ConditionalOperator.And,
+                LeftExpression = new CqlQueryCondition
+                {
+                    Identifier = "PageName",
+                    Operator = EqualityOperator.GreaterThan,
+                    Value = "5"
+                },
+                RightExpression = new CqlQueryCondition
+                {
+                    Identifier = "PageName",
+                    Operator = EqualityOperator.Equals,
+                    Value = "10"
+                }
+            };
+
+            CqlExpressionVisitorContext context = new CqlExpressionVisitorContext();
+
+            CqlExpressionVisitor cqlExpressionVisitor =
+                new CqlExpressionVisitor(
+                    new QueryConditionToPropertyCriteriaMapper(
+                        new PropertyDataTypeResolver(new ContentType())), context);
+
+            // Act
+            cqlExpressionVisitor.VisitQueryExpression(orExpression);
+
+            IEnumerable<PropertyCriteriaCollection> propertyCriteriaCollection = context.GetCriteria();
+
+            // Assert
+            propertyCriteriaCollection.Should().HaveCount(1);
+        }
+
+        [Fact]
+        public void Test_can_map_nested_expressions()
+        {
+            // Arrange
+            CqlQueryBinaryExpression expressions = new CqlQueryBinaryExpression
+            {
+                Operator = ConditionalOperator.Or,
+                LeftExpression = new CqlQueryBinaryExpression
+                {
+                    Operator = ConditionalOperator.Or,
+                    LeftExpression = new CqlQueryBinaryExpression
+                    {
+                        Operator = ConditionalOperator.Or,
+                        LeftExpression = new CqlQueryCondition
+                        {
+                            Identifier = "PageName",
+                            Operator = EqualityOperator.Equals,
+                            Value = "1"
+                        },
+                        RightExpression = new CqlQueryBinaryExpression
+                        {
+                            Operator = ConditionalOperator.Or,
+                            LeftExpression = new CqlQueryCondition
+                            {
+                                Identifier = "PageName",
+                                Operator = EqualityOperator.Equals,
+                                Value = "2"
+                            },
+                            RightExpression = new CqlQueryCondition
+                            {
+                                Identifier = "PageName",
+                                Operator = EqualityOperator.Equals,
+                                Value = "3"
+                            }
+                        }
+                    },
+                    RightExpression = new CqlQueryBinaryExpression
+                    {
+                        Operator = ConditionalOperator.Or,
+                        LeftExpression = new CqlQueryCondition
+                        {
+                            Identifier = "PageName",
+                            Operator = EqualityOperator.Equals,
+                            Value = "4"
+                        },
+                        RightExpression = new CqlQueryCondition
+                        {
+                            Identifier = "PageName",
+                            Operator = EqualityOperator.Equals,
+                            Value = "5"
+                        }
+                    }
+                },
+                RightExpression = new CqlQueryBinaryExpression
+                {
+                    Operator = ConditionalOperator.And,
+                    RightExpression = new CqlQueryCondition
+                    {
+                        Identifier = "PageName",
+                        Operator = EqualityOperator.Equals,
+                        Value = "6"
+                    },
+                    LeftExpression = new CqlQueryCondition
+                    {
+                        Identifier = "PageName",
+                        Operator = EqualityOperator.Equals,
+                        Value = "7"
+                    }
+                }
+            };
+
+            CqlExpressionVisitorContext context = new CqlExpressionVisitorContext();
+
+            CqlExpressionVisitor cqlExpressionVisitor =
+                new CqlExpressionVisitor(
+                    new QueryConditionToPropertyCriteriaMapper(
+                        new PropertyDataTypeResolver(new ContentType())), context);
+
+            // Act
+            cqlExpressionVisitor.VisitQueryExpression(expressions);
+
+            IEnumerable<PropertyCriteriaCollection> propertyCriteriaCollection = context.GetCriteria();
+
+            // Assert
+            propertyCriteriaCollection.Should().HaveCount(6);
         }
     }
 }

@@ -123,6 +123,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Internal\CqlBinaryOrExpressionVisitor.cs" />
     <Compile Include="Internal\CqlExpressionParser.cs" />
     <Compile Include="Internal\CqlExpressionVisitorContext.cs" />
     <Compile Include="Internal\PropertyDataTypeResolver.cs" />

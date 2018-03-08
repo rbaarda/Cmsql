@@ -25,8 +25,7 @@ namespace Cql.EpiServer.Test.Internal
         public void Test_can_add_criteria_when_criteria_collection_has_been_pushed()
         {
             CqlExpressionVisitorContext context = new CqlExpressionVisitorContext();
-
-            context.PushNewPropertyCriteriaCollection();
+            
             context.AddPropertyCriteria(new PropertyCriteria());
 
             IEnumerable<PropertyCriteriaCollection> criteria = context.GetCriteria().ToList();
