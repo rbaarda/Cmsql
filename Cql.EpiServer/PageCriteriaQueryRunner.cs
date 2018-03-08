@@ -45,6 +45,11 @@ namespace Cql.EpiServer
                 }
 
                 PageReference searchStartNodeRef = GetStartSearchFromNode(query.StartNode);
+                if (PageReference.IsNullOrEmpty(searchStartNodeRef))
+                {
+                    errors.Add(new CqlQueryExecutionError($"Couldn't process start node '{query.StartNode}'."));
+                    break;
+                }
 
                 foreach (PropertyCriteriaCollection propertyCriteriaCollection in visitorContext.GetCriteria())
                 {
