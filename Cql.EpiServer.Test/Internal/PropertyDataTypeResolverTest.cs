@@ -83,7 +83,7 @@ namespace Cql.EpiServer.Test.Internal
         }
 
         [Fact]
-        public void Test_when_property_type_cant_be_resolved_should_return_false()
+        public void Test_when_property_type_cannot_be_resolved_should_return_false()
         {
             // Arrange
             ContentType contentType = new ContentType();
@@ -102,32 +102,6 @@ namespace Cql.EpiServer.Test.Internal
             // Assert
             successfullyResolvedProperty.Should().BeFalse();
             resolvedPropertyDataType.ShouldBeEquivalentTo(PropertyDataType.String);
-        }
-
-        [Fact]
-        public void Test_when_property_name_is_null_should_throw()
-        {
-            // Arrange
-            ContentType contentType = new ContentType();
-
-            PropertyDataTypeResolver resolver = new PropertyDataTypeResolver(contentType);
-
-            // Act, Assert
-            resolver.Invoking(x => x.TryResolve(null, out PropertyDataType _))
-                .ShouldThrow<ArgumentException>();
-        }
-
-        [Fact]
-        public void Test_when_property_name_is_empty_should_throw()
-        {
-            // Arrange
-            ContentType contentType = new ContentType();
-
-            PropertyDataTypeResolver resolver = new PropertyDataTypeResolver(contentType);
-
-            // Act, Assert
-            resolver.Invoking(x => x.TryResolve("", out PropertyDataType _))
-                .ShouldThrow<ArgumentException>();
         }
     }
 }

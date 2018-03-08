@@ -20,6 +20,12 @@ namespace Cql.EpiServer.Internal
 
         public virtual void VisitQueryCondition(CqlQueryCondition condition)
         {
+            if (condition == null)
+            {
+                Context.Errors.Add(new CqlQueryExecutionError("Could not process malformed query condition."));
+                return;
+            }
+
             if (_conditionToCriteriaMapper.TryMap(condition, out PropertyCriteria criteria))
             {
                 Context.AddPropertyCriteria(criteria);

@@ -2,6 +2,7 @@
 using System.Linq;
 using Cql.EpiServer.Internal;
 using Cql.Query;
+using Cql.Query.Execution;
 using EPiServer;
 using EPiServer.DataAbstraction;
 using EPiServer.Filters;
@@ -61,6 +62,51 @@ namespace Cql.EpiServer.Test.Internal
             
             // Assert
             propertyCriteriaCollection.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void Test_when_condition_is_null_context_should_contain_error()
+        {
+            // Arrange
+            CqlExpressionVisitorContext context = new CqlExpressionVisitorContext();
+
+            CqlExpressionVisitor cqlExpressionVisitor =
+                new CqlExpressionVisitor(
+                    new QueryConditionToPropertyCriteriaMapper(
+                        new PropertyDataTypeResolver(new ContentType())), context);
+
+            // Act
+            cqlExpressionVisitor.VisitQueryCondition(null);
+
+            // Assert
+            CqlQueryExecutionError error = context.Errors.Single();
+            error.Message.ShouldBeEquivalentTo("Could not process malformed query condition.");
+        }
+
+        [Fact]
+        public void Test_when_property_cannot_be_resolved_context_should_contain_error()
+        {
+            // Arrange
+            CqlQueryCondition condition = new CqlQueryCondition
+            {
+                Identifier = "ThisPropertyCannotBeFound",
+                Operator = EqualityOperator.GreaterThan,
+                Value = "5"
+            };
+
+            CqlExpressionVisitorContext context = new CqlExpressionVisitorContext();
+
+            CqlExpressionVisitor cqlExpressionVisitor =
+                new CqlExpressionVisitor(
+                    new QueryConditionToPropertyCriteriaMapper(
+                        new PropertyDataTypeResolver(new ContentType())), context);
+
+            // Act
+            cqlExpressionVisitor.VisitQueryCondition(condition);
+            
+            // Assert
+            CqlQueryExecutionError error = context.Errors.Single();
+            error.Message.ShouldBeEquivalentTo("Could not find property 'ThisPropertyCannotBeFound'");
         }
 
         [Fact]
