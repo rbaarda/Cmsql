@@ -33,16 +33,20 @@ namespace Cql.EpiServer
                 if (contentType == null)
                 {
                     errors.Add(new CqlQueryExecutionError($"Couldn't load content-type '{query.ContentType}'."));
-                    return new CqlQueryExecutionResult(Enumerable.Empty<ICqlQueryResult>(), errors);
+                    break;
                 }
 
                 CqlExpressionParser expressionParser = new CqlExpressionParser();
-                IEnumerable<PropertyCriteriaCollection> propertyCriteria =
-                    expressionParser.Parse(contentType, query.Criteria);
+                CqlExpressionVisitorContext visitorContext = expressionParser.Parse(contentType, query.Criteria);
+                if (visitorContext.Errors.Any())
+                {
+                    errors.AddRange(visitorContext.Errors);
+                    break;
+                }
 
                 PageReference searchStartNodeRef = GetStartSearchFromNode(query.StartNode);
 
-                foreach (PropertyCriteriaCollection propertyCriteriaCollection in propertyCriteria)
+                foreach (PropertyCriteriaCollection propertyCriteriaCollection in visitorContext.GetCriteria())
                 {
                     PageDataCollection foundPages = _pageCriteriaQueryService.FindPagesWithCriteria(
                         searchStartNodeRef,

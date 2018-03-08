@@ -1,29 +1,29 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Cql.Query;
-using EPiServer;
+﻿using Cql.Query;
 using EPiServer.DataAbstraction;
 
 namespace Cql.EpiServer.Internal
 {
     internal class CqlExpressionParser
     {
-        public IEnumerable<PropertyCriteriaCollection> Parse(ContentType contentType, ICqlQueryExpression expression)
+        public CqlExpressionVisitorContext Parse(
+            ContentType contentType,
+            ICqlQueryExpression expression)
         {
-            if (expression == null)
-            {
-                return Enumerable.Empty<PropertyCriteriaCollection>();
-            }
-
             CqlExpressionVisitorContext context = new CqlExpressionVisitorContext();
 
-            QueryConditionToPropertyCriteriaMapper mapper =
-                new QueryConditionToPropertyCriteriaMapper(new PropertyDataTypeResolver(contentType));
+            if (contentType == null || expression == null)
+            {
+                return context;
+            }
+            
+            CqlExpressionVisitor visitor =
+                new CqlExpressionVisitor(
+                    new QueryConditionToPropertyCriteriaMapper(
+                        new PropertyDataTypeResolver(contentType)), context);
 
-            CqlExpressionVisitor visitor = new CqlExpressionVisitor(mapper, context);
             expression.Accept(visitor);
 
-            return context.GetCriteria();
+            return context;
         }
     }
 }
