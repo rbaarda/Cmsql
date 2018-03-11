@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7A6A187B-4CFF-4515-A6E9-070331425CA4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cql</RootNamespace>
+    <AssemblyName>Cql</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr4.Runtime, Version=4.6.0.0, Culture=neutral, PublicKeyToken=09abb75b9ed49849, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr4.Runtime.4.6.4\lib\net45\Antlr4.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CqlQueryResultSet.cs" />
+    <Compile Include="CqlQueryService.cs" />
+    <Compile Include="Grammar\Parsing\CqlQueryParseError.cs" />
+    <Compile Include="Grammar\Parsing\CqlQueryParser.cs" />
+    <Compile Include="Grammar\Parsing\CqlQueryParseResult.cs" />
+    <Compile Include="Grammar\Parsing\Internal\ConditionVisitor.cs" />
+    <Compile Include="Grammar\Parsing\Internal\CqlParserErrorListener.cs" />
+    <Compile Include="Grammar\Parsing\Internal\ExpressionVisitor.cs" />
+    <Compile Include="Grammar\Parsing\Internal\FromClauseVisitor.cs" />
+    <Compile Include="Grammar\Parsing\Internal\QueriesVisitor.cs" />
+    <Compile Include="Grammar\Parsing\Internal\QueryVisitor.cs" />
+    <Compile Include="Grammar\Parsing\Internal\SelectClauseVisitor.cs" />
+    <Compile Include="Grammar\Parsing\Internal\WhereClauseVisitor.cs" />
+    <Compile Include="ICqlQueryService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query\ConditionalOperator.cs" />
+    <Compile Include="Query\CqlQuery.cs" />
+    <Compile Include="Query\CqlQueryBinaryExpression.cs" />
+    <Compile Include="Query\CqlQueryCondition.cs" />
+    <Compile Include="Query\ICqlQueryResult.cs" />
+    <Compile Include="Query\CqlQueryStartNode.cs" />
+    <Compile Include="Query\CqlQueryStartNodeType.cs" />
+    <Compile Include="Query\EqualityOperator.cs" />
+    <Compile Include="Query\Execution\CqlQueryExecutionError.cs" />
+    <Compile Include="Query\Execution\CqlQueryExecutionResult.cs" />
+    <Compile Include="Query\Execution\ICqlQueryExpressionVisitor.cs" />
+    <Compile Include="Query\Execution\ICqlQueryRunner.cs" />
+    <Compile Include="Query\ICqlQueryExpression.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cql.Grammar\Cql.Grammar.csproj">
+      <Project>{DD49E66F-FA20-447E-B979-B034B944A0B9}</Project>
+      <Name>Cql.Grammar</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
