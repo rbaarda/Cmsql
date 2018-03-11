@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Cql.Grammar.Parsing;
-using Cql.Query;
 using Cql.Query.Execution;
 
 namespace Cql
