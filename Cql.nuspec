@@ -5,15 +5,14 @@
     <version>$version$</version>
     <title>CQL - Content Query Language</title>
     <authors>Robert Baarda</authors>
-    <owners>Robert Baarda</owners>
-    <!-- <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl> -->
-    <!-- <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl> -->
-    <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
+    <owners>rbaarda</owners>
+    <licenseUrl>https://github.com/rbaarda/Cql/blob/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/rbaarda/Cql</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-	  <summary>Content Query Language (CQL), a DSL for querying tree structured data.</summary>
+	<summary>Content Query Language (CQL), a DSL for querying tree structured data.</summary>
     <description>Content Query Language (CQL), is a DSL specifically designed for use in Content Management Systems to query over tree structured data.</description>
     <releaseNotes>Initial alpha release (Proof of concept).</releaseNotes>
-    <copyright>Copyright (c) 2017 Robert Baarda</copyright>
+    <copyright>Copyright (c) 2018 Robert Baarda</copyright>
     <tags>cql content lexer parser dsl query tree cms</tags>
     <dependencies>
       <dependency id="Antlr4.Runtime" version="[4.6.4,5.0.0)"/>
