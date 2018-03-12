@@ -18,12 +18,12 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             CmsqlParser.QueryContext parseTree = cmsqlParser.query();
 
             QueryVisitor visitor = new QueryVisitor();
-            CqlQuery cqlQuery = visitor.VisitQuery(parseTree);
+            CmsqlQuery cmsqlQuery = visitor.VisitQuery(parseTree);
 
-            cqlQuery.Should().NotBeNull();
-            cqlQuery.ContentType.Should().NotBeNullOrEmpty();
-            cqlQuery.StartNode.Should().NotBeNull();
-            cqlQuery.Criteria.Should().BeNull();
+            cmsqlQuery.Should().NotBeNull();
+            cmsqlQuery.ContentType.Should().NotBeNullOrEmpty();
+            cmsqlQuery.StartNode.Should().NotBeNull();
+            cmsqlQuery.Criteria.Should().BeNull();
         }
 
         [Theory]
@@ -36,12 +36,12 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             CmsqlParser.QueryContext parseTree = cmsqlParser.query();
 
             QueryVisitor visitor = new QueryVisitor();
-            CqlQuery cqlQuery = visitor.VisitQuery(parseTree);
+            CmsqlQuery cmsqlQuery = visitor.VisitQuery(parseTree);
 
-            cqlQuery.Should().NotBeNull();
-            cqlQuery.ContentType.Should().NotBeNullOrEmpty();
-            cqlQuery.StartNode.Should().NotBeNull();
-            cqlQuery.Criteria.Should().BeNull();
+            cmsqlQuery.Should().NotBeNull();
+            cmsqlQuery.ContentType.Should().NotBeNullOrEmpty();
+            cmsqlQuery.StartNode.Should().NotBeNull();
+            cmsqlQuery.Criteria.Should().BeNull();
         }
 
         [Theory]
@@ -54,12 +54,12 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             CmsqlParser.QueryContext parseTree = cmsqlParser.query();
 
             QueryVisitor visitor = new QueryVisitor();
-            CqlQuery cqlQuery = visitor.VisitQuery(parseTree);
+            CmsqlQuery cmsqlQuery = visitor.VisitQuery(parseTree);
 
-            cqlQuery.Should().NotBeNull();
-            cqlQuery.ContentType.Should().NotBeNullOrEmpty();
-            cqlQuery.StartNode.Should().NotBeNull();
-            cqlQuery.Criteria.Should().NotBeNull();
+            cmsqlQuery.Should().NotBeNull();
+            cmsqlQuery.ContentType.Should().NotBeNullOrEmpty();
+            cmsqlQuery.StartNode.Should().NotBeNull();
+            cmsqlQuery.Criteria.Should().NotBeNull();
         }
 
         [Theory]
@@ -72,12 +72,12 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             CmsqlParser.QueryContext parseTree = cmsqlParser.query();
 
             QueryVisitor visitor = new QueryVisitor();
-            CqlQuery cqlQuery = visitor.VisitQuery(parseTree);
+            CmsqlQuery cmsqlQuery = visitor.VisitQuery(parseTree);
 
-            cqlQuery.Should().NotBeNull();
-            cqlQuery.ContentType.Should().NotBeNullOrEmpty();
-            cqlQuery.StartNode.Should().NotBeNull();
-            cqlQuery.Criteria.Should().NotBeNull();
+            cmsqlQuery.Should().NotBeNull();
+            cmsqlQuery.ContentType.Should().NotBeNullOrEmpty();
+            cmsqlQuery.StartNode.Should().NotBeNull();
+            cmsqlQuery.Criteria.Should().NotBeNull();
         }
     }
 }

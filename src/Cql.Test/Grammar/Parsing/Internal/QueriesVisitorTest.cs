@@ -19,10 +19,10 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             CmsqlParser.QueriesContext parseTree = cmsqlParser.queries();
 
             QueriesVisitor visitor = new QueriesVisitor();
-            IEnumerable<CqlQuery> cqlQueries = visitor.VisitQueries(parseTree);
+            IEnumerable<CmsqlQuery> queries = visitor.VisitQueries(parseTree);
 
-            cqlQueries.Should().NotBeNullOrEmpty();
-            cqlQueries.Should().HaveCount(1);
+            queries.Should().NotBeNullOrEmpty();
+            queries.Should().HaveCount(1);
         }
 
         [Theory]
@@ -35,10 +35,10 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             CmsqlParser.QueriesContext parseTree = cmsqlParser.queries();
 
             QueriesVisitor visitor = new QueriesVisitor();
-            IEnumerable<CqlQuery> cqlQueries = visitor.VisitQueries(parseTree);
+            IEnumerable<CmsqlQuery> queries = visitor.VisitQueries(parseTree);
 
-            cqlQueries.Should().NotBeNullOrEmpty();
-            cqlQueries.Should().HaveCount(1);
+            queries.Should().NotBeNullOrEmpty();
+            queries.Should().HaveCount(1);
         }
 
         [Theory]
@@ -51,10 +51,10 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             CmsqlParser.QueriesContext parseTree = cmsqlParser.queries();
 
             QueriesVisitor visitor = new QueriesVisitor();
-            IEnumerable<CqlQuery> cqlQueries = visitor.VisitQueries(parseTree);
+            IEnumerable<CmsqlQuery> queries = visitor.VisitQueries(parseTree);
 
-            cqlQueries.Should().NotBeNullOrEmpty();
-            cqlQueries.Should().HaveCount(3);
+            queries.Should().NotBeNullOrEmpty();
+            queries.Should().HaveCount(3);
         }
     }
 }

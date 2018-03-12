@@ -2,24 +2,24 @@
 
 namespace Cmsql.Grammar.Parsing.Internal
 {
-    internal class ExpressionVisitor : CmsqlBaseVisitor<ICqlQueryExpression>
+    internal class ExpressionVisitor : CmsqlBaseVisitor<ICmsqlQueryExpression>
     {
-        public override ICqlQueryExpression VisitConditionExpression(CmsqlParser.ConditionExpressionContext context)
+        public override ICmsqlQueryExpression VisitConditionExpression(CmsqlParser.ConditionExpressionContext context)
         {
             ConditionVisitor conditionVisitor = new ConditionVisitor();
             return context.condition().Accept(conditionVisitor);
         }
 
-        public override ICqlQueryExpression VisitParenthesizedExpression(CmsqlParser.ParenthesizedExpressionContext context)
+        public override ICmsqlQueryExpression VisitParenthesizedExpression(CmsqlParser.ParenthesizedExpressionContext context)
         {
             ExpressionVisitor expressionVisitor = new ExpressionVisitor();
             return context.expression().Accept(expressionVisitor);
         }
 
-        public override ICqlQueryExpression VisitBinaryExpression(CmsqlParser.BinaryExpressionContext context)
+        public override ICmsqlQueryExpression VisitBinaryExpression(CmsqlParser.BinaryExpressionContext context)
         {
             ExpressionVisitor expressionVisitor = new ExpressionVisitor();
-            return new CqlQueryBinaryExpression
+            return new CmsqlQueryBinaryExpression
             {
                 Operator = GetConditionalOperator(context.op.Type),
                 LeftExpression = context.left.Accept(expressionVisitor),

@@ -2,11 +2,11 @@
 
 namespace Cmsql.Grammar.Parsing.Internal
 {
-    internal class QueryVisitor : CmsqlBaseVisitor<CqlQuery>
+    internal class QueryVisitor : CmsqlBaseVisitor<CmsqlQuery>
     {
-        public override CqlQuery VisitQuery(CmsqlParser.QueryContext context)
+        public override CmsqlQuery VisitQuery(CmsqlParser.QueryContext context)
         {
-            CqlQuery query = new CqlQuery();
+            CmsqlQuery query = new CmsqlQuery();
 
             SelectClauseVisitor selectClauseVisitor = new SelectClauseVisitor();
             query.ContentType = context.selectClause().Accept(selectClauseVisitor);

@@ -2,9 +2,9 @@
 
 namespace Cmsql.Grammar.Parsing.Internal
 {
-    internal class WhereClauseVisitor : CmsqlBaseVisitor<ICqlQueryExpression>
+    internal class WhereClauseVisitor : CmsqlBaseVisitor<ICmsqlQueryExpression>
     {
-        public override ICqlQueryExpression VisitWhereClause(CmsqlParser.WhereClauseContext context)
+        public override ICmsqlQueryExpression VisitWhereClause(CmsqlParser.WhereClauseContext context)
         {
             ExpressionVisitor expressionVisitor = new ExpressionVisitor();
 

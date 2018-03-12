@@ -2,11 +2,11 @@
 
 namespace Cmsql.Grammar.Parsing.Internal
 {
-    internal class ConditionVisitor : CmsqlBaseVisitor<CqlQueryCondition>
+    internal class ConditionVisitor : CmsqlBaseVisitor<CmsqlQueryCondition>
     {
-        public override CqlQueryCondition VisitCondition(CmsqlParser.ConditionContext context)
+        public override CmsqlQueryCondition VisitCondition(CmsqlParser.ConditionContext context)
         {
-            return new CqlQueryCondition
+            return new CmsqlQueryCondition
             {
                 Operator = GetEqualityOperator(context.op.Type),
                 Identifier = context.IDENTIFIER().GetText(),

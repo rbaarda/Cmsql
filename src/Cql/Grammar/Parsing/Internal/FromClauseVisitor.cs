@@ -2,30 +2,30 @@
 
 namespace Cmsql.Grammar.Parsing.Internal
 {
-    internal class FromClauseVisitor : CmsqlBaseVisitor<CqlQueryStartNode>
+    internal class FromClauseVisitor : CmsqlBaseVisitor<CmsqlQueryStartNode>
     {
-        public override CqlQueryStartNode VisitFromClause(CmsqlParser.FromClauseContext context)
+        public override CmsqlQueryStartNode VisitFromClause(CmsqlParser.FromClauseContext context)
         {
             if (context.NUMBER() != null)
             {
-                return new CqlQueryStartNode
+                return new CmsqlQueryStartNode
                 {
                     StartNodeId = context.NUMBER().GetText(),
-                    StartNodeType = CqlQueryStartNodeType.Id
+                    StartNodeType = CmsqlQueryStartNodeType.Id
                 };
             }
             if (context.START() != null)
             {
-                return new CqlQueryStartNode
+                return new CmsqlQueryStartNode
                 {
-                    StartNodeType = CqlQueryStartNodeType.Start
+                    StartNodeType = CmsqlQueryStartNodeType.Start
                 };
             }
             if (context.ROOT() != null)
             {
-                return new CqlQueryStartNode
+                return new CmsqlQueryStartNode
                 {
-                    StartNodeType = CqlQueryStartNodeType.Root
+                    StartNodeType = CmsqlQueryStartNodeType.Root
                 };
             }
 

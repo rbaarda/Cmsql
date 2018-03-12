@@ -16,9 +16,9 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
                 (CmsqlParser.ConditionExpressionContext)cmsqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
-            ICqlQueryExpression expression = visitor.VisitConditionExpression(parseTree);
+            ICmsqlQueryExpression expression = visitor.VisitConditionExpression(parseTree);
 
-            expression.Should().BeOfType<CqlQueryCondition>();
+            expression.Should().BeOfType<CmsqlQueryCondition>();
             expression.Should().NotBeNull();
         }
 
@@ -30,9 +30,9 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
                 (CmsqlParser.ParenthesizedExpressionContext)cmsqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
-            ICqlQueryExpression expression = visitor.VisitParenthesizedExpression(parseTree);
+            ICmsqlQueryExpression expression = visitor.VisitParenthesizedExpression(parseTree);
 
-            expression.Should().BeOfType<CqlQueryCondition>();
+            expression.Should().BeOfType<CmsqlQueryCondition>();
             expression.Should().NotBeNull();
         }
 
@@ -44,11 +44,11 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
                 (CmsqlParser.BinaryExpressionContext)cmsqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
-            CqlQueryBinaryExpression binaryExpression = (CqlQueryBinaryExpression)visitor.VisitBinaryExpression(parseTree);
+            CmsqlQueryBinaryExpression binaryExpression = (CmsqlQueryBinaryExpression)visitor.VisitBinaryExpression(parseTree);
 
-            binaryExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
+            binaryExpression.LeftExpression.Should().BeOfType<CmsqlQueryCondition>();
             binaryExpression.LeftExpression.Should().NotBeNull();
-            binaryExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
+            binaryExpression.RightExpression.Should().BeOfType<CmsqlQueryCondition>();
             binaryExpression.RightExpression.Should().NotBeNull();
         }
 
@@ -62,11 +62,11 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
                 (CmsqlParser.BinaryExpressionContext)cmsqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
-            CqlQueryBinaryExpression binaryExpression = (CqlQueryBinaryExpression)visitor.VisitBinaryExpression(parseTree);
+            CmsqlQueryBinaryExpression binaryExpression = (CmsqlQueryBinaryExpression)visitor.VisitBinaryExpression(parseTree);
 
-            binaryExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
+            binaryExpression.LeftExpression.Should().BeOfType<CmsqlQueryCondition>();
             binaryExpression.LeftExpression.Should().NotBeNull();
-            binaryExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
+            binaryExpression.RightExpression.Should().BeOfType<CmsqlQueryCondition>();
             binaryExpression.RightExpression.Should().NotBeNull();
         }
 
@@ -78,11 +78,11 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
                 (CmsqlParser.ParenthesizedExpressionContext)cmsqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
-            CqlQueryBinaryExpression binaryExpression = (CqlQueryBinaryExpression)visitor.VisitParenthesizedExpression(parseTree);
+            CmsqlQueryBinaryExpression binaryExpression = (CmsqlQueryBinaryExpression)visitor.VisitParenthesizedExpression(parseTree);
 
-            binaryExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
+            binaryExpression.LeftExpression.Should().BeOfType<CmsqlQueryCondition>();
             binaryExpression.LeftExpression.Should().NotBeNull();
-            binaryExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
+            binaryExpression.RightExpression.Should().BeOfType<CmsqlQueryCondition>();
             binaryExpression.RightExpression.Should().NotBeNull();
         }
 
@@ -96,23 +96,23 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
                 (CmsqlParser.BinaryExpressionContext)cmsqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
-            CqlQueryBinaryExpression binaryExpression = (CqlQueryBinaryExpression)visitor.VisitBinaryExpression(parseTree);
+            CmsqlQueryBinaryExpression binaryExpression = (CmsqlQueryBinaryExpression)visitor.VisitBinaryExpression(parseTree);
 
-            binaryExpression.LeftExpression.Should().BeOfType<CqlQueryBinaryExpression>();
+            binaryExpression.LeftExpression.Should().BeOfType<CmsqlQueryBinaryExpression>();
             binaryExpression.LeftExpression.Should().NotBeNull();
-            binaryExpression.RightExpression.Should().BeOfType<CqlQueryBinaryExpression>();
+            binaryExpression.RightExpression.Should().BeOfType<CmsqlQueryBinaryExpression>();
             binaryExpression.RightExpression.Should().NotBeNull();
 
-            CqlQueryBinaryExpression leftParenthesizedBinaryExpression = (CqlQueryBinaryExpression) binaryExpression.LeftExpression;
-            leftParenthesizedBinaryExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
+            CmsqlQueryBinaryExpression leftParenthesizedBinaryExpression = (CmsqlQueryBinaryExpression) binaryExpression.LeftExpression;
+            leftParenthesizedBinaryExpression.LeftExpression.Should().BeOfType<CmsqlQueryCondition>();
             leftParenthesizedBinaryExpression.LeftExpression.Should().NotBeNull();
-            leftParenthesizedBinaryExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
+            leftParenthesizedBinaryExpression.RightExpression.Should().BeOfType<CmsqlQueryCondition>();
             leftParenthesizedBinaryExpression.RightExpression.Should().NotBeNull();
 
-            CqlQueryBinaryExpression rightParenthesizedBinaryExpression = (CqlQueryBinaryExpression)binaryExpression.RightExpression;
-            rightParenthesizedBinaryExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
+            CmsqlQueryBinaryExpression rightParenthesizedBinaryExpression = (CmsqlQueryBinaryExpression)binaryExpression.RightExpression;
+            rightParenthesizedBinaryExpression.LeftExpression.Should().BeOfType<CmsqlQueryCondition>();
             rightParenthesizedBinaryExpression.LeftExpression.Should().NotBeNull();
-            rightParenthesizedBinaryExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
+            rightParenthesizedBinaryExpression.RightExpression.Should().BeOfType<CmsqlQueryCondition>();
             rightParenthesizedBinaryExpression.RightExpression.Should().NotBeNull();
         }
 
@@ -126,23 +126,23 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
                 (CmsqlParser.ParenthesizedExpressionContext)cmsqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
-            CqlQueryBinaryExpression binaryExpression = (CqlQueryBinaryExpression)visitor.VisitParenthesizedExpression(parseTree);
+            CmsqlQueryBinaryExpression binaryExpression = (CmsqlQueryBinaryExpression)visitor.VisitParenthesizedExpression(parseTree);
 
-            binaryExpression.LeftExpression.Should().BeOfType<CqlQueryBinaryExpression>();
+            binaryExpression.LeftExpression.Should().BeOfType<CmsqlQueryBinaryExpression>();
             binaryExpression.LeftExpression.Should().NotBeNull();
-            binaryExpression.RightExpression.Should().BeOfType<CqlQueryBinaryExpression>();
+            binaryExpression.RightExpression.Should().BeOfType<CmsqlQueryBinaryExpression>();
             binaryExpression.RightExpression.Should().NotBeNull();
 
-            CqlQueryBinaryExpression leftParenthesizedBinaryExpression = (CqlQueryBinaryExpression)binaryExpression.LeftExpression;
-            leftParenthesizedBinaryExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
+            CmsqlQueryBinaryExpression leftParenthesizedBinaryExpression = (CmsqlQueryBinaryExpression)binaryExpression.LeftExpression;
+            leftParenthesizedBinaryExpression.LeftExpression.Should().BeOfType<CmsqlQueryCondition>();
             leftParenthesizedBinaryExpression.LeftExpression.Should().NotBeNull();
-            leftParenthesizedBinaryExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
+            leftParenthesizedBinaryExpression.RightExpression.Should().BeOfType<CmsqlQueryCondition>();
             leftParenthesizedBinaryExpression.RightExpression.Should().NotBeNull();
 
-            CqlQueryBinaryExpression rightParenthesizedBinaryExpression = (CqlQueryBinaryExpression)binaryExpression.RightExpression;
-            rightParenthesizedBinaryExpression.LeftExpression.Should().BeOfType<CqlQueryCondition>();
+            CmsqlQueryBinaryExpression rightParenthesizedBinaryExpression = (CmsqlQueryBinaryExpression)binaryExpression.RightExpression;
+            rightParenthesizedBinaryExpression.LeftExpression.Should().BeOfType<CmsqlQueryCondition>();
             rightParenthesizedBinaryExpression.LeftExpression.Should().NotBeNull();
-            rightParenthesizedBinaryExpression.RightExpression.Should().BeOfType<CqlQueryCondition>();
+            rightParenthesizedBinaryExpression.RightExpression.Should().BeOfType<CmsqlQueryCondition>();
             rightParenthesizedBinaryExpression.RightExpression.Should().NotBeNull();
         }
     }
