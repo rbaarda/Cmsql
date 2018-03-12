@@ -11,7 +11,7 @@ namespace Cql
 
         public CqlQueryService(ICqlQueryRunner queryRunner)
         {
-            _queryRunner = queryRunner;
+            _queryRunner = queryRunner ?? throw new ArgumentNullException(nameof(queryRunner));
         }
 
         public CqlQueryResultSet ExecuteQuery(string query)
