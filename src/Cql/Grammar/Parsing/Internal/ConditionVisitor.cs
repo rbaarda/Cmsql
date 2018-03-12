@@ -1,10 +1,10 @@
-﻿using Cql.Query;
+﻿using Cmsql.Query;
 
-namespace Cql.Grammar.Parsing.Internal
+namespace Cmsql.Grammar.Parsing.Internal
 {
-    internal class ConditionVisitor : CqlBaseVisitor<CqlQueryCondition>
+    internal class ConditionVisitor : CmsqlBaseVisitor<CqlQueryCondition>
     {
-        public override CqlQueryCondition VisitCondition(CqlParser.ConditionContext context)
+        public override CqlQueryCondition VisitCondition(CmsqlParser.ConditionContext context)
         {
             return new CqlQueryCondition
             {
@@ -18,17 +18,17 @@ namespace Cql.Grammar.Parsing.Internal
         {
             switch (token)
             {
-                case CqlParser.EQUALS:
+                case CmsqlParser.EQUALS:
                     return EqualityOperator.Equals;
-                case CqlParser.NOTEQUALS:
+                case CmsqlParser.NOTEQUALS:
                     return EqualityOperator.NotEquals;
-                case CqlParser.GREATERTHAN:
+                case CmsqlParser.GREATERTHAN:
                     return EqualityOperator.GreaterThan;
-                case CqlParser.LESSTHAN:
+                case CmsqlParser.LESSTHAN:
                     return EqualityOperator.LessThan;
-                case CqlParser.GREATERTHANOREQUALS:
+                case CmsqlParser.GREATERTHANOREQUALS:
                     return EqualityOperator.GreaterThanOrEquals;
-                case CqlParser.LESSTHANOREQUALS:
+                case CmsqlParser.LESSTHANOREQUALS:
                     return EqualityOperator.LessThanOrEquals;
             }
 

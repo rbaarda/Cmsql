@@ -1,19 +1,19 @@
-﻿using Cql.Grammar;
-using Cql.Grammar.Parsing.Internal;
-using Cql.Query;
+﻿using Cmsql.Grammar;
+using Cmsql.Grammar.Parsing.Internal;
+using Cmsql.Query;
 using FluentAssertions;
 using Xunit;
 
-namespace Cql.Test.Grammar.Parsing.Internal
+namespace Cmsql.Test.Grammar.Parsing.Internal
 {
     public class ExpressionVisitorTest
     {
         [Fact]
         public void Test_can_parse_condition_as_expression()
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("foo != 'bar'");
-            CqlParser.ConditionExpressionContext parseTree =
-                (CqlParser.ConditionExpressionContext)cqlParser.expression();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("foo != 'bar'");
+            CmsqlParser.ConditionExpressionContext parseTree =
+                (CmsqlParser.ConditionExpressionContext)cmsqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
             ICqlQueryExpression expression = visitor.VisitConditionExpression(parseTree);
@@ -25,9 +25,9 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [Fact]
         public void Test_can_parse_parenthesized_expression_containing_condition_expression()
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("(foo != 'bar')");
-            CqlParser.ParenthesizedExpressionContext parseTree =
-                (CqlParser.ParenthesizedExpressionContext)cqlParser.expression();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("(foo != 'bar')");
+            CmsqlParser.ParenthesizedExpressionContext parseTree =
+                (CmsqlParser.ParenthesizedExpressionContext)cmsqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
             ICqlQueryExpression expression = visitor.VisitParenthesizedExpression(parseTree);
@@ -39,9 +39,9 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [Fact]
         public void Test_can_binary_expression_containing_two_condition_expressions()
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("foo != 'bar' and bar = 'foo'");
-            CqlParser.BinaryExpressionContext parseTree =
-                (CqlParser.BinaryExpressionContext)cqlParser.expression();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("foo != 'bar' and bar = 'foo'");
+            CmsqlParser.BinaryExpressionContext parseTree =
+                (CmsqlParser.BinaryExpressionContext)cmsqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
             CqlQueryBinaryExpression binaryExpression = (CqlQueryBinaryExpression)visitor.VisitBinaryExpression(parseTree);
@@ -57,9 +57,9 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [InlineData("foo != 'bar' and (bar = 'foo')")]
         public void Test_can_parse_binary_expression_containing_parenthesized_expression_and_condition_expression(string queryExpression)
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery(queryExpression);
-            CqlParser.BinaryExpressionContext parseTree =
-                (CqlParser.BinaryExpressionContext)cqlParser.expression();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery(queryExpression);
+            CmsqlParser.BinaryExpressionContext parseTree =
+                (CmsqlParser.BinaryExpressionContext)cmsqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
             CqlQueryBinaryExpression binaryExpression = (CqlQueryBinaryExpression)visitor.VisitBinaryExpression(parseTree);
@@ -73,9 +73,9 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [Fact]
         public void Test_can_parse_parenthesized_expression_for_binary_expression()
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("(foo != 'bar' and bar = 'foo')");
-            CqlParser.ParenthesizedExpressionContext parseTree =
-                (CqlParser.ParenthesizedExpressionContext)cqlParser.expression();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("(foo != 'bar' and bar = 'foo')");
+            CmsqlParser.ParenthesizedExpressionContext parseTree =
+                (CmsqlParser.ParenthesizedExpressionContext)cmsqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
             CqlQueryBinaryExpression binaryExpression = (CqlQueryBinaryExpression)visitor.VisitParenthesizedExpression(parseTree);
@@ -89,11 +89,11 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [Fact]
         public void Test_can_parse_binary_expression_for_two_parenthesized_expressions()
         {
-            CqlParser cqlParser =
-                CqlParserFactory.CreateParserForQuery(
+            CmsqlParser cmsqlParser =
+                CmsqlParserFactory.CreateParserForQuery(
                     "(jon != 'stark' and john = 'snow') or (arya = 'stark' and sansa = 'stark')");
-            CqlParser.BinaryExpressionContext parseTree =
-                (CqlParser.BinaryExpressionContext)cqlParser.expression();
+            CmsqlParser.BinaryExpressionContext parseTree =
+                (CmsqlParser.BinaryExpressionContext)cmsqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
             CqlQueryBinaryExpression binaryExpression = (CqlQueryBinaryExpression)visitor.VisitBinaryExpression(parseTree);
@@ -119,11 +119,11 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [Fact]
         public void Test_can_parse_parenthesized_expression_for_binary_expression_for_two_parenthesized_expressions()
         {
-            CqlParser cqlParser =
-                CqlParserFactory.CreateParserForQuery(
+            CmsqlParser cmsqlParser =
+                CmsqlParserFactory.CreateParserForQuery(
                     "((jon != 'stark' and john = 'snow') or (arya = 'stark' and sansa = 'stark'))");
-            CqlParser.ParenthesizedExpressionContext parseTree =
-                (CqlParser.ParenthesizedExpressionContext)cqlParser.expression();
+            CmsqlParser.ParenthesizedExpressionContext parseTree =
+                (CmsqlParser.ParenthesizedExpressionContext)cmsqlParser.expression();
 
             ExpressionVisitor visitor = new ExpressionVisitor();
             CqlQueryBinaryExpression binaryExpression = (CqlQueryBinaryExpression)visitor.VisitParenthesizedExpression(parseTree);

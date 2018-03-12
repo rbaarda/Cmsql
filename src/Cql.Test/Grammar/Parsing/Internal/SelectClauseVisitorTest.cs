@@ -1,9 +1,9 @@
-﻿using Cql.Grammar;
-using Cql.Grammar.Parsing.Internal;
+﻿using Cmsql.Grammar;
+using Cmsql.Grammar.Parsing.Internal;
 using FluentAssertions;
 using Xunit;
 
-namespace Cql.Test.Grammar.Parsing.Internal
+namespace Cmsql.Test.Grammar.Parsing.Internal
 {
     public class SelectClauseVisitorTest
     {
@@ -18,8 +18,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [InlineData("Test123Test")]
         public void Test_can_parse_valid_content_type_identifier(string queryIdentifier)
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery($"select {queryIdentifier}");
-            CqlParser.SelectClauseContext parseTree = cqlParser.selectClause();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery($"select {queryIdentifier}");
+            CmsqlParser.SelectClauseContext parseTree = cmsqlParser.selectClause();
 
             SelectClauseVisitor visitor = new SelectClauseVisitor();
             string identifier = visitor.VisitSelectClause(parseTree);

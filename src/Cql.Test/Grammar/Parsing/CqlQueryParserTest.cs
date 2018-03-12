@@ -1,10 +1,10 @@
 ﻿using System.Linq;
-using Cql.Grammar.Parsing;
-using Cql.Query;
+using Cmsql.Grammar.Parsing;
+using Cmsql.Query;
 using FluentAssertions;
 using Xunit;
 
-namespace Cql.Test.Grammar.Parsing
+namespace Cmsql.Test.Grammar.Parsing
 {
     public class CqlQueryParserTest
     {

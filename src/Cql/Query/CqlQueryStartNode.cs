@@ -1,4 +1,4 @@
-﻿namespace Cql.Query
+﻿namespace Cmsql.Query
 {
     public class CqlQueryStartNode
     {

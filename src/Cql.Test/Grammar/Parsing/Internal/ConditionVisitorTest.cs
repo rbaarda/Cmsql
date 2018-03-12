@@ -1,18 +1,18 @@
-﻿using Cql.Grammar;
-using Cql.Grammar.Parsing.Internal;
-using Cql.Query;
+﻿using Cmsql.Grammar;
+using Cmsql.Grammar.Parsing.Internal;
+using Cmsql.Query;
 using FluentAssertions;
 using Xunit;
 
-namespace Cql.Test.Grammar.Parsing.Internal
+namespace Cmsql.Test.Grammar.Parsing.Internal
 {
     public class ConditionVisitorTest
     {
         [Fact]
         public void Test_can_parse_equals_condition()
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("foo = 'bar'");
-            CqlParser.ConditionContext parseTree = cqlParser.condition();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("foo = 'bar'");
+            CmsqlParser.ConditionContext parseTree = cmsqlParser.condition();
             
             ConditionVisitor visitor = new ConditionVisitor();
             CqlQueryCondition condition = visitor.VisitCondition(parseTree);
@@ -25,8 +25,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [Fact]
         public void Test_can_parse_not_equals_condition()
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("foo != 'bar'");
-            CqlParser.ConditionContext parseTree = cqlParser.condition();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("foo != 'bar'");
+            CmsqlParser.ConditionContext parseTree = cmsqlParser.condition();
 
             ConditionVisitor visitor = new ConditionVisitor();
             CqlQueryCondition condition = visitor.VisitCondition(parseTree);
@@ -39,8 +39,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [Fact]
         public void Test_can_parse_larger_than_condition()
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("foo > 'bar'");
-            CqlParser.ConditionContext parseTree = cqlParser.condition();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("foo > 'bar'");
+            CmsqlParser.ConditionContext parseTree = cmsqlParser.condition();
 
             ConditionVisitor visitor = new ConditionVisitor();
             CqlQueryCondition condition = visitor.VisitCondition(parseTree);
@@ -53,8 +53,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [Fact]
         public void Test_can_parse_less_than_condition()
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("foo < 'bar'");
-            CqlParser.ConditionContext parseTree = cqlParser.condition();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("foo < 'bar'");
+            CmsqlParser.ConditionContext parseTree = cmsqlParser.condition();
 
             ConditionVisitor visitor = new ConditionVisitor();
             CqlQueryCondition condition = visitor.VisitCondition(parseTree);
@@ -67,8 +67,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [Fact]
         public void Test_can_parse_larger_than_or_equals_condition()
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("foo >= 'bar'");
-            CqlParser.ConditionContext parseTree = cqlParser.condition();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("foo >= 'bar'");
+            CmsqlParser.ConditionContext parseTree = cmsqlParser.condition();
 
             ConditionVisitor visitor = new ConditionVisitor();
             CqlQueryCondition condition = visitor.VisitCondition(parseTree);
@@ -81,8 +81,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [Fact]
         public void Test_can_parse_less_than_or_equals_condition()
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("foo <= 'bar'");
-            CqlParser.ConditionContext parseTree = cqlParser.condition();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("foo <= 'bar'");
+            CmsqlParser.ConditionContext parseTree = cmsqlParser.condition();
 
             ConditionVisitor visitor = new ConditionVisitor();
             CqlQueryCondition condition = visitor.VisitCondition(parseTree);

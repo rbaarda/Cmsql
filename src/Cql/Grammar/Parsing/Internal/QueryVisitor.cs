@@ -1,10 +1,10 @@
-﻿using Cql.Query;
+﻿using Cmsql.Query;
 
-namespace Cql.Grammar.Parsing.Internal
+namespace Cmsql.Grammar.Parsing.Internal
 {
-    internal class QueryVisitor : CqlBaseVisitor<CqlQuery>
+    internal class QueryVisitor : CmsqlBaseVisitor<CqlQuery>
     {
-        public override CqlQuery VisitQuery(CqlParser.QueryContext context)
+        public override CqlQuery VisitQuery(CmsqlParser.QueryContext context)
         {
             CqlQuery query = new CqlQuery();
 
@@ -14,7 +14,7 @@ namespace Cql.Grammar.Parsing.Internal
             FromClauseVisitor fromClauseVisitor = new FromClauseVisitor();
             query.StartNode = context.fromClause().Accept(fromClauseVisitor);
             
-            CqlParser.WhereClauseContext whereClauseContext = context.whereClause();
+            CmsqlParser.WhereClauseContext whereClauseContext = context.whereClause();
             if (whereClauseContext != null)
             {
                 WhereClauseVisitor whereClauseVisitor = new WhereClauseVisitor();

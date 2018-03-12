@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Cql.Query;
-using Cql.Query.Execution;
+using Cmsql.Query;
+using Cmsql.Query.Execution;
 
-namespace Cql.Test
+namespace Cmsql.Test
 {
     public class FakeCqlQueryRunner : ICqlQueryRunner
     {

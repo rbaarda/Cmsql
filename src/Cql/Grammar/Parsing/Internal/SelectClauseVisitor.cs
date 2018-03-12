@@ -1,8 +1,8 @@
-﻿namespace Cql.Grammar.Parsing.Internal
+﻿namespace Cmsql.Grammar.Parsing.Internal
 {
-    internal class SelectClauseVisitor : CqlBaseVisitor<string>
+    internal class SelectClauseVisitor : CmsqlBaseVisitor<string>
     {
-        public override string VisitSelectClause(CqlParser.SelectClauseContext context)
+        public override string VisitSelectClause(CmsqlParser.SelectClauseContext context)
         {
             return context.IDENTIFIER().GetText();
         }

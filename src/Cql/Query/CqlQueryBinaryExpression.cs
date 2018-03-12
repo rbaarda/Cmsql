@@ -1,6 +1,6 @@
-﻿using Cql.Query.Execution;
+﻿using Cmsql.Query.Execution;
 
-namespace Cql.Query
+namespace Cmsql.Query
 {
     public class CqlQueryBinaryExpression : ICqlQueryExpression
     {

@@ -1,4 +1,4 @@
-﻿namespace Cql
+﻿namespace Cmsql
 {
     public interface ICqlQueryService
     {

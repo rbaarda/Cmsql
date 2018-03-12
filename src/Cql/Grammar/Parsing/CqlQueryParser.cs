@@ -2,9 +2,9 @@
 using Antlr4.Runtime;
 using Antlr4.Runtime.Atn;
 using Antlr4.Runtime.Tree;
-using Cql.Grammar.Parsing.Internal;
+using Cmsql.Grammar.Parsing.Internal;
 
-namespace Cql.Grammar.Parsing
+namespace Cmsql.Grammar.Parsing
 {
     public class CqlQueryParser
     {
@@ -15,7 +15,7 @@ namespace Cql.Grammar.Parsing
                 throw new ArgumentException($"Parameter '{nameof(cqlQuery)}' is null, empty or whitespace.");
             }
             
-            CqlParser parser = CreateCqlParser(cqlQuery);
+            CmsqlParser parser = CreateParser(cqlQuery);
             parser.RemoveErrorListeners();
 
             CqlParserErrorListener errorListener = new CqlParserErrorListener();
@@ -30,11 +30,11 @@ namespace Cql.Grammar.Parsing
             };
         }
 
-        private CqlParser CreateCqlParser(string cqlQuery)
+        private CmsqlParser CreateParser(string cqlQuery)
         {
-            return new CqlParser(
+            return new CmsqlParser(
                 new CommonTokenStream(
-                    new CqlLexer(
+                    new CmsqlLexer(
                         new AntlrInputStream(cqlQuery))))
             {
                 Interpreter = {PredictionMode = PredictionMode.Sll}

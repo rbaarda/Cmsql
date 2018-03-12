@@ -4,265 +4,265 @@ using Antlr4.Runtime;
 using FluentAssertions;
 using Xunit;
 
-namespace Cql.Grammar.Test
+namespace Cmsql.Grammar.Test
 {
-    public class CqlLexerTest
+    public class CmsqlLexerTest
     {
         [Fact]
         public void Test_can_tokenize_query_from_start()
         {
-            CqlLexer lexer = CreateLexerForQuery("select foo from start");
+            CmsqlLexer lexer = CreateLexerForQuery("select foo from start");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
             tokens.ShouldAllBeEquivalentTo(
                 GetTokensAsList(
-                    CqlLexer.SELECT,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.FROM,
-                    CqlLexer.START));
+                    CmsqlLexer.SELECT,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.FROM,
+                    CmsqlLexer.START));
         }
 
         [Fact]
         public void Test_can_tokenize_query_from_root()
         {
-            CqlLexer lexer = CreateLexerForQuery("select foo from root");
+            CmsqlLexer lexer = CreateLexerForQuery("select foo from root");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
             tokens.ShouldAllBeEquivalentTo(
                 GetTokensAsList(
-                    CqlLexer.SELECT,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.FROM,
-                    CqlLexer.ROOT));
+                    CmsqlLexer.SELECT,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.FROM,
+                    CmsqlLexer.ROOT));
         }
 
         [Fact]
         public void Test_can_tokenize_query_from_arbitrary()
         {
-            CqlLexer lexer = CreateLexerForQuery("select foo from 15");
+            CmsqlLexer lexer = CreateLexerForQuery("select foo from 15");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
             tokens.ShouldAllBeEquivalentTo(
                 GetTokensAsList(
-                    CqlLexer.SELECT,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.FROM,
-                    CqlLexer.NUMBER));
+                    CmsqlLexer.SELECT,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.FROM,
+                    CmsqlLexer.NUMBER));
         }
 
         [Fact]
         public void Test_can_tokenize_start_query()
         {
-            CqlLexer lexer = CreateLexerForQuery("select foo from start");
+            CmsqlLexer lexer = CreateLexerForQuery("select foo from start");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
             tokens.ShouldAllBeEquivalentTo(
                 GetTokensAsList(
-                    CqlLexer.SELECT,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.FROM,
-                    CqlLexer.START));
+                    CmsqlLexer.SELECT,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.FROM,
+                    CmsqlLexer.START));
         }
 
         [Fact]
         public void Test_can_tokenize_query_with_terminator()
         {
-            CqlLexer lexer = CreateLexerForQuery("select foo from start;");
+            CmsqlLexer lexer = CreateLexerForQuery("select foo from start;");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
             tokens.ShouldAllBeEquivalentTo(
                 GetTokensAsList(
-                    CqlLexer.SELECT,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.FROM,
-                    CqlLexer.START,
-                    CqlLexer.TERMINATOR));
+                    CmsqlLexer.SELECT,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.FROM,
+                    CmsqlLexer.START,
+                    CmsqlLexer.TERMINATOR));
         }
 
         [Fact]
         public void Test_can_tokenize_two_queries_separated_by_terminator()
         {
-            CqlLexer lexer = CreateLexerForQuery("select foo from start; select bar from root");
+            CmsqlLexer lexer = CreateLexerForQuery("select foo from start; select bar from root");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
             tokens.ShouldAllBeEquivalentTo(
                 GetTokensAsList(
-                    CqlLexer.SELECT,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.FROM,
-                    CqlLexer.START,
-                    CqlLexer.TERMINATOR,
-                    CqlLexer.SELECT,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.FROM,
-                    CqlLexer.ROOT));
+                    CmsqlLexer.SELECT,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.FROM,
+                    CmsqlLexer.START,
+                    CmsqlLexer.TERMINATOR,
+                    CmsqlLexer.SELECT,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.FROM,
+                    CmsqlLexer.ROOT));
         }
 
         [Fact]
         public void Test_can_tokenize_query_with_single_equals_condition()
         {
-            CqlLexer lexer = CreateLexerForQuery("select foo from start where foo = 'bar'");
+            CmsqlLexer lexer = CreateLexerForQuery("select foo from start where foo = 'bar'");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
             tokens.ShouldAllBeEquivalentTo(
                 GetTokensAsList(
-                    CqlLexer.SELECT,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.FROM,
-                    CqlLexer.START,
-                    CqlLexer.WHERE,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.EQUALS,
-                    CqlLexer.LITERAL));
+                    CmsqlLexer.SELECT,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.FROM,
+                    CmsqlLexer.START,
+                    CmsqlLexer.WHERE,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.EQUALS,
+                    CmsqlLexer.LITERAL));
         }
 
         [Fact]
         public void Test_can_tokenize_query_with_single_not_equals_condition()
         {
-            CqlLexer lexer = CreateLexerForQuery("select foo from start where foo != 'bar'");
+            CmsqlLexer lexer = CreateLexerForQuery("select foo from start where foo != 'bar'");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
             tokens.ShouldAllBeEquivalentTo(
                 GetTokensAsList(
-                    CqlLexer.SELECT,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.FROM,
-                    CqlLexer.START,
-                    CqlLexer.WHERE,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.NOTEQUALS,
-                    CqlLexer.LITERAL));
+                    CmsqlLexer.SELECT,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.FROM,
+                    CmsqlLexer.START,
+                    CmsqlLexer.WHERE,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.NOTEQUALS,
+                    CmsqlLexer.LITERAL));
         }
 
         [Fact]
         public void Test_can_tokenize_query_with_single_conditional_and_expression()
         {
-            CqlLexer lexer = CreateLexerForQuery(
+            CmsqlLexer lexer = CreateLexerForQuery(
                 "select foo from start where foo = 'bar' and bar = 'foo'");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
             tokens.ShouldAllBeEquivalentTo(
                 GetTokensAsList(
-                    CqlLexer.SELECT,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.FROM,
-                    CqlLexer.START,
-                    CqlLexer.WHERE,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.EQUALS,
-                    CqlLexer.LITERAL,
-                    CqlLexer.AND,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.EQUALS,
-                    CqlLexer.LITERAL));
+                    CmsqlLexer.SELECT,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.FROM,
+                    CmsqlLexer.START,
+                    CmsqlLexer.WHERE,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.EQUALS,
+                    CmsqlLexer.LITERAL,
+                    CmsqlLexer.AND,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.EQUALS,
+                    CmsqlLexer.LITERAL));
         }
 
         [Fact]
         public void Test_can_tokenize_query_with_single_conditional_or_expression()
         {
-            CqlLexer lexer = CreateLexerForQuery(
+            CmsqlLexer lexer = CreateLexerForQuery(
                 "select foo from start where foo = 'bar' or bar = 'foo'");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
             tokens.ShouldAllBeEquivalentTo(
                 GetTokensAsList(
-                    CqlLexer.SELECT,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.FROM,
-                    CqlLexer.START,
-                    CqlLexer.WHERE,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.EQUALS,
-                    CqlLexer.LITERAL,
-                    CqlLexer.OR,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.EQUALS,
-                    CqlLexer.LITERAL));
+                    CmsqlLexer.SELECT,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.FROM,
+                    CmsqlLexer.START,
+                    CmsqlLexer.WHERE,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.EQUALS,
+                    CmsqlLexer.LITERAL,
+                    CmsqlLexer.OR,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.EQUALS,
+                    CmsqlLexer.LITERAL));
         }
 
         [Fact]
         public void Test_can_tokenize_query_with_single_parenthesized_expression()
         {
-            CqlLexer lexer = CreateLexerForQuery(
+            CmsqlLexer lexer = CreateLexerForQuery(
                 "select foo from start where (foo = 'bar' and bar = 'foo')");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
             tokens.ShouldAllBeEquivalentTo(
                 GetTokensAsList(
-                    CqlLexer.SELECT,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.FROM,
-                    CqlLexer.START,
-                    CqlLexer.WHERE,
-                    CqlLexer.LPAREN,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.EQUALS,
-                    CqlLexer.LITERAL,
-                    CqlLexer.AND,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.EQUALS,
-                    CqlLexer.LITERAL,
-                    CqlLexer.RPAREN));
+                    CmsqlLexer.SELECT,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.FROM,
+                    CmsqlLexer.START,
+                    CmsqlLexer.WHERE,
+                    CmsqlLexer.LPAREN,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.EQUALS,
+                    CmsqlLexer.LITERAL,
+                    CmsqlLexer.AND,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.EQUALS,
+                    CmsqlLexer.LITERAL,
+                    CmsqlLexer.RPAREN));
         }
 
         [Fact]
         public void Test_can_tokenize_query_with_two_parenthesized_expressions()
         {
-            CqlLexer lexer = CreateLexerForQuery(
+            CmsqlLexer lexer = CreateLexerForQuery(
                 "select foo from start where (foo = 'bar' and bar = 'foo') or (bla = 'test' and test = 'bla')");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
             tokens.ShouldAllBeEquivalentTo(
                 GetTokensAsList(
-                    CqlLexer.SELECT,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.FROM,
-                    CqlLexer.START,
-                    CqlLexer.WHERE,
-                    CqlLexer.LPAREN,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.EQUALS,
-                    CqlLexer.LITERAL,
-                    CqlLexer.AND,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.EQUALS,
-                    CqlLexer.LITERAL,
-                    CqlLexer.RPAREN,
-                    CqlLexer.OR,
-                    CqlLexer.LPAREN,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.EQUALS,
-                    CqlLexer.LITERAL,
-                    CqlLexer.AND,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.EQUALS,
-                    CqlLexer.LITERAL,
-                    CqlLexer.RPAREN));
+                    CmsqlLexer.SELECT,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.FROM,
+                    CmsqlLexer.START,
+                    CmsqlLexer.WHERE,
+                    CmsqlLexer.LPAREN,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.EQUALS,
+                    CmsqlLexer.LITERAL,
+                    CmsqlLexer.AND,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.EQUALS,
+                    CmsqlLexer.LITERAL,
+                    CmsqlLexer.RPAREN,
+                    CmsqlLexer.OR,
+                    CmsqlLexer.LPAREN,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.EQUALS,
+                    CmsqlLexer.LITERAL,
+                    CmsqlLexer.AND,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.EQUALS,
+                    CmsqlLexer.LITERAL,
+                    CmsqlLexer.RPAREN));
         }
 
         [Fact]
         public void Test_can_tokenize_query_with_invalid_type_identifier()
         {
-            CqlLexer lexer = CreateLexerForQuery(
+            CmsqlLexer lexer = CreateLexerForQuery(
                 "select foo-bar from start");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
             tokens.ShouldAllBeEquivalentTo(
                 GetTokensAsList(
-                    CqlLexer.SELECT,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.ERRORCHAR,
-                    CqlLexer.IDENTIFIER,
-                    CqlLexer.FROM,
-                    CqlLexer.START));
+                    CmsqlLexer.SELECT,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.ERRORCHAR,
+                    CmsqlLexer.IDENTIFIER,
+                    CmsqlLexer.FROM,
+                    CmsqlLexer.START));
         }
 
-        private CqlLexer CreateLexerForQuery(string query)
+        private CmsqlLexer CreateLexerForQuery(string query)
         {
-            return new CqlLexer(new AntlrInputStream(new StringReader(query)));
+            return new CmsqlLexer(new AntlrInputStream(new StringReader(query)));
         }
 
-        private IEnumerable<int> GetTokensAsList(CqlLexer lexer)
+        private IEnumerable<int> GetTokensAsList(CmsqlLexer lexer)
         {
             LinkedList<int> tokens = new LinkedList<int>();
 

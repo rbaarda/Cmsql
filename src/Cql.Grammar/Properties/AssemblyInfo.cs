@@ -5,15 +5,15 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Cql.Grammar")]
-[assembly: AssemblyDescription("Content Query Language")]
+[assembly: AssemblyTitle("Cmsql.Grammar")]
+[assembly: AssemblyDescription("CMS Query Language")]
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
 #else
 [assembly: AssemblyConfiguration("Release")]
 #endif
 [assembly: AssemblyCompany("Robert Baarda")]
-[assembly: AssemblyProduct("CQL - Content Query Language")]
+[assembly: AssemblyProduct("CMSQL - CMS Query Language")]
 [assembly: AssemblyCopyright("Copyright © 2018 Robert Baarda")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

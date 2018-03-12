@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Cql.Query;
+using Cmsql.Query;
 
-namespace Cql.Grammar.Parsing.Internal
+namespace Cmsql.Grammar.Parsing.Internal
 {
-    internal class QueriesVisitor : CqlBaseVisitor<IEnumerable<CqlQuery>>
+    internal class QueriesVisitor : CmsqlBaseVisitor<IEnumerable<CqlQuery>>
     {
-        public override IEnumerable<CqlQuery> VisitQueries(CqlParser.QueriesContext context)
+        public override IEnumerable<CqlQuery> VisitQueries(CmsqlParser.QueriesContext context)
         {
             QueryVisitor queryVisitor = new QueryVisitor();
             

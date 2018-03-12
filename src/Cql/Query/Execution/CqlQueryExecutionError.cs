@@ -1,4 +1,4 @@
-﻿namespace Cql.Query.Execution
+﻿namespace Cmsql.Query.Execution
 {
     public class CqlQueryExecutionError
     {

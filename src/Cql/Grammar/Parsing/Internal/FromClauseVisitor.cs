@@ -1,10 +1,10 @@
-﻿using Cql.Query;
+﻿using Cmsql.Query;
 
-namespace Cql.Grammar.Parsing.Internal
+namespace Cmsql.Grammar.Parsing.Internal
 {
-    internal class FromClauseVisitor : CqlBaseVisitor<CqlQueryStartNode>
+    internal class FromClauseVisitor : CmsqlBaseVisitor<CqlQueryStartNode>
     {
-        public override CqlQueryStartNode VisitFromClause(CqlParser.FromClauseContext context)
+        public override CqlQueryStartNode VisitFromClause(CmsqlParser.FromClauseContext context)
         {
             if (context.NUMBER() != null)
             {

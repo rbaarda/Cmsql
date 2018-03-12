@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Cql.Query.Execution
+namespace Cmsql.Query.Execution
 {
     public interface ICqlQueryRunner
     {

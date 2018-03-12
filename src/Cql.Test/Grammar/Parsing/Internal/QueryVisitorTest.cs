@@ -1,10 +1,10 @@
-﻿using Cql.Grammar;
-using Cql.Grammar.Parsing.Internal;
-using Cql.Query;
+﻿using Cmsql.Grammar;
+using Cmsql.Grammar.Parsing.Internal;
+using Cmsql.Query;
 using FluentAssertions;
 using Xunit;
 
-namespace Cql.Test.Grammar.Parsing.Internal
+namespace Cmsql.Test.Grammar.Parsing.Internal
 {
     public class QueryVisitorTest
     {
@@ -14,8 +14,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [InlineData("select test from 123")]
         public void Test_can_parse_valid_query_without_where_clause(string query)
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery(query);
-            CqlParser.QueryContext parseTree = cqlParser.query();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
+            CmsqlParser.QueryContext parseTree = cmsqlParser.query();
 
             QueryVisitor visitor = new QueryVisitor();
             CqlQuery cqlQuery = visitor.VisitQuery(parseTree);
@@ -32,8 +32,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [InlineData("select test from 123;")]
         public void Test_can_parse_valid_query_without_where_clause_with_terminator(string query)
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery(query);
-            CqlParser.QueryContext parseTree = cqlParser.query();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
+            CmsqlParser.QueryContext parseTree = cmsqlParser.query();
 
             QueryVisitor visitor = new QueryVisitor();
             CqlQuery cqlQuery = visitor.VisitQuery(parseTree);
@@ -50,8 +50,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [InlineData("select test from 123 where foo = 'bar'")]
         public void Test_can_parse_valid_query_with_where_clause(string query)
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery(query);
-            CqlParser.QueryContext parseTree = cqlParser.query();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
+            CmsqlParser.QueryContext parseTree = cmsqlParser.query();
 
             QueryVisitor visitor = new QueryVisitor();
             CqlQuery cqlQuery = visitor.VisitQuery(parseTree);
@@ -68,8 +68,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [InlineData("select test from 123 where foo = 'bar';")]
         public void Test_can_parse_valid_query_with_where_clause_with_terminator(string query)
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery(query);
-            CqlParser.QueryContext parseTree = cqlParser.query();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
+            CmsqlParser.QueryContext parseTree = cmsqlParser.query();
 
             QueryVisitor visitor = new QueryVisitor();
             CqlQuery cqlQuery = visitor.VisitQuery(parseTree);

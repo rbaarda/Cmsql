@@ -1,18 +1,18 @@
-﻿using Cql.Grammar;
-using Cql.Grammar.Parsing.Internal;
-using Cql.Query;
+﻿using Cmsql.Grammar;
+using Cmsql.Grammar.Parsing.Internal;
+using Cmsql.Query;
 using FluentAssertions;
 using Xunit;
 
-namespace Cql.Test.Grammar.Parsing.Internal
+namespace Cmsql.Test.Grammar.Parsing.Internal
 {
     public class WhereClauseVisitorTest
     {
         [Fact]
         public void Test_can_parse_single_condition_as_expression()
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("where foo != 'bar'");
-            CqlParser.WhereClauseContext parseTree = cqlParser.whereClause();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("where foo != 'bar'");
+            CmsqlParser.WhereClauseContext parseTree = cmsqlParser.whereClause();
 
             WhereClauseVisitor visitor = new WhereClauseVisitor();
             ICqlQueryExpression expression = visitor.VisitWhereClause(parseTree);
@@ -23,8 +23,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [Fact]
         public void Test_can_parse_two_conditions_as_expression()
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("where foo != 'bar' and bar = 'foo'");
-            CqlParser.WhereClauseContext parseTree = cqlParser.whereClause();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("where foo != 'bar' and bar = 'foo'");
+            CmsqlParser.WhereClauseContext parseTree = cmsqlParser.whereClause();
 
             WhereClauseVisitor visitor = new WhereClauseVisitor();
             CqlQueryBinaryExpression binaryExpression = visitor.VisitWhereClause(parseTree) as CqlQueryBinaryExpression;
@@ -37,8 +37,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [Fact]
         public void Test_can_parse_grouped_expression()
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("where (foo != 'bar' and bar = 'foo')");
-            CqlParser.WhereClauseContext parseTree = cqlParser.whereClause();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("where (foo != 'bar' and bar = 'foo')");
+            CmsqlParser.WhereClauseContext parseTree = cmsqlParser.whereClause();
 
             WhereClauseVisitor visitor = new WhereClauseVisitor();
             CqlQueryBinaryExpression binaryExpression = visitor.VisitWhereClause(parseTree) as CqlQueryBinaryExpression;
@@ -51,8 +51,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [Fact]
         public void Test_can_parse_condition_and_grouped_expression()
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("where foo != 'bar' or (bar = 'foo' and foo = 'bar')");
-            CqlParser.WhereClauseContext parseTree = cqlParser.whereClause();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("where foo != 'bar' or (bar = 'foo' and foo = 'bar')");
+            CmsqlParser.WhereClauseContext parseTree = cmsqlParser.whereClause();
 
             WhereClauseVisitor visitor = new WhereClauseVisitor();
             CqlQueryBinaryExpression binaryExpression = visitor.VisitWhereClause(parseTree) as CqlQueryBinaryExpression;
@@ -65,8 +65,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [Fact]
         public void Test_can_parse_grouped_expression_and_condition()
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("where (bar = 'foo' and foo = 'bar') or foo != 'bar'");
-            CqlParser.WhereClauseContext parseTree = cqlParser.whereClause();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("where (bar = 'foo' and foo = 'bar') or foo != 'bar'");
+            CmsqlParser.WhereClauseContext parseTree = cmsqlParser.whereClause();
 
             WhereClauseVisitor visitor = new WhereClauseVisitor();
             CqlQueryBinaryExpression binaryExpression = visitor.VisitWhereClause(parseTree) as CqlQueryBinaryExpression;

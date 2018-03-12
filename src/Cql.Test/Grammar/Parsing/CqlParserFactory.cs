@@ -1,15 +1,15 @@
 ﻿using Antlr4.Runtime;
-using Cql.Grammar;
+using Cmsql.Grammar;
 
-namespace Cql.Test.Grammar.Parsing
+namespace Cmsql.Test.Grammar.Parsing
 {
-    internal static class CqlParserFactory
+    internal static class CmsqlParserFactory
     {
-        public static CqlParser CreateParserForQuery(string query)
+        public static CmsqlParser CreateParserForQuery(string query)
         {
-            return new CqlParser(
+            return new CmsqlParser(
                 new CommonTokenStream(
-                    new CqlLexer(
+                    new CmsqlLexer(
                         new AntlrInputStream(query))))
             {
                 ErrorHandler = new BailErrorStrategy()

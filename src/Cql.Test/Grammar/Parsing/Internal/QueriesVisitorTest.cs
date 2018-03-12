@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Cql.Grammar;
-using Cql.Grammar.Parsing.Internal;
-using Cql.Query;
+using Cmsql.Grammar;
+using Cmsql.Grammar.Parsing.Internal;
+using Cmsql.Query;
 using FluentAssertions;
 using Xunit;
 
-namespace Cql.Test.Grammar.Parsing.Internal
+namespace Cmsql.Test.Grammar.Parsing.Internal
 {
     public class QueriesVisitorTest
     {
@@ -15,8 +15,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [InlineData("select test from 123")]
         public void Test_can_parse_single_valid_query_without_where_clause(string query)
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery(query);
-            CqlParser.QueriesContext parseTree = cqlParser.queries();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
+            CmsqlParser.QueriesContext parseTree = cmsqlParser.queries();
 
             QueriesVisitor visitor = new QueriesVisitor();
             IEnumerable<CqlQuery> cqlQueries = visitor.VisitQueries(parseTree);
@@ -31,8 +31,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [InlineData("select test from 123;")]
         public void Test_can_parse_single_valid_query_without_where_clause_with_terminator(string query)
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery(query);
-            CqlParser.QueriesContext parseTree = cqlParser.queries();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
+            CmsqlParser.QueriesContext parseTree = cmsqlParser.queries();
 
             QueriesVisitor visitor = new QueriesVisitor();
             IEnumerable<CqlQuery> cqlQueries = visitor.VisitQueries(parseTree);
@@ -47,8 +47,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [InlineData("select test from 123;select test from 123;select test from 123")]
         public void Test_can_parse_multiple_valid_queries_without_where_clause(string query)
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery(query);
-            CqlParser.QueriesContext parseTree = cqlParser.queries();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
+            CmsqlParser.QueriesContext parseTree = cmsqlParser.queries();
 
             QueriesVisitor visitor = new QueriesVisitor();
             IEnumerable<CqlQuery> cqlQueries = visitor.VisitQueries(parseTree);

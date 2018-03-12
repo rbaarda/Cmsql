@@ -1,18 +1,18 @@
-﻿using Cql.Grammar;
-using Cql.Grammar.Parsing.Internal;
-using Cql.Query;
+﻿using Cmsql.Grammar;
+using Cmsql.Grammar.Parsing.Internal;
+using Cmsql.Query;
 using FluentAssertions;
 using Xunit;
 
-namespace Cql.Test.Grammar.Parsing.Internal
+namespace Cmsql.Test.Grammar.Parsing.Internal
 {
     public class FromClauseVisitorTest
     {
         [Fact]
         public void Test_can_parse_start_as_start_node()
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("from start");
-            CqlParser.FromClauseContext parseTree = cqlParser.fromClause();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("from start");
+            CmsqlParser.FromClauseContext parseTree = cmsqlParser.fromClause();
 
             FromClauseVisitor visitor = new FromClauseVisitor();
             CqlQueryStartNode startNode = visitor.VisitFromClause(parseTree);
@@ -24,8 +24,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [Fact]
         public void Test_can_parse_root_as_start_node()
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery("from root");
-            CqlParser.FromClauseContext parseTree = cqlParser.fromClause();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("from root");
+            CmsqlParser.FromClauseContext parseTree = cmsqlParser.fromClause();
 
             FromClauseVisitor visitor = new FromClauseVisitor();
             CqlQueryStartNode startNode = visitor.VisitFromClause(parseTree);
@@ -43,8 +43,8 @@ namespace Cql.Test.Grammar.Parsing.Internal
         [InlineData("123456")]
         public void Test_can_parse_arbitrary_id_as_start_node(string id)
         {
-            CqlParser cqlParser = CqlParserFactory.CreateParserForQuery($"from {id}");
-            CqlParser.FromClauseContext parseTree = cqlParser.fromClause();
+            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery($"from {id}");
+            CmsqlParser.FromClauseContext parseTree = cmsqlParser.fromClause();
 
             FromClauseVisitor visitor = new FromClauseVisitor();
             CqlQueryStartNode startNode = visitor.VisitFromClause(parseTree);

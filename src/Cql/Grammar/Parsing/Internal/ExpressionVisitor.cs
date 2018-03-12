@@ -1,22 +1,22 @@
-﻿using Cql.Query;
+﻿using Cmsql.Query;
 
-namespace Cql.Grammar.Parsing.Internal
+namespace Cmsql.Grammar.Parsing.Internal
 {
-    internal class ExpressionVisitor : CqlBaseVisitor<ICqlQueryExpression>
+    internal class ExpressionVisitor : CmsqlBaseVisitor<ICqlQueryExpression>
     {
-        public override ICqlQueryExpression VisitConditionExpression(CqlParser.ConditionExpressionContext context)
+        public override ICqlQueryExpression VisitConditionExpression(CmsqlParser.ConditionExpressionContext context)
         {
             ConditionVisitor conditionVisitor = new ConditionVisitor();
             return context.condition().Accept(conditionVisitor);
         }
 
-        public override ICqlQueryExpression VisitParenthesizedExpression(CqlParser.ParenthesizedExpressionContext context)
+        public override ICqlQueryExpression VisitParenthesizedExpression(CmsqlParser.ParenthesizedExpressionContext context)
         {
             ExpressionVisitor expressionVisitor = new ExpressionVisitor();
             return context.expression().Accept(expressionVisitor);
         }
 
-        public override ICqlQueryExpression VisitBinaryExpression(CqlParser.BinaryExpressionContext context)
+        public override ICqlQueryExpression VisitBinaryExpression(CmsqlParser.BinaryExpressionContext context)
         {
             ExpressionVisitor expressionVisitor = new ExpressionVisitor();
             return new CqlQueryBinaryExpression
@@ -31,9 +31,9 @@ namespace Cql.Grammar.Parsing.Internal
         {
             switch (token)
             {
-                case CqlParser.AND:
+                case CmsqlParser.AND:
                     return ConditionalOperator.And;
-                case CqlParser.OR:
+                case CmsqlParser.OR:
                     return ConditionalOperator.Or;
             }
 

@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace Cql.Test
+namespace Cmsql.Test
 {
     public class CqlQueryServiceTest
     {

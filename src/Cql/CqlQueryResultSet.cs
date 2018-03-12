@@ -1,7 +1,7 @@
-﻿using Cql.Grammar.Parsing;
-using Cql.Query.Execution;
+﻿using Cmsql.Grammar.Parsing;
+using Cmsql.Query.Execution;
 
-namespace Cql
+namespace Cmsql
 {
     public class CqlQueryResultSet
     {
