@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{D24B2BFC-6FC0-422F-986C-C933E5155186}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3A1B6A0D-D5CD-4F29-B6AB-D5FD8135ECBD}"
+	ProjectSection(SolutionItems) = preProject
+		build.ps1 = build.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{02EA132A-6EEF-460C-8D6C-58437BCFEEF6}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.config = .nuget\NuGet.config
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cmsql", "Cmsql\Cmsql.csproj", "{7A6A187B-4CFF-4515-A6E9-070331425CA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cmsql.Grammar", "Cmsql.Grammar\Cmsql.Grammar.csproj", "{DD49E66F-FA20-447E-B979-B034B944A0B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cmsql.Test", "Cmsql.Test\Cmsql.Test.csproj", "{660185C9-3EC2-4D6A-8C29-805B7C5C7CDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cmsql.Grammar.Test", "Cmsql.Grammar.Test\Cmsql.Grammar.Test.csproj", "{D9C0B61D-2586-4761-AFEA-8D47B11278A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A6A187B-4CFF-4515-A6E9-070331425CA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A6A187B-4CFF-4515-A6E9-070331425CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A6A187B-4CFF-4515-A6E9-070331425CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A6A187B-4CFF-4515-A6E9-070331425CA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD49E66F-FA20-447E-B979-B034B944A0B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD49E66F-FA20-447E-B979-B034B944A0B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD49E66F-FA20-447E-B979-B034B944A0B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD49E66F-FA20-447E-B979-B034B944A0B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{660185C9-3EC2-4D6A-8C29-805B7C5C7CDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{660185C9-3EC2-4D6A-8C29-805B7C5C7CDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{660185C9-3EC2-4D6A-8C29-805B7C5C7CDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{660185C9-3EC2-4D6A-8C29-805B7C5C7CDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9C0B61D-2586-4761-AFEA-8D47B11278A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9C0B61D-2586-4761-AFEA-8D47B11278A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9C0B61D-2586-4761-AFEA-8D47B11278A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9C0B61D-2586-4761-AFEA-8D47B11278A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{02EA132A-6EEF-460C-8D6C-58437BCFEEF6} = {3A1B6A0D-D5CD-4F29-B6AB-D5FD8135ECBD}
+		{660185C9-3EC2-4D6A-8C29-805B7C5C7CDD} = {D24B2BFC-6FC0-422F-986C-C933E5155186}
+		{D9C0B61D-2586-4761-AFEA-8D47B11278A3} = {D24B2BFC-6FC0-422F-986C-C933E5155186}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AFB3C612-4480-4BC9-8E7B-4243C5DDEABF}
+	EndGlobalSection
+EndGlobal
