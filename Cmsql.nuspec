@@ -19,7 +19,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="src\Cql\bin\$configuration$\Cmsql.dll" target="lib\net461"/>
-	<file src="src\Cql\bin\$configuration$\Cmsql.Grammar.dll" target="lib\net461"/>
+    <file src="src\Cmsql\bin\$configuration$\Cmsql.dll" target="lib\net461"/>
+	<file src="src\Cmsql\bin\$configuration$\Cmsql.Grammar.dll" target="lib\net461"/>
   </files>
 </package>
