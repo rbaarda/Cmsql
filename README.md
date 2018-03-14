@@ -14,7 +14,7 @@ On its own the Cmsql package can parse Cmsql queries but it needs a specific imp
 You can use this package on itself if your project needs a Cmsql parser or if you're working on a specific implementation for Cmsql.
 
 The Cmsql package contains a `CmsqlQueryService` which is basically a facade that takes care of parsing and executing queries through the `ExecuteQuery` method.
-The `ExecuteQuery` returns an instance of `CmsqlQueryResultSet` which is a composite type that contains information about the parsing and execution process.
+The `ExecuteQuery` method returns an instance of `CmsqlQueryResultSet` which is a composite type that contains information about the parsing and execution process.
 When no errors are encountered and data is found the result set should contain data in the form of a collection of `ICmsqlQueryResult`.
 
 The following (EPiServer specific) example demonstrates how to execute a query, check for errors and get data from the result set.
