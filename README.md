@@ -4,10 +4,13 @@ At this point there is only an [implementation](https://github.com/rbaarda/Cmsql
 
 At this point the CMS Query Language is very minimalistic and offers basic query capabilities.
 
+## Goal
+CMSQL is trying to answer questions like *"Can you show me all news articles created by mr. X"* or *"Can you show me all product pages in category X"* et cetera. It tries to answer such question by means of a simple easy to learn query language. It was designed with content management systems in mind that work with content types and which structure their site content in a hierarchical way, for example systems like [Umbraco](https://umbraco.com/) or [EPiServer](https://www.episerver.com/).
+
 ## Installation
 You can install the NuGet package by running the following command (Please note that this is a pre-release).
 
-```Install-Package Cmsql -Version 1.0.0-alpha1```
+`Install-Package Cmsql -Version 1.0.0-alpha1`
 
 ## Usage
 On its own the Cmsql package can parse Cmsql queries but it needs a specific implementation to execute them.
@@ -30,5 +33,11 @@ if (!resultSet.ParseResult.Errors.Any() && !resultSet.ExecutionResult.Errors.Any
 }
 ```
 
-## Syntax
-TODO: Documentation about the CMSQL language/syntax...
+## CMSQL Syntax
+Basically a CMSQL query exists out of three parts:
+
+* A content type (for now you can only query/search for one specific type).
+* A starting point in the content tree to start searching from.
+* A set of conditions/criteria
+
+`select [CONTENT TYPE] from [QUERY START POINT IN CONTENT TREE] where [PROPERTY CONDITIONS]`
