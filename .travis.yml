@@ -2,11 +2,7 @@ sudo: required
 dist: trusty
 language: csharp
 solution: src/Cmsql.sln
-before_install:
-  - sudo add-apt-repository ppa:openjdk-r/ppa
-  - sudo apt-get -qq update
-  - sudo apt-get install -y openjdk-8-jdk
-  - sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
+jdk: openjdk8
 install:
   - nuget restore src/Cmsql.sln
   - nuget install xunit.runners -Version 1.9.2 -OutputDirectory testrunner
