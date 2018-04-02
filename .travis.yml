@@ -2,11 +2,13 @@ sudo: required
 dist: trusty
 language: csharp
 solution: src/Cmsql.sln
-jdk: openjdk8
+jdk: oraclejdk8
+before_install:
+  - echo $JAVA_HOME
 install:
   - nuget restore src/Cmsql.sln
   - nuget install xunit.runners -Version 1.9.2 -OutputDirectory testrunner
 script:
   - msbuild /p:Configuration=Release src/Cmsql.sln
-  - mono ./testrunner/xunit.runners.1.9.2/tools/xunit.console.clr4.exe .src/Cmsql.Test/bin/Release/Cmsql.Test.dll
-  - mono ./testrunner/xunit.runners.1.9.2/tools/xunit.console.clr4.exe .src/Cmsql.Grammar.Test/bin/Release/Cmsql.Grammar.Test.dll
+  - mono ./testrunner/xunit.runners.1.9.2/tools/xunit.console.clr4.exe ./src/Cmsql.Test/bin/Release/Cmsql.Test.dll
+  - mono ./testrunner/xunit.runners.1.9.2/tools/xunit.console.clr4.exe ./src/Cmsql.Grammar.Test/bin/Release/Cmsql.Grammar.Test.dll
