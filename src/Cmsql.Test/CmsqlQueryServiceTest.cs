@@ -6,11 +6,13 @@ namespace Cmsql.Test
 {
     public class CmsqlQueryServiceTest
     {
-        [Fact]
-        public void Test_when_query_contains_syntax_errors_parse_result_has_errors_and_execution_result_is_empty()
+        [Theory]
+        [InlineData("selectaaaa test from start")]
+        [InlineData("select * from ProductPage")]
+        public void Test_when_query_contains_syntax_errors_parse_result_has_errors_and_execution_result_is_empty(string query)
         {
             CmsqlQueryService queryService = new CmsqlQueryService(new FakeCmsqlQueryRunner());
-            CmsqlQueryResultSet resultSet = queryService.ExecuteQuery("selectaaaa test from start");
+            CmsqlQueryResultSet resultSet = queryService.ExecuteQuery(query);
 
             resultSet.ParseResult.Errors.Should().NotBeNullOrEmpty();
             resultSet.ExecutionResult.QueryResults.Should().BeNullOrEmpty();

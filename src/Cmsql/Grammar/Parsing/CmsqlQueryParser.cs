@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Atn;
 using Antlr4.Runtime.Tree;
 using Cmsql.Grammar.Parsing.Internal;
+using Cmsql.Query;
 
 namespace Cmsql.Grammar.Parsing
 {
@@ -23,10 +25,13 @@ namespace Cmsql.Grammar.Parsing
 
             IParseTree parseTree = parser.queries();
             QueriesVisitor queriesVisitor = new QueriesVisitor();
+
             return new CmsqlQueryParseResult
             {
                 Errors = errorListener.ParseErrors,
-                Queries = queriesVisitor.Visit(parseTree)
+                Queries = !errorListener.ParseErrors.Any()
+                    ? queriesVisitor.Visit(parseTree)
+                    : Enumerable.Empty<CmsqlQuery>()
             };
         }
 
