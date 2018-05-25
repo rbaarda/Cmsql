@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
 	<summary>CMS Query Language (CMSQL), a DSL for querying tree structured data.</summary>
     <description>CMS Query Language (CMSQL), is a DSL specifically designed for use in Content Management Systems to query over tree structured data.</description>
-    <releaseNotes>Initial alpha release (Proof of concept).</releaseNotes>
+    <releaseNotes>Fixed small issue that could cause NullReferenceException in some cases.</releaseNotes>
     <copyright>Copyright (c) 2018 Robert Baarda</copyright>
     <tags>cmsql content lexer parser dsl query tree cms</tags>
     <dependencies>
@@ -20,6 +20,6 @@
   </metadata>
   <files>
     <file src="src\Cmsql\bin\$configuration$\Cmsql.dll" target="lib\net461"/>
-	<file src="src\Cmsql\bin\$configuration$\Cmsql.Grammar.dll" target="lib\net461"/>
+    <file src="src\Cmsql\bin\$configuration$\Cmsql.Grammar.dll" target="lib\net461"/>
   </files>
 </package>
