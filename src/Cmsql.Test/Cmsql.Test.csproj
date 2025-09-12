@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="CmsqlQueryServiceTest.cs" />
     <Compile Include="FakeCmsqlQueryRunner.cs" />
+    <Compile Include="Grammar\CmsqlLexerTest.cs" />
+    <Compile Include="Grammar\CmsqlParserTest.cs" />
     <Compile Include="Grammar\Parsing\CmsqlParserFactory.cs" />
     <Compile Include="Grammar\Parsing\CmsqlQueryParserTest.cs" />
     <Compile Include="Grammar\Parsing\Internal\ConditionVisitorTest.cs" />
@@ -53,10 +55,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cmsql.Grammar\Cmsql.Grammar.csproj">
-      <Project>{DD49E66F-FA20-447E-B979-B034B944A0B9}</Project>
-      <Name>Cmsql.Grammar</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Cmsql\Cmsql.csproj">
       <Project>{7a6a187b-4cff-4515-a6e9-070331425ca4}</Project>
       <Name>Cmsql</Name>
@@ -66,8 +64,8 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Antlr4.Runtime">
-      <Version>4.6.4</Version>
+    <PackageReference Include="Antlr4.Runtime.Standard">
+      <Version>4.13.1</Version>
     </PackageReference>
     <PackageReference Include="FluentAssertions">
       <Version>4.19.4</Version>

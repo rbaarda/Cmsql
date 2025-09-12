@@ -39,28 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CmsqlLexerTest.cs" />
-    <Compile Include="CmsqlParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Cmsql.Grammar\Cmsql.Grammar.csproj">
-      <Project>{dd49e66f-fa20-447e-b979-b034b944a0b9}</Project>
-      <Name>Cmsql.Grammar</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Antlr4">
-      <Version>4.6.6</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Antlr4.Runtime">
-      <Version>4.6.4</Version>
-    </PackageReference>
     <PackageReference Include="FluentAssertions">
       <Version>4.19.4</Version>
     </PackageReference>

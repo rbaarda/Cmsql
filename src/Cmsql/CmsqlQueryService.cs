@@ -1,7 +1,10 @@
-﻿using System;
-using System.Linq;
-using Cmsql.Grammar.Parsing;
+﻿using Cmsql.Grammar.Parsing;
 using Cmsql.Query.Execution;
+using System;
+using System.Linq;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("Cmsql.Test")]
 
 namespace Cmsql
 {

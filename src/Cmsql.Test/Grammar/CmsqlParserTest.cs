@@ -229,7 +229,7 @@ namespace Cmsql.Grammar.Test
                     new CmsqlLexer(
                         new AntlrInputStream(query))))
             {
-                Interpreter = {PredictionMode = PredictionMode.Sll}
+                Interpreter = {PredictionMode = PredictionMode.SLL}
             };
         }
     }

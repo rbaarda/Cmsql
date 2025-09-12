@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using Antlr4.Runtime;
+﻿using Antlr4.Runtime;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Cmsql.Grammar.Parsing.Internal
 {
@@ -15,6 +16,7 @@ namespace Cmsql.Grammar.Parsing.Internal
         }
 
         public override void SyntaxError(
+            TextWriter output,
             IRecognizer recognizer,
             IToken offendingSymbol,
             int line,
