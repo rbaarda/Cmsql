@@ -17,9 +17,9 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             ConditionVisitor visitor = new ConditionVisitor();
             CmsqlQueryCondition condition = visitor.VisitCondition(parseTree);
 
-            condition.Identifier.ShouldBeEquivalentTo("foo");
-            condition.Operator.ShouldBeEquivalentTo(EqualityOperator.Equals);
-            condition.Value.ShouldBeEquivalentTo("bar");
+            condition.Identifier.Should().BeEquivalentTo("foo");
+            condition.Operator.Should().Be(EqualityOperator.Equals);
+            condition.Value.Should().BeEquivalentTo("bar");
         }
 
         [Fact]
@@ -31,9 +31,9 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             ConditionVisitor visitor = new ConditionVisitor();
             CmsqlQueryCondition condition = visitor.VisitCondition(parseTree);
 
-            condition.Identifier.ShouldBeEquivalentTo("foo");
-            condition.Operator.ShouldBeEquivalentTo(EqualityOperator.NotEquals);
-            condition.Value.ShouldBeEquivalentTo("bar");
+            condition.Identifier.Should().BeEquivalentTo("foo");
+            condition.Operator.Should().Be(EqualityOperator.NotEquals);
+            condition.Value.Should().Be("bar");
         }
 
         [Fact]
@@ -45,9 +45,9 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             ConditionVisitor visitor = new ConditionVisitor();
             CmsqlQueryCondition condition = visitor.VisitCondition(parseTree);
 
-            condition.Identifier.ShouldBeEquivalentTo("foo");
-            condition.Operator.ShouldBeEquivalentTo(EqualityOperator.GreaterThan);
-            condition.Value.ShouldBeEquivalentTo("bar");
+            condition.Identifier.Should().BeEquivalentTo("foo");
+            condition.Operator.Should().Be(EqualityOperator.GreaterThan);
+            condition.Value.Should().BeEquivalentTo("bar");
         }
 
         [Fact]
@@ -59,9 +59,9 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             ConditionVisitor visitor = new ConditionVisitor();
             CmsqlQueryCondition condition = visitor.VisitCondition(parseTree);
 
-            condition.Identifier.ShouldBeEquivalentTo("foo");
-            condition.Operator.ShouldBeEquivalentTo(EqualityOperator.LessThan);
-            condition.Value.ShouldBeEquivalentTo("bar");
+            condition.Identifier.Should().BeEquivalentTo("foo");
+            condition.Operator.Should().Be(EqualityOperator.LessThan);
+            condition.Value.Should().BeEquivalentTo("bar");
         }
 
         [Fact]
@@ -73,9 +73,9 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             ConditionVisitor visitor = new ConditionVisitor();
             CmsqlQueryCondition condition = visitor.VisitCondition(parseTree);
 
-            condition.Identifier.ShouldBeEquivalentTo("foo");
-            condition.Operator.ShouldBeEquivalentTo(EqualityOperator.GreaterThanOrEquals);
-            condition.Value.ShouldBeEquivalentTo("bar");
+            condition.Identifier.Should().BeEquivalentTo("foo");
+            condition.Operator.Should().Be(EqualityOperator.GreaterThanOrEquals);
+            condition.Value.Should().BeEquivalentTo("bar");
         }
 
         [Fact]
@@ -87,9 +87,9 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             ConditionVisitor visitor = new ConditionVisitor();
             CmsqlQueryCondition condition = visitor.VisitCondition(parseTree);
 
-            condition.Identifier.ShouldBeEquivalentTo("foo");
-            condition.Operator.ShouldBeEquivalentTo(EqualityOperator.LessThanOrEquals);
-            condition.Value.ShouldBeEquivalentTo("bar");
+            condition.Identifier.Should().BeEquivalentTo("foo");
+            condition.Operator.Should().Be(EqualityOperator.LessThanOrEquals);
+            condition.Value.Should().BeEquivalentTo("bar");
         }
     }
 }

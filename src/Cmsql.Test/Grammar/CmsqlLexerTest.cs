@@ -14,7 +14,7 @@ namespace Cmsql.Grammar.Test
             CmsqlLexer lexer = CreateLexerForQuery("select foo from start");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
-            tokens.ShouldAllBeEquivalentTo(
+            tokens.Should().BeEquivalentTo(
                 GetTokensAsList(
                     CmsqlLexer.SELECT,
                     CmsqlLexer.IDENTIFIER,
@@ -28,7 +28,7 @@ namespace Cmsql.Grammar.Test
             CmsqlLexer lexer = CreateLexerForQuery("select foo from root");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
-            tokens.ShouldAllBeEquivalentTo(
+            tokens.Should().BeEquivalentTo(
                 GetTokensAsList(
                     CmsqlLexer.SELECT,
                     CmsqlLexer.IDENTIFIER,
@@ -42,7 +42,7 @@ namespace Cmsql.Grammar.Test
             CmsqlLexer lexer = CreateLexerForQuery("select foo from 15");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
-            tokens.ShouldAllBeEquivalentTo(
+            tokens.Should().BeEquivalentTo(
                 GetTokensAsList(
                     CmsqlLexer.SELECT,
                     CmsqlLexer.IDENTIFIER,
@@ -56,7 +56,7 @@ namespace Cmsql.Grammar.Test
             CmsqlLexer lexer = CreateLexerForQuery("select foo from start");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
-            tokens.ShouldAllBeEquivalentTo(
+            tokens.Should().BeEquivalentTo(
                 GetTokensAsList(
                     CmsqlLexer.SELECT,
                     CmsqlLexer.IDENTIFIER,
@@ -70,7 +70,7 @@ namespace Cmsql.Grammar.Test
             CmsqlLexer lexer = CreateLexerForQuery("select foo from start;");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
-            tokens.ShouldAllBeEquivalentTo(
+            tokens.Should().BeEquivalentTo(
                 GetTokensAsList(
                     CmsqlLexer.SELECT,
                     CmsqlLexer.IDENTIFIER,
@@ -85,7 +85,7 @@ namespace Cmsql.Grammar.Test
             CmsqlLexer lexer = CreateLexerForQuery("select foo from start; select bar from root");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
-            tokens.ShouldAllBeEquivalentTo(
+            tokens.Should().BeEquivalentTo(
                 GetTokensAsList(
                     CmsqlLexer.SELECT,
                     CmsqlLexer.IDENTIFIER,
@@ -104,7 +104,7 @@ namespace Cmsql.Grammar.Test
             CmsqlLexer lexer = CreateLexerForQuery("select foo from start where foo = 'bar'");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
-            tokens.ShouldAllBeEquivalentTo(
+            tokens.Should().BeEquivalentTo(
                 GetTokensAsList(
                     CmsqlLexer.SELECT,
                     CmsqlLexer.IDENTIFIER,
@@ -122,7 +122,7 @@ namespace Cmsql.Grammar.Test
             CmsqlLexer lexer = CreateLexerForQuery("select foo from start where foo != 'bar'");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
-            tokens.ShouldAllBeEquivalentTo(
+            tokens.Should().BeEquivalentTo(
                 GetTokensAsList(
                     CmsqlLexer.SELECT,
                     CmsqlLexer.IDENTIFIER,
@@ -141,7 +141,7 @@ namespace Cmsql.Grammar.Test
                 "select foo from start where foo = 'bar' and bar = 'foo'");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
-            tokens.ShouldAllBeEquivalentTo(
+            tokens.Should().BeEquivalentTo(
                 GetTokensAsList(
                     CmsqlLexer.SELECT,
                     CmsqlLexer.IDENTIFIER,
@@ -164,7 +164,7 @@ namespace Cmsql.Grammar.Test
                 "select foo from start where foo = 'bar' or bar = 'foo'");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
-            tokens.ShouldAllBeEquivalentTo(
+            tokens.Should().BeEquivalentTo(
                 GetTokensAsList(
                     CmsqlLexer.SELECT,
                     CmsqlLexer.IDENTIFIER,
@@ -187,7 +187,7 @@ namespace Cmsql.Grammar.Test
                 "select foo from start where (foo = 'bar' and bar = 'foo')");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
-            tokens.ShouldAllBeEquivalentTo(
+            tokens.Should().BeEquivalentTo(
                 GetTokensAsList(
                     CmsqlLexer.SELECT,
                     CmsqlLexer.IDENTIFIER,
@@ -212,7 +212,7 @@ namespace Cmsql.Grammar.Test
                 "select foo from start where (foo = 'bar' and bar = 'foo') or (bla = 'test' and test = 'bla')");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
-            tokens.ShouldAllBeEquivalentTo(
+            tokens.Should().BeEquivalentTo(
                 GetTokensAsList(
                     CmsqlLexer.SELECT,
                     CmsqlLexer.IDENTIFIER,
@@ -247,7 +247,7 @@ namespace Cmsql.Grammar.Test
                 "select foo-bar from start");
             IEnumerable<int> tokens = GetTokensAsList(lexer);
 
-            tokens.ShouldAllBeEquivalentTo(
+            tokens.Should().BeEquivalentTo(
                 GetTokensAsList(
                     CmsqlLexer.SELECT,
                     CmsqlLexer.IDENTIFIER,

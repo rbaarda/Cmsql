@@ -29,7 +29,7 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             WhereClauseVisitor visitor = new WhereClauseVisitor();
             CmsqlQueryBinaryExpression binaryExpression = visitor.VisitWhereClause(parseTree) as CmsqlQueryBinaryExpression;
             
-            binaryExpression.Operator.ShouldBeEquivalentTo(ConditionalOperator.And);
+            binaryExpression.Operator.Should().Be(ConditionalOperator.And);
             binaryExpression.LeftExpression.Should().BeOfType<CmsqlQueryCondition>();
             binaryExpression.RightExpression.Should().BeOfType<CmsqlQueryCondition>();
         }
@@ -43,7 +43,7 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             WhereClauseVisitor visitor = new WhereClauseVisitor();
             CmsqlQueryBinaryExpression binaryExpression = visitor.VisitWhereClause(parseTree) as CmsqlQueryBinaryExpression;
 
-            binaryExpression.Operator.ShouldBeEquivalentTo(ConditionalOperator.And);
+            binaryExpression.Operator.Should().Be(ConditionalOperator.And);
             binaryExpression.LeftExpression.Should().BeOfType<CmsqlQueryCondition>();
             binaryExpression.RightExpression.Should().BeOfType<CmsqlQueryCondition>();
         }
@@ -57,7 +57,7 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             WhereClauseVisitor visitor = new WhereClauseVisitor();
             CmsqlQueryBinaryExpression binaryExpression = visitor.VisitWhereClause(parseTree) as CmsqlQueryBinaryExpression;
 
-            binaryExpression.Operator.ShouldBeEquivalentTo(ConditionalOperator.Or);
+            binaryExpression.Operator.Should().Be(ConditionalOperator.Or);
             binaryExpression.LeftExpression.Should().BeOfType<CmsqlQueryCondition>();
             binaryExpression.RightExpression.Should().BeOfType<CmsqlQueryBinaryExpression>();
         }
@@ -71,7 +71,7 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             WhereClauseVisitor visitor = new WhereClauseVisitor();
             CmsqlQueryBinaryExpression binaryExpression = visitor.VisitWhereClause(parseTree) as CmsqlQueryBinaryExpression;
 
-            binaryExpression.Operator.ShouldBeEquivalentTo(ConditionalOperator.Or);
+            binaryExpression.Operator.Should().Be(ConditionalOperator.Or);
             binaryExpression.LeftExpression.Should().BeOfType<CmsqlQueryBinaryExpression>();
             binaryExpression.RightExpression.Should().BeOfType<CmsqlQueryCondition>();
         }

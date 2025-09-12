@@ -18,7 +18,7 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             CmsqlQueryStartNode startNode = visitor.VisitFromClause(parseTree);
 
             startNode.StartNodeId.Should().BeNullOrEmpty();
-            startNode.StartNodeType.ShouldBeEquivalentTo(CmsqlQueryStartNodeType.Start);
+            startNode.StartNodeType.Should().Be(CmsqlQueryStartNodeType.Start);
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             CmsqlQueryStartNode startNode = visitor.VisitFromClause(parseTree);
 
             startNode.StartNodeId.Should().BeNullOrEmpty();
-            startNode.StartNodeType.ShouldBeEquivalentTo(CmsqlQueryStartNodeType.Root);
+            startNode.StartNodeType.Should().Be(CmsqlQueryStartNodeType.Root);
         }
 
         [Theory]
@@ -49,8 +49,8 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             FromClauseVisitor visitor = new FromClauseVisitor();
             CmsqlQueryStartNode startNode = visitor.VisitFromClause(parseTree);
 
-            startNode.StartNodeId.ShouldBeEquivalentTo(id);
-            startNode.StartNodeType.ShouldBeEquivalentTo(CmsqlQueryStartNodeType.Id);
+            startNode.StartNodeId.Should().BeEquivalentTo(id);
+            startNode.StartNodeType.Should().Be(CmsqlQueryStartNodeType.Id);
         }
     }
 }

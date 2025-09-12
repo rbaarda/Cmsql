@@ -22,14 +22,14 @@ namespace Cmsql.Test
         public void Test_when_query_is_null_should_throw()
         {
             CmsqlQueryService queryService = new CmsqlQueryService(new FakeCmsqlQueryRunner());
-            queryService.Invoking(x => x.ExecuteQuery(null)).ShouldThrow<ArgumentException>();
+            queryService.Invoking(x => x.ExecuteQuery(null)).Should().Throw<ArgumentException>();
         }
 
         [Fact]
         public void Test_when_query_is_empty_should_throw()
         {
             CmsqlQueryService queryService = new CmsqlQueryService(new FakeCmsqlQueryRunner());
-            queryService.Invoking(x => x.ExecuteQuery(string.Empty)).ShouldThrow<ArgumentException>();
+            queryService.Invoking(x => x.ExecuteQuery(string.Empty)).Should().Throw<ArgumentException>();
         }
     }
 }

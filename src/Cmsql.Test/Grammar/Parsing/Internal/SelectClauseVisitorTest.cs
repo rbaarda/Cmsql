@@ -24,7 +24,7 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
             SelectClauseVisitor visitor = new SelectClauseVisitor();
             string identifier = visitor.VisitSelectClause(parseTree);
             
-            identifier.ShouldBeEquivalentTo(queryIdentifier);
+            identifier.Should().BeEquivalentTo(queryIdentifier);
         }
     }
 }

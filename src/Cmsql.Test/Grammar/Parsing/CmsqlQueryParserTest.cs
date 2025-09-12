@@ -19,9 +19,9 @@ namespace Cmsql.Test.Grammar.Parsing
             parseResult.Errors.Should().BeNullOrEmpty();
 
             CmsqlQuery query = parseResult.Queries.First();
-            query.ContentType.ShouldBeEquivalentTo("pages");
+            query.ContentType.Should().BeEquivalentTo("pages");
             query.StartNode.StartNodeId.Should().BeNullOrEmpty();
-            query.StartNode.StartNodeType.ShouldBeEquivalentTo(CmsqlQueryStartNodeType.Start);
+            query.StartNode.StartNodeType.Should().Be(CmsqlQueryStartNodeType.Start);
             query.Criteria.Should().BeNull();
         }
 
@@ -36,9 +36,9 @@ namespace Cmsql.Test.Grammar.Parsing
             parseResult.Errors.Should().BeNullOrEmpty();
 
             CmsqlQuery query = parseResult.Queries.First();
-            query.ContentType.ShouldBeEquivalentTo("test");
+            query.ContentType.Should().BeEquivalentTo("test");
             query.StartNode.StartNodeId.Should().BeNullOrEmpty();
-            query.StartNode.StartNodeType.ShouldBeEquivalentTo(CmsqlQueryStartNodeType.Start);
+            query.StartNode.StartNodeType.Should().Be(CmsqlQueryStartNodeType.Start);
             query.Criteria.Should().BeNull();
         }
 
@@ -53,25 +53,25 @@ namespace Cmsql.Test.Grammar.Parsing
             parseResult.Errors.Should().BeNullOrEmpty();
 
             CmsqlQuery firstQuery = parseResult.Queries.First();
-            firstQuery.ContentType.ShouldBeEquivalentTo("test");
+            firstQuery.ContentType.Should().BeEquivalentTo("test");
             firstQuery.StartNode.StartNodeId.Should().BeNullOrEmpty();
-            firstQuery.StartNode.StartNodeType.ShouldBeEquivalentTo(CmsqlQueryStartNodeType.Start);
+            firstQuery.StartNode.StartNodeType.Should().Be(CmsqlQueryStartNodeType.Start);
             firstQuery.Criteria.Should().BeNull();
 
             CmsqlQuery secondQuery = parseResult.Queries.ElementAt(1);
-            secondQuery.ContentType.ShouldBeEquivalentTo("test");
+            secondQuery.ContentType.Should().BeEquivalentTo("test");
             secondQuery.StartNode.StartNodeId.Should().BeNullOrEmpty();
-            secondQuery.StartNode.StartNodeType.ShouldBeEquivalentTo(CmsqlQueryStartNodeType.Root);
+            secondQuery.StartNode.StartNodeType.Should().Be(CmsqlQueryStartNodeType.Root);
             secondQuery.Criteria.Should().BeOfType<CmsqlQueryCondition>();
             CmsqlQueryCondition condition = secondQuery.Criteria as CmsqlQueryCondition;
-            condition.Identifier.ShouldBeEquivalentTo("foo");
-            condition.Operator.ShouldBeEquivalentTo(EqualityOperator.Equals);
-            condition.Value.ShouldBeEquivalentTo("bar");
+            condition.Identifier.Should().BeEquivalentTo("foo");
+            condition.Operator.Should().Be(EqualityOperator.Equals);
+            condition.Value.Should().Be("bar");
 
             CmsqlQuery thirdQuery = parseResult.Queries.ElementAt(2);
-            thirdQuery.ContentType.ShouldBeEquivalentTo("barf");
-            thirdQuery.StartNode.StartNodeId.ShouldBeEquivalentTo("123");
-            thirdQuery.StartNode.StartNodeType.ShouldBeEquivalentTo(CmsqlQueryStartNodeType.Id);
+            thirdQuery.ContentType.Should().BeEquivalentTo("barf");
+            thirdQuery.StartNode.StartNodeId.Should().BeEquivalentTo("123");
+            thirdQuery.StartNode.StartNodeType.Should().Be(CmsqlQueryStartNodeType.Id);
             thirdQuery.Criteria.Should().BeOfType<CmsqlQueryBinaryExpression>();
         }
 
