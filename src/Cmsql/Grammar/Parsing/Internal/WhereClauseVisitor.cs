@@ -6,7 +6,7 @@ namespace Cmsql.Grammar.Parsing.Internal
     {
         public override ICmsqlQueryExpression VisitWhereClause(CmsqlParser.WhereClauseContext context)
         {
-            ExpressionVisitor expressionVisitor = new ExpressionVisitor();
+            var expressionVisitor = new ExpressionVisitor();
 
             return context.expression().Accept(expressionVisitor);
         }

@@ -1,6 +1,4 @@
-﻿using Cmsql.Grammar;
-using Cmsql.Grammar.Parsing.Internal;
-using Cmsql.Query;
+﻿using Cmsql.Grammar.Parsing.Internal;
 using FluentAssertions;
 using Xunit;
 
@@ -14,11 +12,11 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
         [InlineData("select test from 123")]
         public void Test_can_parse_valid_query_without_where_clause(string query)
         {
-            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
-            CmsqlParser.QueryContext parseTree = cmsqlParser.query();
+            var cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
+            var parseTree = cmsqlParser.query();
 
-            QueryVisitor visitor = new QueryVisitor();
-            CmsqlQuery cmsqlQuery = visitor.VisitQuery(parseTree);
+            var visitor = new QueryVisitor();
+            var cmsqlQuery = visitor.VisitQuery(parseTree);
 
             cmsqlQuery.Should().NotBeNull();
             cmsqlQuery.ContentType.Should().NotBeNullOrEmpty();
@@ -32,11 +30,11 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
         [InlineData("select test from 123;")]
         public void Test_can_parse_valid_query_without_where_clause_with_terminator(string query)
         {
-            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
-            CmsqlParser.QueryContext parseTree = cmsqlParser.query();
+            var cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
+            var parseTree = cmsqlParser.query();
 
-            QueryVisitor visitor = new QueryVisitor();
-            CmsqlQuery cmsqlQuery = visitor.VisitQuery(parseTree);
+            var visitor = new QueryVisitor();
+            var cmsqlQuery = visitor.VisitQuery(parseTree);
 
             cmsqlQuery.Should().NotBeNull();
             cmsqlQuery.ContentType.Should().NotBeNullOrEmpty();
@@ -50,11 +48,11 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
         [InlineData("select test from 123 where foo = 'bar'")]
         public void Test_can_parse_valid_query_with_where_clause(string query)
         {
-            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
-            CmsqlParser.QueryContext parseTree = cmsqlParser.query();
+            var cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
+            var parseTree = cmsqlParser.query();
 
-            QueryVisitor visitor = new QueryVisitor();
-            CmsqlQuery cmsqlQuery = visitor.VisitQuery(parseTree);
+            var visitor = new QueryVisitor();
+            var cmsqlQuery = visitor.VisitQuery(parseTree);
 
             cmsqlQuery.Should().NotBeNull();
             cmsqlQuery.ContentType.Should().NotBeNullOrEmpty();
@@ -68,11 +66,11 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
         [InlineData("select test from 123 where foo = 'bar';")]
         public void Test_can_parse_valid_query_with_where_clause_with_terminator(string query)
         {
-            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
-            CmsqlParser.QueryContext parseTree = cmsqlParser.query();
+            var cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
+            var parseTree = cmsqlParser.query();
 
-            QueryVisitor visitor = new QueryVisitor();
-            CmsqlQuery cmsqlQuery = visitor.VisitQuery(parseTree);
+            var visitor = new QueryVisitor();
+            var cmsqlQuery = visitor.VisitQuery(parseTree);
 
             cmsqlQuery.Should().NotBeNull();
             cmsqlQuery.ContentType.Should().NotBeNullOrEmpty();

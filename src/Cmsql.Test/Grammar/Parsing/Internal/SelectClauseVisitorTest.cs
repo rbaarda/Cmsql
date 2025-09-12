@@ -1,5 +1,4 @@
-﻿using Cmsql.Grammar;
-using Cmsql.Grammar.Parsing.Internal;
+﻿using Cmsql.Grammar.Parsing.Internal;
 using FluentAssertions;
 using Xunit;
 
@@ -18,11 +17,11 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
         [InlineData("Test123Test")]
         public void Test_can_parse_valid_content_type_identifier(string queryIdentifier)
         {
-            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery($"select {queryIdentifier}");
-            CmsqlParser.SelectClauseContext parseTree = cmsqlParser.selectClause();
+            var cmsqlParser = CmsqlParserFactory.CreateParserForQuery($"select {queryIdentifier}");
+            var parseTree = cmsqlParser.selectClause();
 
-            SelectClauseVisitor visitor = new SelectClauseVisitor();
-            string identifier = visitor.VisitSelectClause(parseTree);
+            var visitor = new SelectClauseVisitor();
+            var identifier = visitor.VisitSelectClause(parseTree);
             
             identifier.Should().BeEquivalentTo(queryIdentifier);
         }

@@ -1,5 +1,4 @@
-﻿using Cmsql.Grammar;
-using Cmsql.Grammar.Parsing.Internal;
+﻿using Cmsql.Grammar.Parsing.Internal;
 using Cmsql.Query;
 using FluentAssertions;
 using Xunit;
@@ -11,11 +10,11 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
         [Fact]
         public void Test_can_parse_start_as_start_node()
         {
-            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("from start");
-            CmsqlParser.FromClauseContext parseTree = cmsqlParser.fromClause();
+            var cmsqlParser = CmsqlParserFactory.CreateParserForQuery("from start");
+            var parseTree = cmsqlParser.fromClause();
 
-            FromClauseVisitor visitor = new FromClauseVisitor();
-            CmsqlQueryStartNode startNode = visitor.VisitFromClause(parseTree);
+            var visitor = new FromClauseVisitor();
+            var startNode = visitor.VisitFromClause(parseTree);
 
             startNode.StartNodeId.Should().BeNullOrEmpty();
             startNode.StartNodeType.Should().Be(CmsqlQueryStartNodeType.Start);
@@ -24,11 +23,11 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
         [Fact]
         public void Test_can_parse_root_as_start_node()
         {
-            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery("from root");
-            CmsqlParser.FromClauseContext parseTree = cmsqlParser.fromClause();
+            var cmsqlParser = CmsqlParserFactory.CreateParserForQuery("from root");
+            var parseTree = cmsqlParser.fromClause();
 
-            FromClauseVisitor visitor = new FromClauseVisitor();
-            CmsqlQueryStartNode startNode = visitor.VisitFromClause(parseTree);
+            var visitor = new FromClauseVisitor();
+            var startNode = visitor.VisitFromClause(parseTree);
 
             startNode.StartNodeId.Should().BeNullOrEmpty();
             startNode.StartNodeType.Should().Be(CmsqlQueryStartNodeType.Root);
@@ -43,11 +42,11 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
         [InlineData("123456")]
         public void Test_can_parse_arbitrary_id_as_start_node(string id)
         {
-            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery($"from {id}");
-            CmsqlParser.FromClauseContext parseTree = cmsqlParser.fromClause();
+            var cmsqlParser = CmsqlParserFactory.CreateParserForQuery($"from {id}");
+            var parseTree = cmsqlParser.fromClause();
 
-            FromClauseVisitor visitor = new FromClauseVisitor();
-            CmsqlQueryStartNode startNode = visitor.VisitFromClause(parseTree);
+            var visitor = new FromClauseVisitor();
+            var startNode = visitor.VisitFromClause(parseTree);
 
             startNode.StartNodeId.Should().BeEquivalentTo(id);
             startNode.StartNodeType.Should().Be(CmsqlQueryStartNodeType.Id);

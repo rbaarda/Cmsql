@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Cmsql.Grammar;
-using Cmsql.Grammar.Parsing.Internal;
-using Cmsql.Query;
+﻿using Cmsql.Grammar.Parsing.Internal;
 using FluentAssertions;
 using Xunit;
 
@@ -15,11 +12,11 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
         [InlineData("select test from 123")]
         public void Test_can_parse_single_valid_query_without_where_clause(string query)
         {
-            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
-            CmsqlParser.QueriesContext parseTree = cmsqlParser.queries();
+            var cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
+            var parseTree = cmsqlParser.queries();
 
-            QueriesVisitor visitor = new QueriesVisitor();
-            IEnumerable<CmsqlQuery> queries = visitor.VisitQueries(parseTree);
+            var visitor = new QueriesVisitor();
+            var queries = visitor.VisitQueries(parseTree);
 
             queries.Should().NotBeNullOrEmpty();
             queries.Should().HaveCount(1);
@@ -31,11 +28,11 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
         [InlineData("select test from 123;")]
         public void Test_can_parse_single_valid_query_without_where_clause_with_terminator(string query)
         {
-            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
-            CmsqlParser.QueriesContext parseTree = cmsqlParser.queries();
+            var cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
+            var parseTree = cmsqlParser.queries();
 
-            QueriesVisitor visitor = new QueriesVisitor();
-            IEnumerable<CmsqlQuery> queries = visitor.VisitQueries(parseTree);
+            var visitor = new QueriesVisitor();
+            var queries = visitor.VisitQueries(parseTree);
 
             queries.Should().NotBeNullOrEmpty();
             queries.Should().HaveCount(1);
@@ -47,11 +44,11 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
         [InlineData("select test from 123;select test from 123;select test from 123")]
         public void Test_can_parse_multiple_valid_queries_without_where_clause(string query)
         {
-            CmsqlParser cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
-            CmsqlParser.QueriesContext parseTree = cmsqlParser.queries();
+            var cmsqlParser = CmsqlParserFactory.CreateParserForQuery(query);
+            var parseTree = cmsqlParser.queries();
 
-            QueriesVisitor visitor = new QueriesVisitor();
-            IEnumerable<CmsqlQuery> queries = visitor.VisitQueries(parseTree);
+            var visitor = new QueriesVisitor();
+            var queries = visitor.VisitQueries(parseTree);
 
             queries.Should().NotBeNullOrEmpty();
             queries.Should().HaveCount(3);

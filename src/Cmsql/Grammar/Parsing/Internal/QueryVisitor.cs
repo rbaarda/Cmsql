@@ -6,18 +6,18 @@ namespace Cmsql.Grammar.Parsing.Internal
     {
         public override CmsqlQuery VisitQuery(CmsqlParser.QueryContext context)
         {
-            CmsqlQuery query = new CmsqlQuery();
+            var query = new CmsqlQuery();
 
-            SelectClauseVisitor selectClauseVisitor = new SelectClauseVisitor();
+            var selectClauseVisitor = new SelectClauseVisitor();
             query.ContentType = context.selectClause().Accept(selectClauseVisitor);
 
-            FromClauseVisitor fromClauseVisitor = new FromClauseVisitor();
+            var fromClauseVisitor = new FromClauseVisitor();
             query.StartNode = context.fromClause().Accept(fromClauseVisitor);
             
-            CmsqlParser.WhereClauseContext whereClauseContext = context.whereClause();
+            var whereClauseContext = context.whereClause();
             if (whereClauseContext != null)
             {
-                WhereClauseVisitor whereClauseVisitor = new WhereClauseVisitor();
+                var whereClauseVisitor = new WhereClauseVisitor();
                 query.Criteria = whereClauseContext.Accept(whereClauseVisitor);
             }
 

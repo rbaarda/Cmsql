@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
-using Antlr4.Runtime;
+﻿using Antlr4.Runtime;
 using Antlr4.Runtime.Atn;
-using Antlr4.Runtime.Tree;
 using Cmsql.Grammar.Parsing.Internal;
 using Cmsql.Query;
+using System;
+using System.Linq;
 
 namespace Cmsql.Grammar.Parsing
 {
@@ -17,14 +16,14 @@ namespace Cmsql.Grammar.Parsing
                 throw new ArgumentException($"Parameter '{nameof(query)}' is null, empty or whitespace.");
             }
             
-            CmsqlParser parser = CreateParser(query);
+            var parser = CreateParser(query);
             parser.RemoveErrorListeners();
 
-            CmsqlParserErrorListener errorListener = new CmsqlParserErrorListener();
+            var errorListener = new CmsqlParserErrorListener();
             parser.AddErrorListener(errorListener);
 
-            IParseTree parseTree = parser.queries();
-            QueriesVisitor queriesVisitor = new QueriesVisitor();
+            var parseTree = parser.queries();
+            var queriesVisitor = new QueriesVisitor();
 
             return new CmsqlQueryParseResult
             {

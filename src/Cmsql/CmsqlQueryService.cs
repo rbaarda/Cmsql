@@ -24,14 +24,14 @@ namespace Cmsql
                 throw new ArgumentException($"Parameter '{nameof(query)}' is null or whitespace.");
             }
 
-            CmsqlQueryParser parser = new CmsqlQueryParser();
-            CmsqlQueryParseResult parseResult = parser.Parse(query);
+            var parser = new CmsqlQueryParser();
+            var parseResult = parser.Parse(query);
             if (parseResult.Errors != null && parseResult.Errors.Any())
             {
                 return new CmsqlQueryResultSet(parseResult, new CmsqlQueryExecutionResult());
             }
 
-            CmsqlQueryExecutionResult executionResult = _queryRunner.ExecuteQueries(parseResult.Queries);
+            var executionResult = _queryRunner.ExecuteQueries(parseResult.Queries);
 
             return new CmsqlQueryResultSet(parseResult, executionResult);
         }
