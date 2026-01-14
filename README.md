@@ -1,11 +1,11 @@
 # CMSQL - CMS Query Language
 CMSQL (CMS Query Language) is a DSL specifically designed to query over tree structured data/content in Content Management Systems.
-At this point there is only an [implementation](https://github.com/rbaarda/Cmsql.EpiServer) for the [EPiServer CMS](https://www.episerver.com/) available which should be considered as a Proof Of Concept.
+At this point there is only an [implementation](https://github.com/rbaarda/Cmsql.Optimizely) for the [Optimizely CMS](https://www.optimizely.com/products/content-management/) available which should be considered as a Proof Of Concept.
 
 At this point the CMS Query Language is very minimalistic and offers basic query capabilities.
 
 ## Goal
-CMSQL is trying to answer questions like *"Can you show me all news articles created by mr. X"* or *"Can you show me all product pages in category X"* et cetera. It tries to answer such question by means of a simple easy to learn query language. It was designed with content management systems in mind that work with content types and which structure their site content in a hierarchical way, for example systems like [Umbraco](https://umbraco.com/) or [EPiServer](https://www.episerver.com/).
+CMSQL is trying to answer questions like *"Can you show me all news articles created by mr. X"* or *"Can you show me all product pages in category X"* et cetera. It tries to answer such question by means of a simple easy to learn query language. It was designed with content management systems in mind that work with content types and which structure their site content in a hierarchical way, for example systems like [Umbraco](https://umbraco.com/) or [Optimizely CMS](https://www.optimizely.com/products/content-management/).
 
 The initial idea is that content-editors and developers should have a simple and easy to learn query language under their fingers available to quickly get that information they are looking for and probably want to edit, especially in large websites with huge content trees. The query language can be exposed to content-editors through some sort of editor in the CMS backend system.
 
@@ -14,9 +14,9 @@ On its own the Cmsql package can parse Cmsql queries but it needs a specific imp
 You can use this package on itself if your project needs a Cmsql parser or if you're working on a specific implementation for Cmsql.
 
 ### Installation
-You can install the NuGet package by running the following command (Please note that this is a pre-release).
+You can install the NuGet package by running the following command.
 
-`Install-Package Cmsql -Version 1.0.0-alpha1`
+`dotnet add package Cmsql --version 1.0.0`
 
 ### Usage
 The Cmsql package contains a `CmsqlQueryService` which is basically a facade that takes care of parsing and executing queries through the `ExecuteQuery` method.
