@@ -28,12 +28,12 @@ namespace Cmsql
             var parseResult = parser.Parse(query);
             if (parseResult.Errors != null && parseResult.Errors.Any())
             {
-                return new CmsqlQueryResultSet(parseResult, new CmsqlQueryExecutionResult());
+                return CmsqlQueryResultSet.CreateParseFailure(parseResult);
             }
 
             var executionResult = _queryRunner.ExecuteQueries(parseResult.Queries);
 
-            return new CmsqlQueryResultSet(parseResult, executionResult);
+            return CmsqlQueryResultSet.CreateSuccess(parseResult, executionResult);
         }
     }
 }

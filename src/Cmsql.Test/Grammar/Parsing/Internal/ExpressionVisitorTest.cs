@@ -50,6 +50,20 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
         }
 
         [Theory]
+        [InlineData("foo = 'bar' and bar = 'foo'", ConditionalOperator.And)]
+        [InlineData("foo = 'bar' or bar = 'foo'", ConditionalOperator.Or)]
+        public void Test_binary_expression_sets_conditional_operator(string expression, ConditionalOperator expectedOperator)
+        {
+            var cmsqlParser = CmsqlParserFactory.CreateParserForQuery(expression);
+            var parseTree = (CmsqlParser.BinaryExpressionContext)cmsqlParser.expression();
+
+            var visitor = new ExpressionVisitor();
+            var binaryExpression = (CmsqlQueryBinaryExpression)visitor.VisitBinaryExpression(parseTree);
+
+            binaryExpression.Operator.Should().Be(expectedOperator);
+        }
+
+        [Theory]
         [InlineData("(foo != 'bar') and bar = 'foo'")]
         [InlineData("foo != 'bar' and (bar = 'foo')")]
         public void Test_can_parse_binary_expression_containing_parenthesized_expression_and_condition_expression(string queryExpression)

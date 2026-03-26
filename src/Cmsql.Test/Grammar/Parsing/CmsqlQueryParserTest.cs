@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Cmsql.Grammar.Parsing;
 using Cmsql.Query;
 using FluentAssertions;
@@ -82,6 +83,17 @@ namespace Cmsql.Test.Grammar.Parsing
             var parseResult = parser.Parse("select test-test from start");
 
             parseResult.Errors.Should().HaveCount(1);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("   ")]
+        public void Test_parse_throws_when_query_is_null_or_whitespace(string query)
+        {
+            var parser = new CmsqlQueryParser();
+
+            parser.Invoking(p => p.Parse(query)).Should().Throw<ArgumentException>();
         }
     }
 }
