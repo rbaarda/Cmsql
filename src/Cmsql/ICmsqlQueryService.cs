@@ -2,6 +2,6 @@
 {
     public interface ICmsqlQueryService
     {
-        CmsqlQueryResultSet ExecuteQuery(string queries);
+        CmsqlQueryResultSet ExecuteQuery(string query);
     }
 }

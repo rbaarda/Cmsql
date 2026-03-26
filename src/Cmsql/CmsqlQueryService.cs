@@ -26,7 +26,7 @@ namespace Cmsql
 
             var parser = new CmsqlQueryParser();
             var parseResult = parser.Parse(query);
-            if (parseResult.Errors != null && parseResult.Errors.Any())
+            if (parseResult.Errors.Any())
             {
                 return CmsqlQueryResultSet.CreateParseFailure(parseResult);
             }

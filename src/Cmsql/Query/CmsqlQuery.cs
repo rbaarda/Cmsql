@@ -2,10 +2,10 @@
 {
     public class CmsqlQuery
     {
-        public string ContentType { get; set; }
+        public string ContentType { get; init; }
 
-        public CmsqlQueryStartNode StartNode { get; set; }
+        public CmsqlQueryStartNode StartNode { get; init; }
 
-        public ICmsqlQueryExpression Criteria { get; set; }
+        public ICmsqlQueryExpression Criteria { get; init; }
     }
 }

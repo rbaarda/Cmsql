@@ -2,8 +2,8 @@
 {
     public class CmsqlQueryStartNode
     {
-        public string StartNodeId { get; set; }
+        public string StartNodeId { get; init; }
 
-        public CmsqlQueryStartNodeType StartNodeType { get; set; }
+        public CmsqlQueryStartNodeType StartNodeType { get; init; }
     }
 }

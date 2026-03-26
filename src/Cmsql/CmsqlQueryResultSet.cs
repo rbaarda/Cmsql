@@ -40,7 +40,7 @@ namespace Cmsql
             }
         }
 
-        public CmsqlQueryResultSet(
+        internal CmsqlQueryResultSet(
             CmsqlQueryParseResult parseResult,
             CmsqlQueryExecutionResult executionResult)
         {

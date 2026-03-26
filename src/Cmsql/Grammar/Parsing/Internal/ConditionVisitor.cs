@@ -1,4 +1,5 @@
 ﻿using Cmsql.Query;
+using System;
 
 namespace Cmsql.Grammar.Parsing.Internal
 {
@@ -14,7 +15,7 @@ namespace Cmsql.Grammar.Parsing.Internal
             };
         }
 
-        private EqualityOperator GetEqualityOperator(int token)
+        private static EqualityOperator GetEqualityOperator(int token)
         {
             switch (token)
             {
@@ -30,9 +31,9 @@ namespace Cmsql.Grammar.Parsing.Internal
                     return EqualityOperator.GreaterThanOrEquals;
                 case CmsqlParser.LESSTHANOREQUALS:
                     return EqualityOperator.LessThanOrEquals;
+                default:
+                    throw new InvalidOperationException($"Unrecognised equality operator token: {token}");
             }
-
-            return EqualityOperator.None;
         }
     }
 }

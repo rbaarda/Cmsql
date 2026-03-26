@@ -4,11 +4,11 @@ namespace Cmsql.Query
 {
     public class CmsqlQueryCondition : ICmsqlQueryExpression
     {
-        public EqualityOperator Operator { get; set; }
+        public EqualityOperator Operator { get; init; }
 
-        public string Identifier { get; set; }
+        public string Identifier { get; init; }
 
-        public string Value { get; set; }
+        public string Value { get; init; }
 
         public void Accept(ICmsqlQueryExpressionVisitor expressionVisitor)
         {

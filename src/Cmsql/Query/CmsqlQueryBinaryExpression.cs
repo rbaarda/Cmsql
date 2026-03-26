@@ -4,11 +4,11 @@ namespace Cmsql.Query
 {
     public class CmsqlQueryBinaryExpression : ICmsqlQueryExpression
     {
-        public ConditionalOperator Operator { get; set; }
+        public ConditionalOperator Operator { get; init; }
 
-        public ICmsqlQueryExpression LeftExpression { get; set; }
+        public ICmsqlQueryExpression LeftExpression { get; init; }
 
-        public ICmsqlQueryExpression RightExpression { get; set; }
+        public ICmsqlQueryExpression RightExpression { get; init; }
 
         public void Accept(ICmsqlQueryExpressionVisitor expressionVisitor)
         {

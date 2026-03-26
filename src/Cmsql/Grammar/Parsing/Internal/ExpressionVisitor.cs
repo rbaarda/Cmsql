@@ -1,33 +1,33 @@
 ﻿using Cmsql.Query;
+using System;
 
 namespace Cmsql.Grammar.Parsing.Internal
 {
     internal class ExpressionVisitor : CmsqlBaseVisitor<ICmsqlQueryExpression>
     {
+        private static readonly ConditionVisitor _conditionVisitor = new ConditionVisitor();
+
         public override ICmsqlQueryExpression VisitConditionExpression(CmsqlParser.ConditionExpressionContext context)
         {
-            ConditionVisitor conditionVisitor = new ConditionVisitor();
-            return context.condition().Accept(conditionVisitor);
+            return context.condition().Accept(_conditionVisitor);
         }
 
         public override ICmsqlQueryExpression VisitParenthesizedExpression(CmsqlParser.ParenthesizedExpressionContext context)
         {
-            ExpressionVisitor expressionVisitor = new ExpressionVisitor();
-            return context.expression().Accept(expressionVisitor);
+            return context.expression().Accept(this);
         }
 
         public override ICmsqlQueryExpression VisitBinaryExpression(CmsqlParser.BinaryExpressionContext context)
         {
-            ExpressionVisitor expressionVisitor = new ExpressionVisitor();
             return new CmsqlQueryBinaryExpression
             {
                 Operator = GetConditionalOperator(context.op.Type),
-                LeftExpression = context.left.Accept(expressionVisitor),
-                RightExpression = context.right.Accept(expressionVisitor)
+                LeftExpression = context.left.Accept(this),
+                RightExpression = context.right.Accept(this)
             };
         }
 
-        private ConditionalOperator GetConditionalOperator(int token)
+        private static ConditionalOperator GetConditionalOperator(int token)
         {
             switch (token)
             {
@@ -35,9 +35,9 @@ namespace Cmsql.Grammar.Parsing.Internal
                     return ConditionalOperator.And;
                 case CmsqlParser.OR:
                     return ConditionalOperator.Or;
+                default:
+                    throw new InvalidOperationException($"Unrecognised conditional operator token: {token}");
             }
-
-            return ConditionalOperator.None;
         }
     }
 }
