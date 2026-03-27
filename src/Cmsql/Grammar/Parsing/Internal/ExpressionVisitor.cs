@@ -1,5 +1,4 @@
-﻿using Cmsql.Query;
-using System;
+using Cmsql.Query;
 
 namespace Cmsql.Grammar.Parsing.Internal
 {
@@ -17,27 +16,24 @@ namespace Cmsql.Grammar.Parsing.Internal
             return context.expression().Accept(this);
         }
 
-        public override ICmsqlQueryExpression VisitBinaryExpression(CmsqlParser.BinaryExpressionContext context)
+        public override ICmsqlQueryExpression VisitAndExpression(CmsqlParser.AndExpressionContext context)
         {
             return new CmsqlQueryBinaryExpression
             {
-                Operator = GetConditionalOperator(context.op.Type),
+                Operator = ConditionalOperator.And,
                 LeftExpression = context.left.Accept(this),
                 RightExpression = context.right.Accept(this)
             };
         }
 
-        private static ConditionalOperator GetConditionalOperator(int token)
+        public override ICmsqlQueryExpression VisitOrExpression(CmsqlParser.OrExpressionContext context)
         {
-            switch (token)
+            return new CmsqlQueryBinaryExpression
             {
-                case CmsqlParser.AND:
-                    return ConditionalOperator.And;
-                case CmsqlParser.OR:
-                    return ConditionalOperator.Or;
-                default:
-                    throw new InvalidOperationException($"Unrecognised conditional operator token: {token}");
-            }
+                Operator = ConditionalOperator.Or,
+                LeftExpression = context.left.Accept(this),
+                RightExpression = context.right.Accept(this)
+            };
         }
     }
 }

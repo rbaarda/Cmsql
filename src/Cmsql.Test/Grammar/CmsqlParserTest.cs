@@ -41,23 +41,6 @@ namespace Cmsql.Test.Grammar
         }
 
         [Theory]
-        [InlineData("select test from start;")]
-        [InlineData("select test from root;")]
-        [InlineData("select test from 12345;")]
-        public void Test_query_rule_can_parse_query_without_where_clause_with_terminator(string query)
-        {
-            var parser = CreateParserForQuery(query);
-            var tree = parser.query();
-
-            var pattern = parser.CompileParseTreePattern(
-                "<selectClause> <fromClause> <TERMINATOR>",
-                CmsqlParser.RULE_query);
-
-            var match = pattern.Match(tree);
-            match.Succeeded.Should().BeTrue();
-        }
-
-        [Theory]
         [InlineData("select test from start where foo = 'bar'")]
         [InlineData("select test from root where foo = 'bar'")]
         [InlineData("select test from 12345 where foo = 'bar'")]
@@ -76,31 +59,6 @@ namespace Cmsql.Test.Grammar
 
             var pattern = parser.CompileParseTreePattern(
                 "<selectClause> <fromClause> <whereClause>",
-                CmsqlParser.RULE_query);
-
-            var match = pattern.Match(tree);
-            match.Succeeded.Should().BeTrue();
-        }
-
-        [Theory]
-        [InlineData("select test from start where foo = 'bar';")]
-        [InlineData("select test from root where foo = 'bar';")]
-        [InlineData("select test from 12345 where foo = 'bar';")]
-        [InlineData("select test from 12345 where (foo = 'bar');")]
-        [InlineData("select test from 12345 where foo = 'bar' and foo = 'bar';")]
-        [InlineData("select test from 12345 where foo = 'bar' or foo = 'bar';")]
-        [InlineData("select test from 12345 where (foo = 'bar' and foo = 'bar');")]
-        [InlineData("select test from 12345 where (foo = 'bar' or foo = 'bar');")]
-        [InlineData("select test from 12345 where (foo = 'bar' and foo = 'bar') or (foo = 'bar' and foo = 'bar');")]
-        [InlineData("select test from 12345 where (foo = 'bar' and foo = 'bar') and (foo = 'bar' and foo = 'bar');")]
-        [InlineData("select test from 12345 where ((foo = 'bar' and foo = 'bar') and (foo = 'bar' and foo = 'bar'));")]
-        public void Test_query_rule_can_parse_query_with_where_clause_with_terminator(string query)
-        {
-            var parser = CreateParserForQuery(query);
-            var tree = parser.query();
-
-            var pattern = parser.CompileParseTreePattern(
-                "<selectClause> <fromClause> <whereClause> <TERMINATOR>",
                 CmsqlParser.RULE_query);
 
             var match = pattern.Match(tree);

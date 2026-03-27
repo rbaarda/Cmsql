@@ -38,10 +38,10 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
         public void Test_can_binary_expression_containing_two_condition_expressions()
         {
             var cmsqlParser = CmsqlParserFactory.CreateParserForQuery("foo != 'bar' and bar = 'foo'");
-            var parseTree = (CmsqlParser.BinaryExpressionContext)cmsqlParser.expression();
+            var parseTree = (CmsqlParser.AndExpressionContext)cmsqlParser.expression();
 
             var visitor = new ExpressionVisitor();
-            var binaryExpression = (CmsqlQueryBinaryExpression)visitor.VisitBinaryExpression(parseTree);
+            var binaryExpression = (CmsqlQueryBinaryExpression)visitor.VisitAndExpression(parseTree);
 
             binaryExpression.LeftExpression.Should().BeOfType<CmsqlQueryCondition>();
             binaryExpression.LeftExpression.Should().NotBeNull();
@@ -55,10 +55,9 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
         public void Test_binary_expression_sets_conditional_operator(string expression, ConditionalOperator expectedOperator)
         {
             var cmsqlParser = CmsqlParserFactory.CreateParserForQuery(expression);
-            var parseTree = (CmsqlParser.BinaryExpressionContext)cmsqlParser.expression();
 
             var visitor = new ExpressionVisitor();
-            var binaryExpression = (CmsqlQueryBinaryExpression)visitor.VisitBinaryExpression(parseTree);
+            var binaryExpression = (CmsqlQueryBinaryExpression)visitor.Visit(cmsqlParser.expression());
 
             binaryExpression.Operator.Should().Be(expectedOperator);
         }
@@ -69,10 +68,10 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
         public void Test_can_parse_binary_expression_containing_parenthesized_expression_and_condition_expression(string queryExpression)
         {
             var cmsqlParser = CmsqlParserFactory.CreateParserForQuery(queryExpression);
-            var parseTree = (CmsqlParser.BinaryExpressionContext)cmsqlParser.expression();
+            var parseTree = (CmsqlParser.AndExpressionContext)cmsqlParser.expression();
 
             var visitor = new ExpressionVisitor();
-            var binaryExpression = (CmsqlQueryBinaryExpression)visitor.VisitBinaryExpression(parseTree);
+            var binaryExpression = (CmsqlQueryBinaryExpression)visitor.VisitAndExpression(parseTree);
 
             binaryExpression.LeftExpression.Should().BeOfType<CmsqlQueryCondition>();
             binaryExpression.LeftExpression.Should().NotBeNull();
@@ -100,10 +99,10 @@ namespace Cmsql.Test.Grammar.Parsing.Internal
         {
             var cmsqlParser = CmsqlParserFactory.CreateParserForQuery(
                 "(jon != 'stark' and john = 'snow') or (arya = 'stark' and sansa = 'stark')");
-            var parseTree = (CmsqlParser.BinaryExpressionContext)cmsqlParser.expression();
+            var parseTree = (CmsqlParser.OrExpressionContext)cmsqlParser.expression();
 
             var visitor = new ExpressionVisitor();
-            var binaryExpression = (CmsqlQueryBinaryExpression)visitor.VisitBinaryExpression(parseTree);
+            var binaryExpression = (CmsqlQueryBinaryExpression)visitor.VisitOrExpression(parseTree);
 
             binaryExpression.LeftExpression.Should().BeOfType<CmsqlQueryBinaryExpression>();
             binaryExpression.LeftExpression.Should().NotBeNull();

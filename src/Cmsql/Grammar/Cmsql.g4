@@ -3,10 +3,10 @@ grammar Cmsql;
 /*
  * Parser rules
  */
-queries             : query (TERMINATOR query)* EOF
+queries             : query (TERMINATOR query)* TERMINATOR? EOF
                     ;
 
-query               : selectClause fromClause whereClause? TERMINATOR*
+query               : selectClause fromClause whereClause?
                     ;
 
 selectClause        : SELECT IDENTIFIER
@@ -18,9 +18,10 @@ fromClause          : FROM (NUMBER|START|ROOT)
 whereClause         : WHERE expression
                     ;
 
-expression          : condition                                     # conditionExpression
-                    | left=expression op=(AND|OR) right=expression  # binaryExpression
-                    | LPAREN expression RPAREN                      # parenthesizedExpression
+expression          : condition                              # conditionExpression
+                    | left=expression AND right=expression  # andExpression
+                    | left=expression OR right=expression   # orExpression
+                    | LPAREN expression RPAREN              # parenthesizedExpression
                     ;
 
 condition           : IDENTIFIER op=(EQUALS|NOTEQUALS|GREATERTHAN|LESSTHAN|GREATERTHANOREQUALS|LESSTHANOREQUALS) LITERAL
@@ -37,17 +38,17 @@ AND                 : A N D ;
 NUMBER              : [0-9]+ ;
 START               : S T A R T ;
 ROOT                : R O O T ;
-LITERAL             : '\''([ a-zA-Z0-9]|[_]|[-])+'\'' ;
-IDENTIFIER          : [a-zA-Z]+[a-zA-Z0-9]* ;
+LITERAL             : '\'' [ a-zA-Z0-9_\-]+ '\'' ;
+IDENTIFIER          : [a-zA-Z][a-zA-Z0-9]* ;
 LPAREN              : '(' ;
 RPAREN              : ')' ;
 TERMINATOR          : ';' ;
 EQUALS              : '=' ;
 NOTEQUALS           : '!=' ;
-GREATERTHAN         : '>' ;
-LESSTHAN            : '<' ;
 GREATERTHANOREQUALS : '>=' ;
 LESSTHANOREQUALS    : '<=' ;
+GREATERTHAN         : '>' ;
+LESSTHAN            : '<' ;
 WHITESPACE          : [ \r\n\t]+ -> skip ;
 ERRORCHAR           : . ;
 
