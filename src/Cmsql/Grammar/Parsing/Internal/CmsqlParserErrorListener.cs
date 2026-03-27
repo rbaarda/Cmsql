@@ -24,7 +24,7 @@ namespace Cmsql.Grammar.Parsing.Internal
             string msg,
             RecognitionException e)
         {
-            _parseErrors.Add(new CmsqlQueryParseError(line, charPositionInLine, msg));
+            _parseErrors.Add(new CmsqlQueryParseError { Line = line, CharPositionInLine = charPositionInLine, Message = msg });
         }
     }
 }

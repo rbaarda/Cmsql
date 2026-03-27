@@ -1,8 +1,8 @@
-﻿using Cmsql.Query.Execution;
+using Cmsql.Query.Execution;
 
 namespace Cmsql.Query
 {
-    public class CmsqlQueryCondition : ICmsqlQueryExpression
+    public record CmsqlQueryCondition : ICmsqlQueryExpression
     {
         public EqualityOperator Operator { get; init; }
 

@@ -1,6 +1,6 @@
-﻿namespace Cmsql.Query
+namespace Cmsql.Query
 {
-    public class CmsqlQueryStartNode
+    public record CmsqlQueryStartNode
     {
         public string StartNodeId { get; init; }
 

@@ -1,6 +1,6 @@
-﻿namespace Cmsql.Query
+namespace Cmsql.Query
 {
-    public class CmsqlQuery
+    public record CmsqlQuery
     {
         public string ContentType { get; init; }
 

@@ -1,18 +1,11 @@
-﻿namespace Cmsql.Grammar.Parsing
+namespace Cmsql.Grammar.Parsing
 {
-    public class CmsqlQueryParseError
+    public record CmsqlQueryParseError
     {
-        public int Line { get; }
+        public int Line { get; internal init; }
 
-        public int CharPositionInLine { get; }
+        public int CharPositionInLine { get; internal init; }
 
-        public string Message { get; }
-
-        internal CmsqlQueryParseError(int line, int charPositionInLine, string message)
-        {
-            Line = line;
-            CharPositionInLine = charPositionInLine;
-            Message = message;
-        }
+        public string Message { get; internal init; }
     }
 }

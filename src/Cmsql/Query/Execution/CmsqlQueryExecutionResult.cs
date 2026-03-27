@@ -1,14 +1,16 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Cmsql.Query.Execution
 {
-    public class CmsqlQueryExecutionResult
+    public record CmsqlQueryExecutionResult
     {
-        public IEnumerable<ICmsqlQueryResult> QueryResults { get; }
+        public required IEnumerable<ICmsqlQueryResult> QueryResults { get; init; }
 
-        public IEnumerable<CmsqlQueryExecutionError> Errors { get; }
+        public required IEnumerable<CmsqlQueryExecutionError> Errors { get; init; }
 
+        [SetsRequiredMembers]
         public CmsqlQueryExecutionResult(
             IEnumerable<ICmsqlQueryResult> queryResults,
             IEnumerable<CmsqlQueryExecutionError> errors)
@@ -17,10 +19,10 @@ namespace Cmsql.Query.Execution
             Errors = errors;
         }
 
+        [SetsRequiredMembers]
         public CmsqlQueryExecutionResult()
             : this(Enumerable.Empty<ICmsqlQueryResult>(), Enumerable.Empty<CmsqlQueryExecutionError>())
         {
-
         }
     }
 }

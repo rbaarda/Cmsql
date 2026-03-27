@@ -12,7 +12,7 @@ namespace Cmsql.Test
         [Fact]
         public void Test_has_parse_errors_when_parser_reports_errors()
         {
-            var parseResult = CreateParseResult(new CmsqlQueryParseError(1, 5, "unexpected token"));
+            var parseResult = CreateParseResult(new CmsqlQueryParseError { Line = 1, CharPositionInLine = 5, Message = "unexpected token" });
             var resultSet = CmsqlQueryResultSet.CreateParseFailure(parseResult);
 
             resultSet.HasParseErrors.Should().BeTrue();
@@ -36,7 +36,7 @@ namespace Cmsql.Test
         [Fact]
         public void Test_errors_collection_contains_parse_and_execution_messages()
         {
-            var parseResult = CreateParseResult(new CmsqlQueryParseError(2, 1, "parse failed"));
+            var parseResult = CreateParseResult(new CmsqlQueryParseError { Line = 2, CharPositionInLine = 1, Message = "parse failed" });
             var executionResult = new CmsqlQueryExecutionResult(
                 Array.Empty<ICmsqlQueryResult>(),
                 new[] { new CmsqlQueryExecutionError("execution failed") });
@@ -64,7 +64,7 @@ namespace Cmsql.Test
         [Fact]
         public void Test_get_results_returns_empty_when_result_set_has_errors()
         {
-            var parseResult = CreateParseResult(new CmsqlQueryParseError(1, 0, "parse failed"));
+            var parseResult = CreateParseResult(new CmsqlQueryParseError { Line = 1, CharPositionInLine = 0, Message = "parse failed" });
             var executionResult = new CmsqlQueryExecutionResult(
                 new[] { new DummyCmsqlQueryResult() },
                 Array.Empty<CmsqlQueryExecutionError>());

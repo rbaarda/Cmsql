@@ -1,12 +1,4 @@
-﻿namespace Cmsql.Query.Execution
+namespace Cmsql.Query.Execution
 {
-    public class CmsqlQueryExecutionError
-    {
-        public string Message { get; }
-
-        public CmsqlQueryExecutionError(string message)
-        {
-            Message = message;
-        }
-    }
+    public record CmsqlQueryExecutionError(string Message);
 }

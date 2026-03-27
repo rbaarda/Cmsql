@@ -1,8 +1,8 @@
-﻿using Cmsql.Query.Execution;
+using Cmsql.Query.Execution;
 
 namespace Cmsql.Query
 {
-    public class CmsqlQueryBinaryExpression : ICmsqlQueryExpression
+    public record CmsqlQueryBinaryExpression : ICmsqlQueryExpression
     {
         public ConditionalOperator Operator { get; init; }
 
