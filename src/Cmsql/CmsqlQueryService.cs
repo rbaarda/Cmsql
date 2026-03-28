@@ -24,8 +24,7 @@ namespace Cmsql
                 throw new ArgumentException($"Parameter '{nameof(query)}' is null or whitespace.");
             }
 
-            var parser = new CmsqlQueryParser();
-            var parseResult = parser.Parse(query);
+            var parseResult = CmsqlQueryParser.Parse(query);
             if (parseResult.Errors.Any())
             {
                 return CmsqlQueryResultSet.CreateParseFailure(parseResult);

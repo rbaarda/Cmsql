@@ -1,21 +1,20 @@
-﻿using Antlr4.Runtime;
+using Antlr4.Runtime;
 using Antlr4.Runtime.Atn;
 using Cmsql.Grammar.Parsing.Internal;
-using Cmsql.Query;
 using System;
 using System.Linq;
 
 namespace Cmsql.Grammar.Parsing
 {
-    public class CmsqlQueryParser
+    public static class CmsqlQueryParser
     {
-        public CmsqlQueryParseResult Parse(string query)
+        public static CmsqlQueryParseResult Parse(string query)
         {
             if (string.IsNullOrWhiteSpace(query))
             {
                 throw new ArgumentException($"Parameter '{nameof(query)}' is null, empty or whitespace.");
             }
-            
+
             var parser = CreateParser(query);
             parser.RemoveErrorListeners();
 
@@ -30,11 +29,11 @@ namespace Cmsql.Grammar.Parsing
                 Errors = errorListener.ParseErrors,
                 Queries = !errorListener.ParseErrors.Any()
                     ? queriesVisitor.Visit(parseTree)
-                    : Enumerable.Empty<CmsqlQuery>()
+                    : []
             };
         }
 
-        private CmsqlParser CreateParser(string query)
+        private static CmsqlParser CreateParser(string query)
         {
             return new CmsqlParser(
                 new CommonTokenStream(

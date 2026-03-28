@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Cmsql.Grammar.Parsing;
 using Cmsql.Query;
@@ -12,8 +12,7 @@ namespace Cmsql.Test.Grammar.Parsing
         [Fact]
         public void Test_can_parse_single_query_without_terminator()
         {
-            var parser = new CmsqlQueryParser();
-            var parseResult = parser.Parse("select pages from start");
+            var parseResult = CmsqlQueryParser.Parse("select pages from start");
 
             parseResult.Queries.Should().NotBeNullOrEmpty();
             parseResult.Queries.Should().HaveCount(1);
@@ -29,8 +28,7 @@ namespace Cmsql.Test.Grammar.Parsing
         [Fact]
         public void Test_can_parse_single_query_with_terminator()
         {
-            var parser = new CmsqlQueryParser();
-            var parseResult = parser.Parse("select test from start;");
+            var parseResult = CmsqlQueryParser.Parse("select test from start;");
 
             parseResult.Queries.Should().NotBeNullOrEmpty();
             parseResult.Queries.Should().HaveCount(1);
@@ -46,10 +44,9 @@ namespace Cmsql.Test.Grammar.Parsing
         [Fact]
         public void Test_can_parse_multiple_queries()
         {
-            var parser = new CmsqlQueryParser();
-            var parseResult = parser.Parse(
+            var parseResult = CmsqlQueryParser.Parse(
                 "select test from start;select test from root where foo = 'bar';select barf from 123 where (foo = 'bar' and bar = 'foo') or (bla = 'bli' and bli = 'bla')");
-            
+
             parseResult.Queries.Should().HaveCount(3);
             parseResult.Errors.Should().BeNullOrEmpty();
 
@@ -79,8 +76,7 @@ namespace Cmsql.Test.Grammar.Parsing
         [Fact]
         public void Test_cannot_parse_invalid_query()
         {
-            var parser = new CmsqlQueryParser();
-            var parseResult = parser.Parse("select test-test from start");
+            var parseResult = CmsqlQueryParser.Parse("select test-test from start");
 
             parseResult.Errors.Should().HaveCount(1);
         }
@@ -91,9 +87,9 @@ namespace Cmsql.Test.Grammar.Parsing
         [InlineData("   ")]
         public void Test_parse_throws_when_query_is_null_or_whitespace(string query)
         {
-            var parser = new CmsqlQueryParser();
+            Action act = () => CmsqlQueryParser.Parse(query);
 
-            parser.Invoking(p => p.Parse(query)).Should().Throw<ArgumentException>();
+            act.Should().Throw<ArgumentException>();
         }
     }
 }

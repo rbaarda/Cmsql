@@ -24,6 +24,11 @@ namespace Cmsql
         {
             get
             {
+                if (!HasErrors)
+                {
+                    return [];
+                }
+
                 var errors = new List<string>();
 
                 if (HasParseErrors)
@@ -67,7 +72,7 @@ namespace Cmsql
                 return ExecutionResult.QueryResults;
             }
 
-            return Enumerable.Empty<ICmsqlQueryResult>();
+            return [];
         }
     }
 }
