@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36429.23 d17.14
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11620.152 stable
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{D24B2BFC-6FC0-422F-986C-C933E5155186}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cmsql", "Cmsql\Cmsql.csproj", "{7A6A187B-4CFF-4515-A6E9-070331425CA4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cmsql.Test", "Cmsql.Test\Cmsql.Test.csproj", "{660185C9-3EC2-4D6A-8C29-805B7C5C7CDD}"
@@ -26,9 +24,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{660185C9-3EC2-4D6A-8C29-805B7C5C7CDD} = {D24B2BFC-6FC0-422F-986C-C933E5155186}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AFB3C612-4480-4BC9-8E7B-4243C5DDEABF}
