@@ -12,7 +12,12 @@
         <RepositoryUrl>https://github.com/rbaarda/Cmsql</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>cmsql;query;cms;sql</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
+    <ItemGroup>
+        <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
     <ItemGroup>
         <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
         <PackageReference Include="Antlr4BuildTasks" Version="12.14.0" PrivateAssets="all" />
