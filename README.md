@@ -16,7 +16,7 @@ You can use this package on itself if your project needs a Cmsql parser or if yo
 ### Installation
 You can install the NuGet package by running the following command.
 
-`dotnet add package Cmsql --version 1.0.0`
+`dotnet add package Cmsql --version 1.1.0`
 
 ### Usage
 The Cmsql package contains a `CmsqlQueryService` which is basically a facade that takes care of parsing and executing queries through the `ExecuteQuery` method.
