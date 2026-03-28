@@ -23,13 +23,13 @@ The Cmsql package contains a `CmsqlQueryService` which is basically a facade tha
 The `ExecuteQuery` method returns an instance of `CmsqlQueryResultSet` which is a composite type that contains information about the parsing and execution process.
 When no errors are encountered and data is found the result set should contain data in the form of a collection of `ICmsqlQueryResult`.
 
-The following (EPiServer specific) example demonstrates how to execute a query, check for errors and get data from the result set.
+The following (Optimizely CMS specific) example demonstrates how to execute a query, check for errors and get data from the result set.
 
 ```csharp
 var resultSet = _cmsqlQueryService.ExecuteQuery("select ProductPage from start where PageName = 'Alloy Plan'");
-if (!resultSet.ParseResult.Errors.Any() && !resultSet.ExecutionResult.Errors.Any())
+if (resultSet.IsSuccess)
 {
-  var pages = resultSet.ExecutionResult.QueryResults
+  var pages = resultSet.GetResults()
     .OfType<PageDataCmsqlQueryResult>()
     .Select(p => p.Page)
     .ToList();
